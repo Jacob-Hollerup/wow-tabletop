@@ -21,6 +21,8 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    if (!supabase) return;
+
     supabase.auth.getUser().then(({ data: { user } }) => setUser(user));
 
     const {
@@ -35,7 +37,7 @@ export default function Nav() {
   if (!user) return null;
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
+    await supabase?.auth.signOut();
     router.push("/login");
     router.refresh();
   }

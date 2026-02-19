@@ -13,6 +13,10 @@ export default function LoginPage() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!supabase) {
+      setError("Authentication is not configured");
+      return;
+    }
     setLoading(true);
     setError("");
 

@@ -22,6 +22,11 @@ ${allRulesContent}`;
 
 export async function POST(req: Request) {
   const supabase = await createClient();
+
+  if (!supabase) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
