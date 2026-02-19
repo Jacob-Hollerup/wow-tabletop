@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <!-- Assassination Layout 1: Scorched Battlefield - Craters and trenches -->
+  <defs>
+    <pattern id="as1grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#4B5563" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <linearGradient id="as1blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="as1red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="#1F2937" rx="4"/>
+  <rect x="30" y="30" width="540" height="360" fill="#374151" rx="2"/>
+  <rect x="30" y="30" width="540" height="360" fill="url(#as1grid)"/>
+  <!-- Deployment Zones -->
+  <rect x="30" y="30" width="540" height="90" fill="url(#as1blue)" stroke="#3B82F6" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="60" text-anchor="middle" fill="#60A5FA" font-size="12" font-family="monospace">DEPLOYMENT ZONE A</text>
+  <rect x="30" y="300" width="540" height="90" fill="url(#as1red)" stroke="#EF4444" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="380" text-anchor="middle" fill="#F87171" font-size="12" font-family="monospace">DEPLOYMENT ZONE B</text>
+  <!-- Warlord markers -->
+  <circle cx="300" cy="75" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="300" y="80" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <text x="300" y="98" text-anchor="middle" fill="#FBBF24" font-size="8" font-family="monospace">SECRET WARLORD</text>
+  <circle cx="300" cy="345" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="300" y="350" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <text x="300" y="368" text-anchor="middle" fill="#FBBF24" font-size="8" font-family="monospace">SECRET WARLORD</text>
+  <!-- Craters scattered across the warzone -->
+  <ellipse cx="140" cy="170" rx="22" ry="14" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="140" y="174" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="350" cy="185" rx="25" ry="16" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="350" y="189" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="480" cy="200" rx="20" ry="12" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="480" y="204" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="230" cy="250" rx="22" ry="14" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="230" y="254" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="440" cy="260" rx="18" ry="12" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="440" y="264" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="300" cy="210" rx="28" ry="18" fill="#292524" opacity="0.7" stroke="#57534E" stroke-width="1.5"/>
+  <text x="300" y="214" text-anchor="middle" fill="#A8A29E" font-size="8" font-family="monospace">Lg Crater</text>
+  <!-- Trenches (line terrain - cover) -->
+  <line x1="80" y1="200" x2="120" y2="240" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="85" y="228" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <line x1="480" y1="160" x2="530" y2="185" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="510" y="178" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <!-- Barricades / rubble piles -->
+  <line x1="180" y1="195" x2="210" y2="190" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="390" y1="230" x2="420" y2="225" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="270" y1="160" x2="295" y2="155" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="330" y1="260" x2="360" y2="256" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="110" y1="270" x2="145" y2="268" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="500" y1="240" x2="535" y2="235" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <!-- Scorched earth patches -->
+  <circle cx="200" cy="185" r="12" fill="#78350F" opacity="0.25"/>
+  <circle cx="420" cy="175" r="10" fill="#78350F" opacity="0.2"/>
+  <circle cx="160" cy="260" r="14" fill="#78350F" opacity="0.2"/>
+  <circle cx="500" cy="280" r="11" fill="#78350F" opacity="0.2"/>
+  <!-- Dead trees -->
+  <line x1="90" y1="165" x2="90" y2="145" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="90" y1="152" x2="82" y2="143" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="90" y1="155" x2="98" y2="147" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="520" y1="275" x2="520" y2="255" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="520" y1="262" x2="513" y2="253" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="520" y1="265" x2="528" y2="257" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="300" y="18" text-anchor="middle" fill="#E5E7EB" font-size="14" font-weight="bold" font-family="monospace">ASSASSINATION — Layout 1: Scorched Battlefield</text>
+  <text x="300" y="415" text-anchor="middle" fill="#6B7280" font-size="10" font-family="monospace">Craters, trenches, barricades | Slay the enemy Warlord</text>
+</svg>

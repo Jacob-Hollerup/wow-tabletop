@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <!-- Assassination Layout 2: Ridge Assault - High ground vs low, trenches and rocky outcrops -->
+  <defs>
+    <pattern id="as2grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#4B5563" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <linearGradient id="as2blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="as2red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="#1F2937" rx="4"/>
+  <rect x="30" y="30" width="540" height="360" fill="#374151" rx="2"/>
+  <rect x="30" y="30" width="540" height="360" fill="url(#as2grid)"/>
+  <!-- Defender Deployment (top - on the ridge) -->
+  <rect x="30" y="30" width="540" height="90" fill="url(#as2blue)" stroke="#3B82F6" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="55" text-anchor="middle" fill="#60A5FA" font-size="12" font-family="monospace">DEPLOYMENT ZONE A (Ridge)</text>
+  <!-- Attacker Deployment (bottom - advancing uphill) -->
+  <rect x="30" y="300" width="540" height="90" fill="url(#as2red)" stroke="#EF4444" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="380" text-anchor="middle" fill="#F87171" font-size="12" font-family="monospace">DEPLOYMENT ZONE B (Lowland)</text>
+  <!-- Warlord markers -->
+  <circle cx="300" cy="80" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="300" y="85" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <text x="300" y="100" text-anchor="middle" fill="#FBBF24" font-size="8" font-family="monospace">WARLORD</text>
+  <circle cx="300" cy="345" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="300" y="350" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <text x="300" y="365" text-anchor="middle" fill="#FBBF24" font-size="8" font-family="monospace">WARLORD</text>
+  <!-- Ridge / high ground (elevation band) -->
+  <path d="M30 130 Q150 125 300 135 Q450 145 570 130" fill="none" stroke="#A16207" stroke-width="2"/>
+  <path d="M30 138 Q150 133 300 143 Q450 153 570 138" fill="none" stroke="#A16207" stroke-width="1" opacity="0.5"/>
+  <text x="520" y="148" fill="#FCD34D" font-size="8" font-family="monospace">RIDGE LINE</text>
+  <!-- Rocky outcrops on ridge -->
+  <ellipse cx="120" cy="135" rx="22" ry="12" fill="#57534E" opacity="0.6" stroke="#78716C" stroke-width="1.5"/>
+  <text x="120" y="138" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Rocks</text>
+  <ellipse cx="300" cy="140" rx="25" ry="14" fill="#57534E" opacity="0.6" stroke="#78716C" stroke-width="1.5"/>
+  <text x="300" y="143" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Outcrop</text>
+  <ellipse cx="470" cy="132" rx="22" ry="12" fill="#57534E" opacity="0.6" stroke="#78716C" stroke-width="1.5"/>
+  <text x="470" y="135" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Rocks</text>
+  <!-- Slope terrain (difficult) -->
+  <rect x="30" y="145" width="540" height="40" fill="#78350F" opacity="0.12"/>
+  <text x="300" y="168" text-anchor="middle" fill="#A16207" font-size="8" font-family="monospace" opacity="0.6">SLOPE (Difficult Terrain -2 MOV uphill)</text>
+  <!-- Trenches carved into the approach -->
+  <line x1="80" y1="210" x2="180" y2="210" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="130" y="225" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <line x1="250" y1="220" x2="350" y2="220" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="300" y="235" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <line x1="420" y1="205" x2="520" y2="205" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="470" y="220" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <!-- Craters in the kill zone -->
+  <ellipse cx="180" cy="185" rx="18" ry="12" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="180" y="188" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="400" cy="190" rx="20" ry="13" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="400" y="193" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <!-- Barricades -->
+  <line x1="140" y1="250" x2="175" y2="248" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="300" y1="260" x2="340" y2="255" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="460" y1="248" x2="500" y2="245" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <!-- Burnt ground patches -->
+  <circle cx="220" cy="270" r="15" fill="#78350F" opacity="0.2"/>
+  <circle cx="380" cy="265" r="12" fill="#78350F" opacity="0.2"/>
+  <circle cx="540" cy="250" r="10" fill="#78350F" opacity="0.15"/>
+  <!-- Dead trees in no-man's zone -->
+  <line x1="220" y1="200" x2="220" y2="180" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="220" y1="186" x2="214" y2="178" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="440" y1="245" x2="440" y2="225" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="440" y1="232" x2="447" y2="224" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="300" y="18" text-anchor="middle" fill="#E5E7EB" font-size="14" font-weight="bold" font-family="monospace">ASSASSINATION — Layout 2: Ridge Assault</text>
+  <text x="300" y="415" text-anchor="middle" fill="#6B7280" font-size="10" font-family="monospace">High ground vs lowland | Trenches, craters, rocky outcrops</text>
+</svg>

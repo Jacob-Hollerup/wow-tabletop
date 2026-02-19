@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(tasklist:*)",
+      "Bash(npm run build:*)",
+      "Bash(node:*)",
+      "Bash(npx wrangler:*)",
+      "Bash(npx opennextjs-cloudflare:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm update:*)",
+      "Bash(gh repo view:*)",
+      "Bash(git remote add:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(gh auth:*)"
+    ]
+  }
+}

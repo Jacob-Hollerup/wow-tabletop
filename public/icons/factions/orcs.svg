@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Orcs (Orgrimmar) - War Axe & Tusks -->
+  <defs>
+    <linearGradient id="oRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+    <linearGradient id="oSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D1D5DB"/>
+      <stop offset="100%" stop-color="#6B7280"/>
+    </linearGradient>
+    <linearGradient id="oBone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#D1C4A0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <path d="M60 6 L110 35 L110 85 L60 114 L10 85 L10 35 Z" fill="#7F1D1D" stroke="url(#oRed)" stroke-width="3"/>
+  <!-- Inner border -->
+  <path d="M60 14 L104 39 L104 81 L60 106 L16 81 L16 39 Z" fill="none" stroke="#991B1B" stroke-width="1"/>
+  <!-- Great Axe -->
+  <!-- Handle -->
+  <rect x="57" y="20" width="6" height="72" rx="2" fill="#78350F" stroke="#92400E" stroke-width="0.5"/>
+  <!-- Axe blade left -->
+  <path d="M57 30 Q30 42 28 56 Q30 70 57 82 L57 56 Z" fill="url(#oSteel)" stroke="#4B5563" stroke-width="1"/>
+  <!-- Axe blade right -->
+  <path d="M63 30 Q90 42 92 56 Q90 70 63 82 L63 56 Z" fill="url(#oSteel)" stroke="#4B5563" stroke-width="1"/>
+  <!-- Blade edge highlights -->
+  <path d="M57 35 Q35 46 33 56 Q35 66 57 77" fill="none" stroke="#E5E7EB" stroke-width="0.5" opacity="0.5"/>
+  <path d="M63 35 Q85 46 87 56 Q85 66 63 77" fill="none" stroke="#E5E7EB" stroke-width="0.5" opacity="0.5"/>
+  <!-- Tusks crossed behind -->
+  <path d="M30 88 Q40 70 50 92" fill="none" stroke="url(#oBone)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 88 Q80 70 70 92" fill="none" stroke="url(#oBone)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Blood splatter accent -->
+  <circle cx="40" cy="50" r="2" fill="#DC2626" opacity="0.6"/>
+  <circle cx="82" cy="62" r="1.5" fill="#DC2626" opacity="0.5"/>
+  <circle cx="38" cy="64" r="1" fill="#DC2626" opacity="0.4"/>
+  <!-- Pommel jewel -->
+  <circle cx="60" cy="22" r="4" fill="#EF4444" stroke="#FCA5A5" stroke-width="1"/>
+</svg>

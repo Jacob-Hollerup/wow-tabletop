@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Night Elves (Kaldorei) - Crescent Moon & Tree -->
+  <defs>
+    <linearGradient id="nePurple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="neSilver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E5E7EB"/>
+      <stop offset="100%" stop-color="#9CA3AF"/>
+    </linearGradient>
+    <radialGradient id="neGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4C1D95" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="60" cy="60" r="54" fill="#1E1B4B" stroke="url(#nePurple)" stroke-width="3"/>
+  <!-- Glow -->
+  <circle cx="60" cy="45" r="35" fill="url(#neGlow)"/>
+  <!-- Crescent moon -->
+  <path d="M38 18 A28 28 0 0 1 38 74 A20 20 0 0 0 38 18 Z" fill="url(#neSilver)" transform="translate(12, 0)"/>
+  <!-- Stars -->
+  <circle cx="78" cy="25" r="2" fill="#E5E7EB" opacity="0.9"/>
+  <circle cx="88" cy="40" r="1.5" fill="#E5E7EB" opacity="0.7"/>
+  <circle cx="85" cy="55" r="1" fill="#E5E7EB" opacity="0.5"/>
+  <circle cx="30" cy="30" r="1.5" fill="#E5E7EB" opacity="0.6"/>
+  <!-- World Tree (Teldrassil) - simplified -->
+  <rect x="56" y="58" width="8" height="30" rx="2" fill="#5B21B6"/>
+  <!-- Roots -->
+  <path d="M56 88 Q50 92 42 95" fill="none" stroke="#5B21B6" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M64 88 Q70 92 78 95" fill="none" stroke="#5B21B6" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M58 85 Q52 90 48 100" fill="none" stroke="#5B21B6" stroke-width="2" stroke-linecap="round"/>
+  <path d="M62 85 Q68 90 72 100" fill="none" stroke="#5B21B6" stroke-width="2" stroke-linecap="round"/>
+  <!-- Canopy -->
+  <ellipse cx="60" cy="55" rx="22" ry="12" fill="#6D28D9" opacity="0.7"/>
+  <ellipse cx="52" cy="50" rx="14" ry="10" fill="#7C3AED" opacity="0.6"/>
+  <ellipse cx="68" cy="50" rx="14" ry="10" fill="#7C3AED" opacity="0.6"/>
+  <ellipse cx="60" cy="46" rx="16" ry="9" fill="#8B5CF6" opacity="0.5"/>
+  <!-- Wisps -->
+  <circle cx="35" cy="70" r="3" fill="#A78BFA" opacity="0.5"/>
+  <circle cx="85" cy="72" r="2.5" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="40" cy="82" r="2" fill="#C4B5FD" opacity="0.3"/>
+</svg>

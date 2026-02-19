@@ -1,26 +1,131 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f0f0f;
+  --foreground: #e5e5e5;
+  --gold: #d4a843;
+  --gold-dim: #a67c2e;
+  --surface: #1a1a1a;
+  --surface-hover: #252525;
+  --border: #2a2a2a;
+  --muted: #888;
+  --alliance: #3b82f6;
+  --horde: #ef4444;
+  --scourge: #7dd3fc;
+
+  /* Faction color themes */
+  --faction-humans: #3b82f6;
+  --faction-humans-accent: #d4a843;
+  --faction-dwarves: #9ca3af;
+  --faction-dwarves-accent: #f59e0b;
+  --faction-night-elves: #7c3aed;
+  --faction-night-elves-accent: #c4b5fd;
+  --faction-orcs: #ef4444;
+  --faction-orcs-accent: #fcd34d;
+  --faction-tauren: #a16207;
+  --faction-tauren-accent: #22c55e;
+  --faction-forsaken: #7c3aed;
+  --faction-forsaken-accent: #84cc16;
+  --faction-darkspear: #14b8a6;
+  --faction-darkspear-accent: #f97316;
+  --faction-scourge: #60a5fa;
+  --faction-scourge-accent: #93c5fd;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-alliance: var(--alliance);
+  --color-horde: var(--horde);
+  --color-scourge: var(--scourge);
+  --color-faction-humans: var(--faction-humans);
+  --color-faction-humans-accent: var(--faction-humans-accent);
+  --color-faction-dwarves: var(--faction-dwarves);
+  --color-faction-dwarves-accent: var(--faction-dwarves-accent);
+  --color-faction-night-elves: var(--faction-night-elves);
+  --color-faction-night-elves-accent: var(--faction-night-elves-accent);
+  --color-faction-orcs: var(--faction-orcs);
+  --color-faction-orcs-accent: var(--faction-orcs-accent);
+  --color-faction-tauren: var(--faction-tauren);
+  --color-faction-tauren-accent: var(--faction-tauren-accent);
+  --color-faction-forsaken: var(--faction-forsaken);
+  --color-faction-forsaken-accent: var(--faction-forsaken-accent);
+  --color-faction-darkspear: var(--faction-darkspear);
+  --color-faction-darkspear-accent: var(--faction-darkspear-accent);
+  --color-faction-scourge: var(--faction-scourge);
+  --color-faction-scourge-accent: var(--faction-scourge-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Prose overrides for dark theme */
+.prose {
+  --tw-prose-body: #d4d4d4;
+  --tw-prose-headings: #e5e5e5;
+  --tw-prose-links: var(--gold);
+  --tw-prose-bold: #e5e5e5;
+  --tw-prose-code: var(--gold);
+  --tw-prose-counters: #888;
+  --tw-prose-bullets: #888;
+  --tw-prose-hr: #2a2a2a;
+  --tw-prose-th-borders: #2a2a2a;
+  --tw-prose-td-borders: #1f1f1f;
+}
+
+.prose table {
+  font-size: 0.875rem;
+}
+
+.prose th {
+  background: #1a1a1a;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.prose td,
+.prose th {
+  padding: 0.5rem 0.75rem;
+  border-color: #2a2a2a;
+}
+
+.prose tr:nth-child(even) {
+  background: #141414;
+}
+
+.prose blockquote {
+  border-left-color: var(--gold);
+  color: #aaa;
+}
+
+.prose strong {
+  color: #e5e5e5;
+}
+
+.prose h2 {
+  border-bottom: 1px solid #2a2a2a;
+  padding-bottom: 0.5rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
 }

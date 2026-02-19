@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Dwarves (Ironforge) - Anvil & Hammer -->
+  <defs>
+    <linearGradient id="dSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9CA3AF"/>
+      <stop offset="100%" stop-color="#4B5563"/>
+    </linearGradient>
+    <linearGradient id="dFire" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <linearGradient id="dBrown" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="54" fill="#1F2937" stroke="url(#dSteel)" stroke-width="3"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#6B7280" stroke-width="1"/>
+  <!-- Mountain silhouette -->
+  <path d="M15 85 L40 35 L55 55 L60 30 L65 55 L80 35 L105 85 Z" fill="#374151" stroke="#6B7280" stroke-width="1"/>
+  <!-- Anvil -->
+  <path d="M35 80 L40 68 L80 68 L85 80 Z" fill="url(#dSteel)" stroke="#374151" stroke-width="1"/>
+  <rect x="38" y="62" width="44" height="6" rx="1" fill="url(#dSteel)" stroke="#374151" stroke-width="0.5"/>
+  <rect x="48" y="80" width="24" height="6" rx="1" fill="#6B7280"/>
+  <!-- Hammer -->
+  <rect x="57" y="18" width="6" height="42" rx="2" fill="url(#dBrown)"/>
+  <rect x="45" y="14" width="30" height="12" rx="3" fill="url(#dSteel)" stroke="#374151" stroke-width="1"/>
+  <!-- Rune marks on hammer -->
+  <line x1="50" y1="17" x2="50" y2="23" stroke="url(#dFire)" stroke-width="1.5"/>
+  <line x1="55" y1="17" x2="55" y2="23" stroke="url(#dFire)" stroke-width="1.5"/>
+  <line x1="65" y1="17" x2="65" y2="23" stroke="url(#dFire)" stroke-width="1.5"/>
+  <line x1="70" y1="17" x2="70" y2="23" stroke="url(#dFire)" stroke-width="1.5"/>
+  <!-- Fire sparks -->
+  <circle cx="45" cy="60" r="2" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="75" cy="58" r="1.5" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="50" cy="55" r="1" fill="#FCD34D" opacity="0.7"/>
+  <!-- Gear cog ring accent -->
+  <g fill="none" stroke="#6B7280" stroke-width="1.5" opacity="0.3">
+    <rect x="8" y="56" width="8" height="8" rx="1" transform="rotate(45 12 60)"/>
+    <rect x="104" y="56" width="8" height="8" rx="1" transform="rotate(45 108 60)"/>
+    <rect x="56" y="2" width="8" height="8" rx="1" transform="rotate(45 60 6)"/>
+  </g>
+</svg>

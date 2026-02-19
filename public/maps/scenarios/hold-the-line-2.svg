@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <!-- Hold the Line Layout 2: Fortified Center - Heavy terrain around objectives -->
+  <defs>
+    <pattern id="h2grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#4B5563" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <linearGradient id="h2blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="h2red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.1"/>
+    </linearGradient>
+    <radialGradient id="h2obj" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.2"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="420" fill="#1F2937" rx="4"/>
+  <rect x="30" y="30" width="540" height="360" fill="#374151" rx="2"/>
+  <rect x="30" y="30" width="540" height="360" fill="url(#h2grid)"/>
+  <!-- Deployment Zones -->
+  <rect x="30" y="30" width="540" height="90" fill="url(#h2blue)" stroke="#3B82F6" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="60" text-anchor="middle" fill="#60A5FA" font-size="12" font-family="monospace">DEPLOYMENT ZONE A</text>
+  <rect x="30" y="300" width="540" height="90" fill="url(#h2red)" stroke="#EF4444" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="300" y="380" text-anchor="middle" fill="#F87171" font-size="12" font-family="monospace">DEPLOYMENT ZONE B</text>
+  <!-- Center line -->
+  <line x1="30" y1="210" x2="570" y2="210" stroke="#FCD34D" stroke-width="1" stroke-dasharray="8 4" opacity="0.3"/>
+  <!-- Objective 1 (left) - inside ruins -->
+  <rect x="100" y="185" width="70" height="50" rx="3" fill="#6B7280" opacity="0.4" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="135" y="178" text-anchor="middle" fill="#D1D5DB" font-size="8" font-family="monospace">Fortress Ruins</text>
+  <circle cx="135" cy="210" r="10" fill="none" stroke="#FBBF24" stroke-width="2"/>
+  <circle cx="135" cy="210" r="4" fill="#FBBF24"/>
+  <text x="135" y="250" text-anchor="middle" fill="#FCD34D" font-size="10" font-family="monospace">OBJ 1</text>
+  <!-- Objective 2 (center) - on a hill -->
+  <ellipse cx="300" cy="210" rx="45" ry="30" fill="#78350F" opacity="0.3" stroke="#A16207" stroke-width="1"/>
+  <text x="300" y="255" text-anchor="middle" fill="#A16207" font-size="8" font-family="monospace">Hilltop</text>
+  <circle cx="300" cy="210" r="10" fill="none" stroke="#FBBF24" stroke-width="2"/>
+  <circle cx="300" cy="210" r="4" fill="#FBBF24"/>
+  <text x="300" y="268" text-anchor="middle" fill="#FCD34D" font-size="10" font-family="monospace">OBJ 2</text>
+  <!-- Objective 3 (right) - inside ruins -->
+  <rect x="430" y="185" width="70" height="50" rx="3" fill="#6B7280" opacity="0.4" stroke="#9CA3AF" stroke-width="1"/>
+  <text x="465" y="178" text-anchor="middle" fill="#D1D5DB" font-size="8" font-family="monospace">Tower Ruins</text>
+  <circle cx="465" cy="210" r="10" fill="none" stroke="#FBBF24" stroke-width="2"/>
+  <circle cx="465" cy="210" r="4" fill="#FBBF24"/>
+  <text x="465" y="250" text-anchor="middle" fill="#FCD34D" font-size="10" font-family="monospace">OBJ 3</text>
+  <!-- Dense forests blocking direct paths -->
+  <circle cx="220" cy="170" r="25" fill="#166534" opacity="0.5" stroke="#22C55E" stroke-width="1"/>
+  <text x="220" y="173" text-anchor="middle" fill="#86EFAC" font-size="8" font-family="monospace">Dense</text>
+  <circle cx="220" cy="250" r="25" fill="#166534" opacity="0.5" stroke="#22C55E" stroke-width="1"/>
+  <text x="220" y="253" text-anchor="middle" fill="#86EFAC" font-size="8" font-family="monospace">Forest</text>
+  <circle cx="380" cy="170" r="25" fill="#166534" opacity="0.5" stroke="#22C55E" stroke-width="1"/>
+  <text x="380" y="173" text-anchor="middle" fill="#86EFAC" font-size="8" font-family="monospace">Dense</text>
+  <circle cx="380" cy="250" r="25" fill="#166534" opacity="0.5" stroke="#22C55E" stroke-width="1"/>
+  <text x="380" y="253" text-anchor="middle" fill="#86EFAC" font-size="8" font-family="monospace">Forest</text>
+  <!-- Walls/barricades -->
+  <line x1="80" y1="160" x2="80" y2="260" stroke="#78716C" stroke-width="3" stroke-linecap="round"/>
+  <line x1="520" y1="160" x2="520" y2="260" stroke="#78716C" stroke-width="3" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="300" y="18" text-anchor="middle" fill="#E5E7EB" font-size="14" font-weight="bold" font-family="monospace">HOLD THE LINE — Layout 2: Fortified Center</text>
+  <text x="300" y="415" text-anchor="middle" fill="#6B7280" font-size="10" font-family="monospace">Heavy terrain around objectives | Defensive positions</text>
+</svg>

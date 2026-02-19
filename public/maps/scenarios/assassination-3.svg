@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="600" height="420">
+  <!-- Assassination Layout 3: No Man's Land - Corner deploy, sparse warzone cover -->
+  <defs>
+    <pattern id="as3grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#4B5563" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    <linearGradient id="as3blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="as3red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="420" fill="#1F2937" rx="4"/>
+  <rect x="30" y="30" width="540" height="360" fill="#374151" rx="2"/>
+  <rect x="30" y="30" width="540" height="360" fill="url(#as3grid)"/>
+  <!-- Deployment Zones - corner deployments -->
+  <path d="M30 30 L210 30 L30 180 Z" fill="url(#as3blue)" stroke="#3B82F6" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="90" y="75" text-anchor="middle" fill="#60A5FA" font-size="10" font-family="monospace">ZONE A</text>
+  <path d="M570 390 L390 390 L570 240 Z" fill="url(#as3red)" stroke="#EF4444" stroke-width="1" stroke-dasharray="6 3"/>
+  <text x="510" y="365" text-anchor="middle" fill="#F87171" font-size="10" font-family="monospace">ZONE B</text>
+  <!-- Warlord markers -->
+  <circle cx="90" cy="65" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="90" y="70" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <circle cx="510" cy="355" r="12" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="510" y="360" text-anchor="middle" fill="#FBBF24" font-size="14" font-weight="bold" font-family="monospace">?</text>
+  <!-- No Man's Land zone -->
+  <rect x="180" y="140" width="240" height="140" fill="none" stroke="#DC2626" stroke-width="1" stroke-dasharray="8 4" opacity="0.4"/>
+  <text x="300" y="215" text-anchor="middle" fill="#DC2626" font-size="10" font-family="monospace" opacity="0.5">NO MAN'S LAND</text>
+  <!-- Craters across the warzone -->
+  <ellipse cx="200" cy="170" rx="20" ry="13" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="200" y="174" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="400" cy="250" rx="20" ry="13" fill="#292524" opacity="0.6" stroke="#57534E" stroke-width="1.5"/>
+  <text x="400" y="254" text-anchor="middle" fill="#A8A29E" font-size="7" font-family="monospace">Crater</text>
+  <ellipse cx="300" cy="210" rx="24" ry="16" fill="#292524" opacity="0.7" stroke="#57534E" stroke-width="1.5"/>
+  <text x="300" y="214" text-anchor="middle" fill="#A8A29E" font-size="8" font-family="monospace">Lg Crater</text>
+  <ellipse cx="160" cy="280" rx="16" ry="10" fill="#292524" opacity="0.5" stroke="#57534E" stroke-width="1"/>
+  <ellipse cx="440" cy="150" rx="16" ry="10" fill="#292524" opacity="0.5" stroke="#57534E" stroke-width="1"/>
+  <!-- Barricades / rubble -->
+  <line x1="150" y1="230" x2="190" y2="220" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="410" y1="190" x2="450" y2="180" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="260" y1="160" x2="280" y2="150" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="320" y1="260" x2="350" y2="255" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="230" y1="250" x2="255" y2="242" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <line x1="350" y1="170" x2="375" y2="165" stroke="#78716C" stroke-width="4" stroke-linecap="round"/>
+  <!-- Trenches -->
+  <line x1="100" y1="200" x2="140" y2="240" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="108" y="228" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <line x1="460" y1="180" x2="500" y2="220" stroke="#78716C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <text x="490" y="210" fill="#A8A29E" font-size="7" font-family="monospace">Trench</text>
+  <!-- Hills near deployment zones -->
+  <ellipse cx="160" cy="110" rx="30" ry="16" fill="#78350F" opacity="0.4" stroke="#A16207" stroke-width="1"/>
+  <text x="160" y="114" text-anchor="middle" fill="#FCD34D" font-size="8" font-family="monospace">Hill</text>
+  <ellipse cx="440" cy="310" rx="30" ry="16" fill="#78350F" opacity="0.4" stroke="#A16207" stroke-width="1"/>
+  <text x="440" y="314" text-anchor="middle" fill="#FCD34D" font-size="8" font-family="monospace">Hill</text>
+  <!-- Scorched earth patches -->
+  <circle cx="350" cy="130" r="12" fill="#78350F" opacity="0.2"/>
+  <circle cx="250" cy="280" r="14" fill="#78350F" opacity="0.2"/>
+  <circle cx="480" cy="160" r="10" fill="#78350F" opacity="0.15"/>
+  <circle cx="120" cy="260" r="11" fill="#78350F" opacity="0.15"/>
+  <!-- Dead trees -->
+  <line x1="500" y1="100" x2="500" y2="80" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="500" y1="87" x2="493" y2="78" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="500" y1="90" x2="508" y2="82" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="100" y1="330" x2="100" y2="310" stroke="#57534E" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="317" x2="93" y2="308" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="100" y1="320" x2="108" y2="312" stroke="#57534E" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="300" y="18" text-anchor="middle" fill="#E5E7EB" font-size="14" font-weight="bold" font-family="monospace">ASSASSINATION — Layout 3: No Man's Land</text>
+  <text x="300" y="415" text-anchor="middle" fill="#6B7280" font-size="10" font-family="monospace">Corner deployment | Craters, barricades, scorched earth</text>
+</svg>

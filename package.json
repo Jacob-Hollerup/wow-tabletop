@@ -4,14 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/bundle-content.mjs && next build",
+    "preview": "node scripts/bundle-content.mjs && opennextjs-cloudflare build && wrangler dev",
+    "deploy": "node scripts/bundle-content.mjs && opennextjs-cloudflare build && wrangler deploy",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.45",
+    "@ai-sdk/react": "^3.0.93",
+    "@opennextjs/cloudflare": "^1.16.5",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.97.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "ai": "^6.0.91",
     "next": "16.1.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -21,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.66.0"
   }
 }
