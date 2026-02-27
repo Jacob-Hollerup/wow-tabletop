@@ -1,19 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import type { Unit, HeroAbility } from "@/lib/factions";
 
 const subfactionIconMap: Record<string, string> = {
-  Human: "/images/Human_Crest.webp",
-  Dwarf: "/images/Dwarf_Crest.webp",
-  "Night Elf": "/images/night_elves.webp",
-  Orc: "/images/Orc_Crest.webp",
-
-  Forsaken: "/images/Forsaken_Crest.webp",
-  Darkspear: "/images/Troll_Crest.webp",
-  Troll: "/images/Troll_Crest.webp",
-  Scourge: "/images/scourge.webp",
+  Human: "/icons/factions/humans.svg",
+  Dwarf: "/icons/factions/dwarves.svg",
+  "Night Elf": "/icons/factions/night-elves.svg",
+  Orc: "/icons/factions/orcs.svg",
+  Forsaken: "/icons/factions/forsaken.svg",
+  Darkspear: "/icons/factions/darkspear-trolls.svg",
+  Troll: "/icons/factions/darkspear-trolls.svg",
+  Tauren: "/icons/factions/tauren.svg",
+  Scourge: "/icons/factions/scourge.svg",
 };
 
 const tierColors: Record<string, string> = {
@@ -21,12 +20,6 @@ const tierColors: Record<string, string> = {
   Baseline: "bg-zinc-500/20 text-zinc-300 border-zinc-500/30",
   Mounted: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   Elite: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-};
-
-const factionBorder: Record<string, string> = {
-  Alliance: "border-l-alliance",
-  Horde: "border-l-horde",
-  Scourge: "border-l-scourge",
 };
 
 const specActiveStyle: Record<string, string> = {
@@ -97,7 +90,7 @@ function computeEffectiveINI(unit: Unit): string | null {
 function AbilityRow({ ability, highlight }: { ability: HeroAbility; highlight?: boolean }) {
   if (highlight) {
     return (
-      <div className="rounded border border-gold/20 bg-gold/5 px-2.5 py-1.5">
+      <div className="rounded-lg border border-gold/20 bg-gold/5 px-2.5 py-1.5">
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="text-xs font-semibold text-gold">{ability.name}</span>
           <span className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${costStyle[getCostCategory(ability.cost)]}`}>
@@ -113,7 +106,7 @@ function AbilityRow({ ability, highlight }: { ability: HeroAbility; highlight?: 
   }
 
   return (
-    <div className="rounded bg-background/50 px-2.5 py-1.5">
+    <div className="rounded-lg bg-background/50 px-2.5 py-1.5">
       <div className="flex flex-wrap items-center gap-1.5">
         <span className="text-xs font-medium text-foreground">{ability.name}</span>
         <span className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${costStyle[getCostCategory(ability.cost)]}`}>
@@ -131,23 +124,29 @@ function AbilityRow({ ability, highlight }: { ability: HeroAbility; highlight?: 
 export default function UnitCard({
   unit,
   allegiance,
+  factionId,
 }: {
   unit: Unit;
   allegiance: "Alliance" | "Horde" | "Scourge";
+  factionId?: string;
 }) {
   const [specIdx, setSpecIdx] = useState(0);
   const iniRange = computeEffectiveINI(unit);
   const hero = unit.heroData;
 
+  const factionPrimary = factionId ? `var(--faction-${factionId})` : undefined;
+  const factionAccent = factionId ? `var(--faction-${factionId}-accent)` : undefined;
+
   return (
     <div
-      className={`rounded-lg border border-border border-l-[3px] ${factionBorder[allegiance]} bg-surface p-4 transition-colors hover:border-gold/30`}
+      className="card-hover rounded-xl border border-border border-l-[3px] bg-surface p-4"
+      style={factionPrimary ? { borderLeftColor: factionPrimary } : undefined}
     >
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <h3 className="truncate font-semibold text-foreground">{unit.name}</h3>
+            <h3 className="font-display truncate font-semibold text-foreground">{unit.name}</h3>
             {hero && (
               <span className="shrink-0 text-[10px] text-muted">
                 {hero.className}
@@ -156,12 +155,13 @@ export default function UnitCard({
           </div>
           <p className="flex items-center gap-1 text-xs text-muted">
             {subfactionIconMap[unit.subfaction] && (
-              <Image
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
                 src={subfactionIconMap[unit.subfaction]}
                 alt={unit.subfaction}
                 width={14}
                 height={14}
-                className="opacity-60"
+                className="inline-block opacity-70"
               />
             )}
             {unit.subfaction} &middot; {unit.archetype}
@@ -169,37 +169,70 @@ export default function UnitCard({
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           {unit.dualSlot && (
-            <span className="rounded border border-orange-500/30 bg-orange-500/10 px-1.5 py-0.5 text-[10px] font-medium text-orange-400">
+            <span className="rounded-lg border border-orange-500/30 bg-orange-500/10 px-1.5 py-0.5 text-[10px] font-medium text-orange-400">
               {unit.dualSlot}
             </span>
           )}
           <span
-            className={`rounded border px-2 py-0.5 text-xs font-medium ${
+            className={`rounded-lg border px-2 py-0.5 text-xs font-medium ${
               tierColors[unit.tier] || tierColors.Baseline
             }`}
           >
             {unit.tier}
           </span>
-          <span className="rounded bg-gold/10 px-2 py-0.5 text-xs font-bold text-gold">
+          <span className="rounded-lg bg-gold/10 px-2 py-0.5 text-xs font-bold text-gold">
             {unit.stats.PTS} pts
           </span>
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="mb-3 grid grid-cols-9 gap-px overflow-hidden rounded border border-border bg-border">
-        {STAT_LABELS.map((stat) => {
-          const val = unit.stats[stat];
-          const display = (stat === "SKL" || stat === "DEF") ? `${val}+` : `${val}`;
-          return (
-            <div key={stat} className="bg-background px-1 py-1.5 text-center">
-              <div className="text-[10px] uppercase tracking-wider text-muted">{stat}</div>
-              <div className={`text-sm font-bold ${stat === "PTS" ? "text-gold" : "text-foreground"}`}>
-                {display}
+      {/* Stats Bar — responsive: 2 rows on mobile, 1 row on sm+ */}
+      <div className="mb-3 overflow-hidden rounded-lg border border-border bg-border">
+        {/* Top row: first 5 stats (always visible) */}
+        <div className="grid grid-cols-5 gap-px sm:hidden">
+          {STAT_LABELS.slice(0, 5).map((stat) => {
+            const val = unit.stats[stat];
+            const display = (stat === "SKL" || stat === "DEF") ? `${val}+` : `${val}`;
+            return (
+              <div key={stat} className="bg-background px-1 py-1.5 text-center">
+                <div className="text-[9px] uppercase tracking-wider text-muted">{stat}</div>
+                <div className={`text-sm font-bold ${stat === "PTS" ? "text-gold" : "text-foreground"}`}>
+                  {display}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        {/* Bottom row: last 4 stats (mobile only) */}
+        <div className="grid grid-cols-4 gap-px sm:hidden">
+          {STAT_LABELS.slice(5).map((stat) => {
+            const val = unit.stats[stat];
+            const display = (stat === "SKL" || stat === "DEF") ? `${val}+` : `${val}`;
+            return (
+              <div key={stat} className="bg-background px-1 py-1.5 text-center">
+                <div className="text-[9px] uppercase tracking-wider text-muted">{stat}</div>
+                <div className={`text-sm font-bold ${stat === "PTS" ? "text-gold" : "text-foreground"}`}>
+                  {display}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {/* Single row: all 9 stats (sm+ screens) */}
+        <div className="hidden grid-cols-9 gap-px sm:grid">
+          {STAT_LABELS.map((stat) => {
+            const val = unit.stats[stat];
+            const display = (stat === "SKL" || stat === "DEF") ? `${val}+` : `${val}`;
+            return (
+              <div key={stat} className="bg-background px-1 py-1.5 text-center">
+                <div className="text-[10px] uppercase tracking-wider text-muted">{stat}</div>
+                <div className={`text-sm font-bold ${stat === "PTS" ? "text-gold" : "text-foreground"}`}>
+                  {display}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Effective INI */}
@@ -216,7 +249,12 @@ export default function UnitCard({
           {unit.keywords.map((kw) => (
             <span
               key={kw}
-              className="rounded-full border border-gold/20 bg-gold/5 px-2 py-0.5 text-[11px] font-medium text-gold"
+              className="rounded-full border px-2 py-0.5 text-[11px] font-medium"
+              style={{
+                borderColor: `color-mix(in srgb, ${factionAccent || "var(--gold)"} 30%, transparent)`,
+                backgroundColor: `color-mix(in srgb, ${factionAccent || "var(--gold)"} 8%, transparent)`,
+                color: factionAccent || "var(--gold)",
+              }}
             >
               {kw}
             </span>
@@ -234,7 +272,7 @@ export default function UnitCard({
             {unit.equipment.map((eq) => (
               <span
                 key={eq}
-                className="rounded bg-background px-1.5 py-0.5 text-[11px] text-foreground/60"
+                className="rounded-lg bg-background px-1.5 py-0.5 text-[11px] text-foreground/60"
               >
                 {eq}
               </span>
@@ -272,10 +310,17 @@ export default function UnitCard({
                   key={spec.name}
                   onClick={() => setSpecIdx(idx)}
                   className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
-                    idx === specIdx
+                    idx === specIdx && !factionPrimary
                       ? specActiveStyle[allegiance]
-                      : "border-border bg-background text-muted hover:text-foreground/70"
+                      : idx !== specIdx
+                        ? "border-border bg-background text-muted hover:text-foreground/70"
+                        : ""
                   }`}
+                  style={idx === specIdx && factionPrimary ? {
+                    borderColor: factionPrimary,
+                    backgroundColor: `color-mix(in srgb, ${factionPrimary} 12%, transparent)`,
+                    color: factionPrimary,
+                  } : undefined}
                 >
                   {spec.name}
                 </button>

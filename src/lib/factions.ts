@@ -48,6 +48,9 @@ export interface Faction {
   name: string;
   allegiance: "Alliance" | "Horde" | "Scourge";
   icon: string;
+  crest?: string;      // webp crest for large displays (undefined = fall back to svgIcon)
+  svgIcon: string;     // SVG icon for small inline use (always present)
+  colorKey: string;    // CSS variable fragment, e.g. "humans" → var(--faction-humans)
   theme: string;
   playstyle: string;
   mechanic: { name: string; description: string };
@@ -66,6 +69,9 @@ const HUMANS: Faction = {
   name: "Humans of Stormwind",
   allegiance: "Alliance",
   icon: "/images/Human_Crest.webp",
+  crest: "/images/Human_Crest.webp",
+  svgIcon: "/icons/factions/humans.svg",
+  colorKey: "humans",
   theme: "Disciplined, versatile, faith-powered. The backbone of the Alliance.",
   playstyle: "Balanced and adaptable. Strong defensive line with heavy armor infantry, supported by paladins and priests. Solid ranged support and good cavalry for flanking. No glaring weakness but no extreme specialty — they win through discipline and flexibility.",
   mechanic: {
@@ -190,6 +196,9 @@ const DWARVES: Faction = {
   id: "dwarves",
   name: "Dwarves of Ironforge",
   allegiance: "Alliance",
+  crest: "/images/Dwarf_Crest.webp",
+  svgIcon: "/icons/factions/dwarves.svg",
+  colorKey: "dwarves",
   icon: "/images/Dwarf_Crest.webp",
   theme: "Stubborn, heavily armed, ranged firepower and aerial prowess.",
   playstyle: "Ranged-dominant with the best guns in the game. Extremely tough and stubborn. Slow-moving but devastating at range. They want to shoot you to pieces before you reach them.",
@@ -280,6 +289,9 @@ const NIGHT_ELVES: Faction = {
   id: "night-elves",
   name: "Night Elves",
   allegiance: "Alliance",
+  crest: "/images/night_elves.webp",
+  svgIcon: "/icons/factions/night-elves.svg",
+  colorKey: "night-elves",
   icon: "/images/night_elves.webp",
   theme: "Ancient, stealthy, nature-bound. Guerrilla warfare and druidic shapeshifting.",
   playstyle: "Hit-and-run. High INI across the board, Stealth on many units, strong archery. Druids shapeshift for different roles. They control engagement — picking fights on their terms and using forests as home territory.",
@@ -361,6 +373,9 @@ const ORCS: Faction = {
   id: "orcs",
   name: "Orcs of Orgrimmar",
   allegiance: "Horde",
+  crest: "/images/Orc_Crest.webp",
+  svgIcon: "/icons/factions/orcs.svg",
+  colorKey: "orcs",
   icon: "/images/Orc_Crest.webp",
   theme: "Savage, honorable, shamanic. Brute force meets elemental magic.",
   playstyle: "Fast and brutal. Highest base ATK/STR and fastest infantry. Berserker keyword on many units — Orcs get stronger as they take damage. Momentum on core units. Close the gap, crash in, overwhelm.",
@@ -533,6 +548,9 @@ const DARKSPEAR: Faction = {
   id: "darkspear",
   name: "Darkspear Trolls",
   allegiance: "Horde",
+  crest: "/images/Troll_Crest.webp",
+  svgIcon: "/icons/factions/darkspear-trolls.svg",
+  colorKey: "darkspear",
   icon: "/images/Troll_Crest.webp",
   theme: "Voodoo, regeneration, berserker fury, primal savagery.",
   playstyle: "Regeneration and Berserker everywhere. Trolls get tougher to kill as the fight goes on — they heal, get angry, hit harder. Powerful voodoo magic provides hexes, wards, and healing. The longer the battle lasts, the more they dominate.",
@@ -623,6 +641,8 @@ const TAUREN: Faction = {
   name: "Tauren of Thunder Bluff",
   allegiance: "Horde",
   icon: "/icons/factions/tauren.svg",
+  svgIcon: "/icons/factions/tauren.svg",
+  colorKey: "tauren",
   theme: "Mighty, spiritual, nature-guardians. Walking walls of muscle.",
   playstyle: "Elite-heavy, low model count. Every Tauren is big, tough, and hits hard. Highest base TGH and WND in the game. Cleave keyword sweeps through clusters. They don't have many models, but each one is a serious threat.",
   mechanic: {
@@ -645,15 +665,23 @@ const FORSAKEN: Faction = {
   name: "Forsaken of Undercity",
   allegiance: "Horde",
   icon: "/images/Forsaken_Crest.webp",
-  theme: "Cunning, vengeful, plague and shadow. The dead who chose to fight back.",
-  playstyle: "Attrition and debuff-focused. Plague mechanics weaken enemies over time. Some models are Undead (immune to Morale, can't heal), others are living. Val'kyr is the only model that can heal Undead — a high-priority target.",
+  crest: "/images/Forsaken_Crest.webp",
+  svgIcon: "/icons/factions/forsaken.svg",
+  colorKey: "forsaken",
+  theme: "Chemical warfare, poison, and plague. Free-willed undead who weaponize alchemy and biological agents against the living.",
+  playstyle: "Debuff and attrition through Poison (damage over time) and Plague (stat degradation). Apply both to a target and the Poison wound ignores DEF saves. Blight tokens deny ground. Dark Rangers snipe from Stealth. Dread Riders spread Plague on the charge.",
   mechanic: {
-    name: "Blight",
-    description: "Forsaken models with the Plague keyword can leave Blight tokens when they activate. Enemies that move through or end on Blight suffer 1 automatic wound (DEF save allowed). Blight persists for 2 rounds.",
+    name: "Blight + Poison & Plague",
+    description: "Plague keyword models place Blight tokens (1 wound, DEF save). Poison deals 1 wound at start of victim's activation. Plague applies -1 TGH. If both active, Poison ignores DEF saves.",
   },
-  strengths: "Debuffs that cripple enemy stats, Blight area denial, Stealth assassins, best ranged accuracy (SKL 2+), Undead ignore Morale",
-  weaknesses: "Low raw damage (rely on debuffs first), Undead can't heal except by Val'kyr, split Morale mechanics, moderate stats",
+  strengths: "Two interlocking status effects (Poison + Plague synergy), Blight area denial, Stealth assassins, best ranged accuracy (SKL 2+), Undead ignore Morale",
+  weaknesses: "Low raw damage (rely on debuffs first), Undead can't be healed at all, split Morale mechanics (Living Apothecaries test Morale), moderate base stats",
   ratings: { offense: 2, defense: 3, magic: 4, speed: 3 },
+  specialRules: [
+    "Poison: 1 wound at start of victim's next activation (DEF save). If also Plagued, ignores DEF saves.",
+    "Plague: -1 TGH until end of round. Does not stack beyond -1.",
+    "Blight: Plague keyword models place tokens when activated. Enemies on Blight suffer 1 wound (DEF save). Persists 2 rounds.",
+  ],
   units: [
     {
       name: "Dark Lady",
@@ -661,14 +689,14 @@ const FORSAKEN: Faction = {
       tier: "Hero",
       archetype: "Ranged / Commander",
       keywords: ["Magical", "Undead", "Stealth", "Decisive Blow [2]"],
-      description: "The Forsaken's supreme commander. Black Arrow corrupts targets with Shadow Wound. Charm dominates enemy models. As Undead she never breaks — but can only be healed by Val'kyr.",
+      description: "Supreme commander. Black Arrow applies Poison + -1 DEF on ranged hits. Charm dominates enemy models. As Undead she never breaks — but can only be healed by Val'kyr.",
       equipment: ["Longbow", "Dagger", "Leather"],
       stats: { MOV: 6, ATK: 3, SKL: 2, STR: 4, TGH: 3, DEF: 5, INI: 6, WND: 4, PTS: 140 },
       heroData: {
         className: "Dark Ranger",
         classAbility: { name: "Charm", cost: "Once per game", type: "Instant", description: "Target enemy non-Hero within 8\" switches sides for 1 round, then destroyed" },
         globals: [
-          { name: "Black Arrow", cost: "2 Mana", type: "Buff", description: "Self. Ranged attacks apply Shadow Wound: -1 DEF, can't heal/Regenerate until end of next round" },
+          { name: "Black Arrow", cost: "2 Mana", type: "Buff", description: "Self. Ranged attacks apply Poison (on wound, no unsaved wound required). Poisoned targets also suffer -1 DEF" },
           { name: "Hunter's Mark", cost: "1 Mana", type: "Debuff", description: "Enemy within 18\" suffers -1 DEF. All friendly Forsaken gain +1 to hit vs marked target" },
         ],
         specs: [
@@ -678,7 +706,7 @@ const FORSAKEN: Faction = {
               { name: "Silence", cost: "2 Mana", type: "Debuff", description: "Enemy within 12\" cannot use abilities until end of round" },
               { name: "Dark Pursuit", cost: "1 Mana", type: "Buff", description: "Gain Stealth and Disengage until this Hero attacks" },
             ],
-            ultimate: { name: "Withering Volley", cost: "Once per battle — 3 Mana", type: "Blast", description: "Small Blast 3\", STR 5, Range 24\". All hit suffer -1 TGH for the rest of the game" },
+            ultimate: { name: "Withering Volley", cost: "Once per battle — 3 Mana", type: "Blast", description: "Small Blast 3\", STR 5, Range 24\". All hit become permanently Plagued (does not expire)" },
           },
           {
             name: "Banshee",
@@ -697,14 +725,14 @@ const FORSAKEN: Faction = {
       tier: "Hero",
       archetype: "Plague Caster / Debuff",
       keywords: ["Magical", "Plague"],
-      description: "Royal Apothecary Society's supreme alchemist. Plague bombs, mass debuffs, Blight network detonation. Living (not Undead) — tests Morale. New Plague permanently cripples enemy stats.",
-      equipment: ["Staff", "Dagger", "Robes/None"],
+      description: "Supreme alchemist. Master of chemical warfare — Plague Bombs, mass debuffs, Blight detonation. New Plague permanently applies both Plagued AND Poisoned. Living — tests Morale, can be healed.",
+      equipment: ["Plague Staff", "Robes/None"],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 5, INI: 3, WND: 3, PTS: 120 },
       heroData: {
         className: "Apothecary",
-        classAbility: { name: "New Plague", cost: "Once per game", type: "Blast", description: "Large Blast 5\", Range 12\". All enemies hit suffer -1 TGH AND -1 ATK for the rest of the game. No save" },
+        classAbility: { name: "New Plague", cost: "Once per game", type: "Blast", description: "Large Blast 5\", Range 12\". All enemies hit become Plagued AND Poisoned permanently (neither expires). No save" },
         globals: [
-          { name: "Plague Bomb", cost: "2 Mana", type: "Blast", description: "Small Blast 3\", Range 12\", STR 3. Creates Blight token at impact" },
+          { name: "Plague Bomb", cost: "2 Mana", type: "Blast", description: "Small Blast 3\", Range 12\", STR 3. All hit become Plagued. Creates Blight token at impact" },
           { name: "Miasma", cost: "1 Mana", type: "Debuff", description: "All enemies within 3\" suffer -1 to hit rolls until end of round" },
         ],
         specs: [
@@ -712,17 +740,17 @@ const FORSAKEN: Faction = {
             name: "Plague Doctor",
             abilities: [
               { name: "Toxic Injection", cost: "1 Mana", type: "Buff", description: "Friendly model within 6\" gains Poison on melee attacks this round" },
-              { name: "Adaptive Toxin", cost: "2 Mana", type: "Debuff", description: "Enemy within 12\" suffers -1 TGH. If already Poisoned/Blighted, also -1 ATK" },
+              { name: "Adaptive Toxin", cost: "2 Mana", type: "Debuff", description: "Enemy within 12\" suffers -1 TGH. If already Poisoned or Plagued, also -1 ATK" },
             ],
-            ultimate: { name: "Perfected Strain", cost: "Once per battle — 3 Mana", type: "Debuff", description: "Enemy within 12\" suffers -2 TGH, -1 ATK, -1 DEF for the rest of the game. No save" },
+            ultimate: { name: "Perfected Strain", cost: "Once per battle — 3 Mana", type: "Debuff", description: "Enemy within 12\" becomes permanently Plagued and Poisoned. Also -1 ATK, -1 DEF for the rest of the game. No save" },
           },
           {
             name: "Blightcaller",
             abilities: [
-              { name: "Blight Spray", cost: "1 Mana", type: "Spell Shoot", description: "Range 8\", STR 3. Creates Blight token at target's position" },
-              { name: "Creeping Death", cost: "2 Mana", type: "Instant", description: "All Blight tokens detonate — enemies within 2\" of any token suffer 1 wound (DEF save)" },
+              { name: "Blight Spray", cost: "1 Mana", type: "Spell Shoot", description: "Range 8\", STR 3. Target becomes Plagued. Creates Blight token at target's position" },
+              { name: "Creeping Death", cost: "2 Mana", type: "Instant", description: "All Blight tokens detonate — enemies within 2\" suffer 1 wound (DEF save) and become Plagued. Tokens not removed" },
             ],
-            ultimate: { name: "Wrathgate", cost: "Once per battle — 4 Mana", type: "Blast", description: "Large Blast 5\", Range 18\", STR 5. Creates Blight across blast area. Friendlies also affected" },
+            ultimate: { name: "Wrathgate", cost: "Once per battle — 4 Mana", type: "Blast", description: "Large Blast 5\", Range 18\", STR 5. All hit become Plagued. Creates Blight across blast area. Friendlies also affected" },
           },
         ],
       },
@@ -733,19 +761,9 @@ const FORSAKEN: Faction = {
       tier: "Baseline",
       archetype: "Core Infantry",
       keywords: ["Undead"],
-      description: "Rank-and-file soldiers of Undercity. Undead means they never break but never heal. Relentless and fearless.",
-      equipment: ["Sword", "Axe", "Shield", "Mail", "Leather"],
+      description: "Rank-and-file soldiers of Undercity. Undead: never break, never heal. 3 loadouts: Sword+Shield (DEF 4+), Dual Blades (3 ATK), Greatsword (AP 1, DMG 2, INI -1). Any loadout can upgrade to Poisoned Blades (+5 pts).",
+      equipment: ["Sword+Shield / Dual Blades / Greatsword", "Mail"],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 5, INI: 3, WND: 2, PTS: 35 },
-    },
-    {
-      name: "Plague Spreader",
-      subfaction: "Forsaken",
-      tier: "Baseline",
-      archetype: "Debuff Ranged",
-      keywords: ["Undead", "Plague"],
-      description: "Short-range plague vials that degrade enemy TGH on hit. The only Baseline unit in the game that debuffs enemy stats.",
-      equipment: ["Plague Vial", "Dagger", "Leather"],
-      stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 6, INI: 3, WND: 2, PTS: 40 },
     },
     {
       name: "Dread Rider",
@@ -753,8 +771,8 @@ const FORSAKEN: Faction = {
       tier: "Mounted",
       archetype: "Pursuit Cavalry",
       keywords: ["Undead", "Fear"],
-      description: "Undead knights on skeletal warhorses. Relentless pursuers with Fear aura. Dread Charge forces Morale tests on impact.",
-      equipment: ["Sword", "Lance", "Shield", "Mail"],
+      description: "Undead knights on skeletal warhorses. Dread Charge applies Plagued and forces Morale test. Blighted Lance grants Momentum [1] and AP 1 on charge.",
+      equipment: ["Sword", "Blighted Lance", "Shield", "Mail"],
       stats: { MOV: 8, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 5, INI: 3, WND: 3, PTS: 65 },
     },
     {
@@ -773,8 +791,8 @@ const FORSAKEN: Faction = {
       tier: "Elite",
       archetype: "Poison Assassin",
       keywords: ["Undead", "Stealth", "Disengage"],
-      description: "Forsaken rogues. Stealth in, poison blades strike, Disengage out. Unique Poison DoT — the only persistent melee damage in the game.",
-      equipment: ["Dagger", "Dagger", "Leather"],
+      description: "Stealth in, poisoned blades strike, Disengage out. Poison deals 1 wound at start of victim's next activation. If target is also Plagued, Poison ignores DEF saves.",
+      equipment: ["Poisoned Daggers", "Leather"],
       stats: { MOV: 6, ATK: 3, SKL: 3, STR: 3, TGH: 3, DEF: 6, INI: 6, WND: 2, PTS: 70 },
     },
     {
@@ -783,7 +801,7 @@ const FORSAKEN: Faction = {
       tier: "Elite",
       archetype: "Heavy Tank / Control",
       keywords: ["Undead", "Cleave", "Fear"],
-      description: "Stitched corpse monstrosity. Massive HP, Meat Hook drags enemies into base contact — the only forced repositioning in the game.",
+      description: "Stitched corpse monstrosity filled with plague. Meat Hook drags enemies into base contact. Plague Burst on death applies Plagued + 1 wound to nearby non-Undead.",
       equipment: ["Cleaver", "Meat Hook", "Plate Armor"],
       stats: { MOV: 4, ATK: 3, SKL: 4, STR: 5, TGH: 5, DEF: 4, INI: 1, WND: 5, PTS: 90 },
     },
@@ -791,37 +809,17 @@ const FORSAKEN: Faction = {
       name: "Apothecary",
       subfaction: "Forsaken",
       tier: "Elite",
-      archetype: "Plague Support",
+      archetype: "Plague & Poison Support",
       keywords: ["Magical", "Plague"],
-      description: "Royal Apothecary Society alchemists. Deploy Blight tokens for area denial. Living — tests Morale but can be healed.",
-      equipment: ["Dagger", "Staff", "Leather"],
+      description: "Swiss-army support: hurls Plague Vials (applies Plagued on wound), deploys Blight tokens, and buffs allies with Poison via Toxin Application. Living — tests Morale but can be healed.",
+      equipment: ["Plague Staff", "Plague Vial", "Leather"],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 6, INI: 3, WND: 2, PTS: 55 },
-    },
-    {
-      name: "Val'kyr",
-      subfaction: "Forsaken",
-      tier: "Elite",
-      archetype: "Shadow Support Flyer",
-      keywords: ["Undead", "Fly", "Magical"],
-      description: "The only model in the game that can heal Undead via Shadow Mend. High-priority target — kill her and the Forsaken lose their lifeline.",
-      equipment: [],
-      stats: { MOV: 8, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 6, INI: 5, WND: 3, PTS: 85 },
-    },
-    {
-      name: "Dread Guard",
-      subfaction: "Forsaken",
-      tier: "Elite",
-      archetype: "Heavy Melee",
-      keywords: ["Undead", "Fear"],
-      description: "Elite Forsaken warriors in heavy mail. Tougher than any other Forsaken infantry, they anchor the line so Dark Rangers and Deathstalkers can work.",
-      equipment: ["Sword", "Axe", "Greataxe", "Mace", "Shield", "Heavy Mail"],
-      stats: { MOV: 5, ATK: 3, SKL: 3, STR: 4, TGH: 4, DEF: 4, INI: 3, WND: 3, PTS: 65 },
     },
   ],
   composition: [
-    { size: "Skirmish (500 pts)", baseline: "3-5", mounted: "0-1", elite: "0-2", hero: "1" },
-    { size: "Standard (750 pts)", baseline: "4-7", mounted: "0-2", elite: "1-4", hero: "1-2" },
-    { size: "Large (1000+ pts)", baseline: "5-9", mounted: "0-3", elite: "2-5", hero: "2-3" },
+    { size: "Skirmish (500 pts)", baseline: "3-6", mounted: "0-1", elite: "0-2", hero: "1" },
+    { size: "Standard (750 pts)", baseline: "4-8", mounted: "0-2", elite: "1-4", hero: "1-2" },
+    { size: "Large (1000+ pts)", baseline: "5-10", mounted: "0-3", elite: "2-5", hero: "2" },
   ],
 };
 
@@ -832,6 +830,9 @@ const SCOURGE: Faction = {
   name: "Scourge",
   allegiance: "Scourge",
   icon: "/images/scourge.webp",
+  crest: "/images/scourge.webp",
+  svgIcon: "/icons/factions/scourge.svg",
+  colorKey: "scourge",
   theme: "Undeath incarnate. The Lich King's army of skeletons, ghouls, and necromancers. Relentless, inevitable, endless.",
   playstyle: "Swarm and attrition. Flood the board with cheap Undead that never test Morale. Necromancers raise fallen models as new Skeletons — the army grows as models die. The Scourge doesn't outfight you — it outlasts you.",
   mechanic: {
@@ -1011,4 +1012,11 @@ export function getUnitsByTier(units: Unit[]): Record<string, Unit[]> {
     if (filtered.length > 0) tiers[tier] = filtered;
   }
   return tiers;
+}
+
+export function getFactionCSSVars(colorKey: string): { primary: string; accent: string } {
+  return {
+    primary: `var(--faction-${colorKey})`,
+    accent: `var(--faction-${colorKey}-accent)`,
+  };
 }
