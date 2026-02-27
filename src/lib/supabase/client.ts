@@ -6,5 +6,9 @@ export function createClient() {
 
   if (!url || !key) return null;
 
-  return createBrowserClient(url, key);
+  try {
+    return createBrowserClient(url, key);
+  } catch {
+    return null;
+  }
 }
