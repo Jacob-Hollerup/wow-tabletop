@@ -9,8 +9,8 @@ import type { User } from "@supabase/supabase-js";
 const links = [
   { href: "/rules", label: "Rules" },
   { href: "/armies", label: "Armies" },
+  { href: "/scenarios", label: "Maps" },
   { href: "/reference", label: "Quick Ref" },
-  { href: "/ask", label: "Ask AI" },
 ];
 
 export default function Nav() {
@@ -45,28 +45,53 @@ export default function Nav() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        <Link href="/rules" className="text-lg font-bold text-gold">
-          Azeroth at War
+        {/* Logo */}
+        <Link href="/" className="group flex items-center gap-2">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-gold transition-transform group-hover:scale-110"
+          >
+            <path
+              d="M14.5 3L12 7l-2.5-4M12 7v10M8 13l4 4 4-4M7 21h10"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="font-display text-lg font-bold text-gold">
+            Azeroth at War
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`rounded px-3 py-1.5 text-sm transition-colors ${
-                pathname.startsWith(link.href)
-                  ? "bg-gold/10 text-gold"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="hidden items-center gap-0.5 md:flex">
+          {links.map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative rounded-lg px-3 py-1.5 text-sm transition-colors ${
+                  isActive
+                    ? "text-gold"
+                    : "text-muted hover:text-foreground"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-gold" />
+                )}
+              </Link>
+            );
+          })}
+          <div className="ml-3 h-4 w-px bg-border" />
           <button
             onClick={handleSignOut}
-            className="ml-4 rounded px-3 py-1.5 text-sm text-muted hover:text-foreground"
+            className="ml-3 rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground"
           >
             Sign Out
           </button>
@@ -74,7 +99,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-muted"
+          className="text-muted md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -89,24 +114,26 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-border px-4 pb-4 md:hidden">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className={`block py-2 text-sm ${
-                pathname.startsWith(link.href)
-                  ? "text-gold"
-                  : "text-muted"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="border-t border-border px-4 pb-4 md:hidden animate-in">
+          {links.map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center gap-2 py-2.5 text-sm ${
+                  isActive ? "text-gold" : "text-muted"
+                }`}
+              >
+                {isActive && <span className="h-1.5 w-1.5 rounded-full bg-gold" />}
+                {link.label}
+              </Link>
+            );
+          })}
           <button
             onClick={handleSignOut}
-            className="block py-2 text-sm text-muted"
+            className="block py-2.5 text-sm text-muted"
           >
             Sign Out
           </button>

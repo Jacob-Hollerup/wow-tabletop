@@ -1,6 +1,6 @@
 # AZEROTH AT WAR — Army Book: SCOURGE
 
-## Version 0.2 (Unit List & Hero Specializations)
+## Version 0.3 (Full Unit Profiles & Points)
 
 _All will serve._
 
@@ -43,7 +43,7 @@ Leaders may deploy with a protective screen of followers. While attached, the le
 
 | Weapon | ATK | STR | AP | DMG |
 |---|---|---|---|---|
-| Runesword (SW) | 4 | 5 | 1 | 1 |
+| Runesword (SW) | 4 | 5 | 1 | 3 |
 
 **Armor:** Death Plate (HA)
 **Additional Keywords:** Momentum [1]
@@ -52,12 +52,12 @@ Leaders may deploy with a protective screen of followers. While attached, the le
 
 | MOV | SKL | TGH | DEF | INI | WND |
 |---|---|---|---|---|---|
-| 5 | 3+ | 5 | 4+ | 3 | 7 |
+| 5 | 3+ | 5 | 4+ | 3 | 5 |
 
 | Weapon | ATK | STR | AP | DMG |
 |---|---|---|---|---|
-| Runesword (SW) | 4 | 5 | 1 | 1 |
-| Runeblade (HW) | 4 | 5 | 1 | 2 |
+| Runesword (SW) | 4 | 5 | 1 | 3 |
+| Runeblade (HW) | 4 | 5 | 2 | 3 |
 
 **Armor:** Death Plate (HA), Bone/Chain (MA)
 **Other Equipment:** Shield
@@ -87,7 +87,7 @@ _Master of frost magic and necromancy. May take up to 3 Acolyte bodyguards._
 
 | MOV | SKL | TGH | DEF | INI | WND |
 |---|---|---|---|---|---|
-| 5 | 3+ | 2 | 6+ | 3 | 6 |
+| 5 | 3+ | 2 | 6+ | 3 | 4 |
 
 | Weapon | ATK | STR | AP | DMG |
 |---|---|---|---|---|
@@ -96,18 +96,18 @@ _Master of frost magic and necromancy. May take up to 3 Acolyte bodyguards._
 **Armor:** Rags/None (LA)
 
 **Base Ability — Frost Nova:** (2 Mana) All enemies within 3" cannot move next activation.
-**Dark Ritual (Once per Game):** Destroy one friendly model within 2" to immediately gain 5 Mana.
+**Phylactery:** When this model is destroyed, roll a D6. On 4+, the Lich returns at 1 WND at the end of the round, placed within 6" of a friendly Undead model.
 
 #### Specialization: Frost
 
-- **Level 1 — Frostbolt:** (2 Mana) 24" Range. STR 4. AP 1. Target suffers -2 MOV until end of round.
+- **Level 1 — Frostbolt:** (2 Mana) 24" Range. STR 4. AP 1. DMG 1. Target suffers -2 MOV until end of round.
 - **Level 2 — Frost Armor:** (2 Mana) Target friendly within 6" gains +2 DEF; attackers in melee suffer -1 ATK until end of round.
-- **Level 3 — Blizzard (Once per Game):** (4 Mana) Large Blast. STR 4. AP 1. All targets cannot move and suffer -2 ATK next round.
+- **Level 3 — Blizzard (Once per Game):** (4 Mana) Large Blast. STR 4. AP 1. DMG 1. All targets cannot move and suffer -2 ATK next round.
 
 #### Specialization: Necromancy
 
 - **Level 1 — Free Raise Dead:** (Passive) Raise Dead costs 0 Mana for models destroyed within 6" of this Hero.
-- **Level 2 — Corpse Explosion:** (2 Mana) Destroy one friendly Undead model within 4". Small Blast centered on the destroyed model; STR 5, AP 1 hit to all enemies within 3".
+- **Level 2 — Corpse Explosion:** (2 Mana) Destroy one friendly Undead model within 4". Small Blast centered on the destroyed model; STR 5, AP 1, DMG 1 hit to all enemies within 3".
 - **Level 3 — Mass Raise Dead (Once per Game):** (Action) Destroy all bodyguards. Raise ALL destroyed models within 12" as Skeleton Warriors at no Mana cost.
 
 ---
@@ -133,17 +133,40 @@ _Master of frost magic and necromancy. May take up to 3 Acolyte bodyguards._
 
 - **Level 1 — Cripple:** (2 Mana) 18" Range. Target suffers -2 MOV and -1 ATK.
 - **Level 2 — Cloud of Disease:** (3 Mana) 16" Range. 3" Blast template remains for **2 rounds**; living models inside take 1 Wound at end of each round.
-- **Level 3 — Epidemic (Once per Game):** (Action) Destroy 1 Acolyte. All enemies within 10" suffer 2 Wounds (AP 1). Kills trigger **Raise Dead** for 0 Mana.
 
 #### Specialization: Shadow
 
 - **Level 1 — Shadow Bolt:** (2 Mana) 24" Range. STR 4. AP 1. Ignores Soft Cover.
-- **Level 2 — Dark Ritual:** (Action) Destroy 1 Acolyte to immediately gain **4 Mana** (can exceed cap).
-- **Level 3 — Shadowfury (Once per Game):** (4 Mana) 18" Range. 3" Blast; STR 5, AP 1 hit and forces a **Morale test at -1** (Fear).
+
+---
+
+### Death Knight (Scourge Elite)
+
+**Tier:** Elite | **Archetype:** Melee Leader
+**Keywords:** Undead, Magical
+**Specs:** Frost, Unholy, or Blood
+
+| MOV | SKL | TGH | DEF | INI | WND |
+|---|---|---|---|---|---|
+| 5 | 3+ | 5 | 4+ | 3 | 3 |
+
+| Weapon | ATK | STR | AP | DMG |
+|---|---|---|---|---|
+| Rune Sword (SW) | 3 | 5 | 1 | 2 |
+
+**Armor:** Death Plate (HA)
+
+Lesser death knights — fallen warriors raised by the Lich King's will. Not the great champions of the Scourge, but still fearsome combatants carrying runic power. Provides the Magical keyword for mana generation and fuels Raise Dead.
+
+**Spec Abilities (choose one):**
+- **Frost — Frost Strike** *(2 Mana — Instant):* Next melee attack this activation: target suffers -2 MOV and -1 ATK until end of round.
+- **Unholy — Dark Command** *(2 Mana — Instant):* Target friendly Undead within 6" gains +2 ATK until end of round.
+- **Blood — Death Strike** *(2 Mana — Instant):* After this model's melee attacks resolve, heal 1 WND for each unsaved wound dealt.
 
 ---
 
 ### Abomination (Scourge Elite)
+
 **Tier:** Elite | **Archetype:** Monster
 **Keywords:** Undead, Cleave, Fear
 
@@ -168,6 +191,7 @@ Hulking construct of stitched-together corpses. Slow and inaccurate, but devasta
 ---
 
 ### Skeleton Warrior
+
 **Tier:** Baseline | **Archetype:** Swarm Melee
 **Keywords:** Undead
 
@@ -177,34 +201,43 @@ Hulking construct of stitched-together corpses. Slow and inaccurate, but devasta
 
 | Weapon | ATK | STR | AP | DMG |
 |---|---|---|---|---|
-| Runesword (SW) | 2 | 3 | 0 | 1 |
+| Sword (SW) | 2 | 3 | 0 | 1 |
 
 **Armor:** Bone/Chain (MA)
 **Other Equipment:** Shield
 
-The cheapest model in the game. Individually fragile, but Raise Dead creates an endless tide. Immune to Morale — they never break, they just keep coming.
+The cheapest model in the game. Individually fragile, but Raise Dead creates an endless tide. Immune to Morale — they never break, they just keep coming. Risen humans wielding whatever weapons they died with.
 
 ---
 
-### Skeleton Archer
-**Tier:** Baseline | **Archetype:** Swarm Ranged
-**Keywords:** Undead
+### Crypt Fiend
+
+**Tier:** Baseline | **Archetype:** Ranged / Melee Hybrid
+**Keywords:** Undead, Spider Climb
 
 | MOV | SKL | TGH | DEF | INI | WND |
 |---|---|---|---|---|---|
-| 4 | 5+ | 2 | 6+ | 3 | 1 |
+| 6 | 4+ | 4 | 5+ | 3 | 2 |
 
-| Weapon | Range | ATK | STR | AP | DMG |
+| Weapon | ATK | STR | AP | DMG |
+|---|---|---|---|---|
+| Claws (LW) | 3 | 4 | 0 | 1 |
+
+| Ranged | Range | ATK | STR | AP | DMG |
 |---|---|---|---|---|---|
-| Bone Bow (RW) | 18" | 2 | 3 | 0 | 1 |
+| Venom Spit (RW) | 18" | 2 | 3 | 0 | 1 |
 
-**Armor:** Rags/None (LA)
+**Armor:** Chitin (MA)
 
-Ranged swarm. Inaccurate but massed fire adds up. Even frailer than Skeleton Warriors — no armor, no shield.
+Undead nerubians — giant spider-like creatures that serve the Lich King. Tougher and more versatile than the old Skeleton Archers. Venom Spit provides ranged support while Claws let them fight in melee. Spider Climb makes them excellent at controlling terrain.
+
+**Spider Climb:** This model ignores all terrain movement penalties. Cannot move over other models.
+**Web** *(Once Per Game):* Target one model with the Fly keyword within 18". That model loses the Fly keyword until end of round and must immediately land.
 
 ---
 
 ### Ghoul
+
 **Tier:** Baseline | **Archetype:** Fast Aggressive Melee
 **Keywords:** Undead, Berserker
 
@@ -223,6 +256,7 @@ Fastest Scourge infantry. High ATK and STR for a baseline unit, with Berserker p
 ---
 
 ### Acolyte
+
 **Tier:** Baseline | **Archetype:** Support / Mana Battery
 **Keywords:** Magical
 
@@ -242,21 +276,28 @@ Living cultists — not Undead. Test Morale normally and can be healed. Provide 
 
 ## UNIT ROSTER SUMMARY
 
-| Unit             | Tier     | Role                   | Bodyguards  |
-| ---------------- | -------- | ---------------------- | ----------- |
-| Skeleton Warrior | Baseline | Cheap swarm melee      | N/A         |
-| Skeleton Archer  | Baseline | Cheap swarm ranged     | N/A         |
-| Ghoul            | Baseline | Fast aggressive melee  | N/A         |
-| Acolyte          | Baseline | Mana battery / support | N/A         |
-| Death Knight (M) | Mounted  | Heavy cavalry          | 2 Ghouls    |
-| Death Knight (F) | Elite    | Heavy infantry         | 2 Skeletons |
-| Abomination      | Elite    | Monster / Melee        | N/A         |
-| Necromancer      | Elite    | Caster / Summoner      | 2 Acolytes  |
-| Lich             | Hero     | Pure caster            | 3 Acolytes  |
+| Unit             | Tier     | Role                   | Bodyguards  | PTS | Hero Lv.1 / Lv.2 / Lv.3 |
+| ---------------- | -------- | ---------------------- | ----------- | --- | --- |
+| Skeleton Warrior | Baseline | Cheap swarm melee      | N/A         | 10 | — |
+| Acolyte          | Baseline | Mana battery / support | N/A         | 15 | — |
+| Ghoul            | Baseline | Fast aggressive melee  | N/A         | 30 | — |
+| Crypt Fiend      | Baseline | Ranged / melee hybrid  | N/A         | 35 | — |
+| Necromancer      | Elite    | Caster / Summoner      | 2 Acolytes  | 55 | — |
+| Death Knight (E) | Elite    | Melee leader (spec)    | N/A         | 75 | — |
+| Abomination      | Elite    | Monster / Melee        | N/A         | 100 | — |
+| Death Knight (M) | Hero     | Heavy cavalry          | 2 Ghouls    | — | 150 / 175 / 200 |
+| Death Knight (F) | Hero     | Heavy infantry         | 2 Skeletons | — | 130 / 155 / 180 |
+| Lich             | Hero     | Pure caster            | 3 Acolytes  | — | 120 / 145 / 170 |
 
 ---
 
 ## SPECIAL RULES
+
+### Dark Ritual (Generic Hero Ability)
+
+All Scourge Heroes (Death Knight, Lich, Necromancer) have access to this ability:
+
+- **Dark Ritual (Once per Game):** Destroy one friendly model within 2" to immediately gain 5 Mana.
 
 ### Undead Army
 
@@ -267,3 +308,33 @@ Living cultists — not Undead. Test Morale normally and can be healed. Provide 
 ### Living Scourge Units
 
 **Necromancers** and **Acolytes** are living cultists. They test Morale normally and can be healed. They are the engine for Raise Dead.
+
+---
+
+## WEAPON REFERENCE
+
+### Common (Baseline)
+
+| Weapon | Class | AP | DMG | Notes |
+|---|---|---|---|---|
+| Sword | SW | 0 | 1 | Skeleton Warrior weapon |
+| Claws | LW | 0 | 1 | Ghoul / Crypt Fiend melee |
+| Bone Staff | LW | 0 | 1 | Caster weapon |
+
+### Masterwork (Elite)
+
+| Weapon | Class | AP | DMG | Notes |
+|---|---|---|---|---|
+| Rune Sword | SW | 1 | 2 | Elite Death Knight |
+
+### Magical (Hero)
+
+| Weapon | Class | AP | DMG | Notes |
+|---|---|---|---|---|
+| Runesword | SW | 1 | 3 | Death Knight one-handed |
+| Runeblade | HW | 2 | 3 | Death Knight two-handed, INI -1 |
+| Meat Hook | HW | 2 | 2 | Abomination, INI -1 |
+
+---
+
+_"All will serve."_

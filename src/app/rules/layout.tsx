@@ -6,7 +6,7 @@ export default function RulesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mx-auto flex max-w-7xl">
+    <div className="mx-auto max-w-7xl md:flex">
       <Sidebar />
       <div className="min-w-0 flex-1 px-4 py-8 md:px-8 lg:px-12">
         {children}
