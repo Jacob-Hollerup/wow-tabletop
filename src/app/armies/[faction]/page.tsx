@@ -95,11 +95,11 @@ export default async function FactionPage({
           {/* Faction identity */}
           <div className="flex items-end gap-5 animate-fade-in-up">
             <img
-              src={faction.svgIcon}
+              src={faction.crest ?? faction.svgIcon}
               alt={faction.name}
               width={64}
               height={64}
-              className="mb-1 shrink-0"
+              className="mb-1 shrink-0 rounded-md object-contain"
             />
             <div>
               <p
