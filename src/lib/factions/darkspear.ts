@@ -1,0 +1,103 @@
+import type { Faction } from "./types";
+
+export const DARKSPEAR: Faction = {
+  id: "darkspear",
+  name: "Darkspear Trolls",
+  allegiance: "Horde",
+  crest: "/images/Troll_Crest.webp",
+  svgIcon: "/icons/factions/darkspear-trolls.svg",
+  colorKey: "darkspear",
+  icon: "/images/Troll_Crest.webp",
+  theme: "Voodoo, regeneration, berserker fury, primal savagery.",
+  playstyle: "Regeneration and Berserker everywhere. Trolls get tougher to kill as the fight goes on — they heal, get angry, hit harder. Powerful voodoo magic provides hexes, wards, and healing. The longer the battle lasts, the more they dominate.",
+  mechanic: {
+    name: "Voodoo Shuffle",
+    description: "Darkspear models that pass a Morale test gain +1 ATK die until their next activation. Surviving fear makes them fight harder.",
+  },
+  strengths: "Regeneration makes them incredibly hard to kill over time, Berserker + Voodoo Shuffle means escalating damage, strong voodoo magic, good mobility",
+  weaknesses: "Light armor across the board (low DEF), vulnerable to burst damage before Regeneration kicks in, no heavy armor or shields, Armor Piercing devastating",
+  ratings: { offense: 3, defense: 3, magic: 4, speed: 4 },
+  units: [
+    {
+      name: "Shadow Hunter",
+      subfaction: "Troll",
+      tier: "Hero",
+      archetype: "Caster / Support",
+      keywords: ["Magical"],
+      description: "The Horde's voodoo master. Hex shuts down key targets, Healing Wave sustains, wards provide persistent board control. Racial: Regeneration [1] (recover 1 WND at start of activation).",
+      equipment: ["Dagger", "Throwing Axe", "Longbow", "Leather"],
+      stats: { MOV: 6, ATK: 2, SKL: 3, STR: 4, TGH: 3, DEF: 6, INI: 4, WND: 4, PTS: 130 },
+      heroData: {
+        className: "Shadow Hunter",
+        classAbility: { name: "Big Bad Voodoo", cost: "Once per game", type: "Buff", description: "All friendly models within 4\" become immune to damage until end of round" },
+        globals: [
+          { name: "Hex", cost: "2 Mana", type: "Debuff", description: "Target enemy within 12\" cannot attack for 1 activation" },
+          { name: "Healing Wave", cost: "2 Mana", type: "Instant", description: "Restore 2 WND to a friendly model within 8\"" },
+        ],
+        specs: [
+          {
+            name: "Voodoo",
+            abilities: [
+              { name: "Serpent Ward", cost: "2 Mana", type: "Summon", description: "Place ward within 6\". Makes ranged attack (STR 3, Range 12\") each round. Lasts 2 rounds" },
+              { name: "Healing Ward", cost: "2 Mana", type: "Summon", description: "Place ward within 6\". Heals 1 WND to nearest friendly within 4\" each round. Lasts 2 rounds" },
+            ],
+            ultimate: { name: "Voodoo Frenzy", cost: "Once per battle", type: "Buff", description: "All friendly within 6\" gain +1 ATK and Regeneration [1] until end of round" },
+          },
+          {
+            name: "Shadow",
+            abilities: [
+              { name: "Shadow Strike", cost: "2 Mana", type: "Spell Shoot", description: "Range 18\", STR 5. Target suffers -2 MOV until end of round" },
+              { name: "Curse of Weakness", cost: "1 Mana", type: "Debuff", description: "Target enemy within 12\" suffers -1 ATK until end of round" },
+            ],
+            ultimate: { name: "Curse of Doom", cost: "Once per battle — 2 Mana", type: "Debuff", description: "Debuff on enemy within 12\". After 2 rounds, target takes D6 wounds with no save" },
+          },
+        ],
+      },
+    },
+    {
+      name: "Troll Berserker",
+      subfaction: "Troll",
+      tier: "Baseline",
+      archetype: "Aggressive Infantry",
+      keywords: ["Berserker", "Regeneration [1]"],
+      description: "Heals every turn and gets angrier as it bleeds. Light armor (DEF 6+) but Regeneration [1] effectively adds 1 wound per round. Higher INI than Orcs makes them evasive in melee.",
+      equipment: ["Axe", "Dagger", "Leather"],
+      stats: { MOV: 6, ATK: 2, SKL: 4, STR: 4, TGH: 3, DEF: 6, INI: 4, WND: 3, PTS: 40 },
+    },
+    {
+      name: "Headhunter",
+      subfaction: "Troll",
+      tier: "Baseline",
+      archetype: "Ranged Skirmisher",
+      keywords: ["Berserker"],
+      description: "Troll throwing axe specialists. Only 12\" range but RSTR 4 hits hard at close quarters. MOV 6 lets them close to throwing range fast.",
+      equipment: ["Throwing Axe", "Dagger", "Leather"],
+      stats: { MOV: 6, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 6, INI: 4, WND: 3, PTS: 35 },
+    },
+    {
+      name: "Raptor Rider",
+      subfaction: "Troll",
+      tier: "Mounted",
+      archetype: "Fast Cavalry",
+      keywords: ["Berserker", "Regeneration [1]"],
+      description: "Troll warriors on swift raptors. Faster than Wolf Riders but less armored. Regeneration keeps them in the fight while Berserker makes them increasingly dangerous.",
+      equipment: ["Axe", "Throwing Axe", "Dagger", "Leather"],
+      stats: { MOV: 9, ATK: 3, SKL: 4, STR: 4, TGH: 3, DEF: 6, INI: 4, WND: 3, PTS: 55 },
+    },
+    {
+      name: "Witch Doctor",
+      subfaction: "Troll",
+      tier: "Elite",
+      archetype: "Caster / Support",
+      keywords: ["Magical"],
+      description: "Ward summons (sentry, healing, stasis), voodoo debuffs. Fragile but high utility. Provides Magical keyword for Mana generation.",
+      equipment: ["Staff", "Dagger", "Leather"],
+      stats: { MOV: 5, ATK: 1, SKL: 4, STR: 3, TGH: 3, DEF: 6, INI: 3, WND: 3, PTS: 55 },
+    },
+  ],
+  composition: [
+    { size: "Skirmish (500 pts)", baseline: "3-5", mounted: "0-2", elite: "0-2", hero: "1" },
+    { size: "Standard (750 pts)", baseline: "4-7", mounted: "0-3", elite: "1-3", hero: "1-2" },
+    { size: "Large (1000+ pts)", baseline: "5-9", mounted: "1-4", elite: "2-5", hero: "2-3" },
+  ],
+};

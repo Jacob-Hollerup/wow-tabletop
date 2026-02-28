@@ -1,0 +1,92 @@
+import type { Faction } from "./types";
+
+export const TAUREN: Faction = {
+  id: "tauren",
+  name: "Tauren of Thunder Bluff",
+  allegiance: "Horde",
+  icon: "/icons/factions/tauren.svg",
+  svgIcon: "/icons/factions/tauren.svg",
+  colorKey: "tauren",
+  theme: "Mighty, spiritual, nature-guardians. Walking walls of muscle.",
+  playstyle: "Elite-heavy, low model count. Every Tauren is big, tough, and hits hard. Highest base TGH and WND in the game. Cleave keyword sweeps through clusters. They don't have many models, but each one is a serious threat.",
+  mechanic: {
+    name: "War Stomp",
+    description: "Once per round, one Tauren model may declare War Stomp during its activation. All enemies within 2\" suffer -1 to hit on their next activation. Free, no Mana cost.",
+  },
+  strengths: "Toughest models in the game, Cleave everywhere, War Stomp disruption, excellent tanks, totem buffs",
+  weaknesses: "Very low model count (expensive), slow, no flying, limited ranged options, vulnerable to being outnumbered",
+  ratings: { offense: 4, defense: 5, magic: 3, speed: 2 },
+  units: [
+    {
+      name: "Elder Shaman",
+      subfaction: "Tauren",
+      tier: "Hero",
+      archetype: "Caster / Tank",
+      keywords: ["Magical", "Summon [3]"],
+      description: "Earth magic incarnate. The toughest caster in the game — Tauren stats mean this Hero can take hits while channeling. Racial: War Stomp (once per round, all enemies within 2\" suffer -1 to hit, free).",
+      equipment: ["Staff", "Mace", "Shield", "Chain/Hide"],
+      stats: { MOV: 5, ATK: 2, SKL: 3, STR: 4, TGH: 5, DEF: 5, INI: 2, WND: 5, PTS: 130 },
+      heroData: {
+        className: "Elder Shaman",
+        classAbility: { name: "Reincarnation", cost: "Once per game", type: "Instant", description: "When destroyed, return at start of next Morale Phase with half WND (rounded up) at same position" },
+        globals: [
+          { name: "Lightning Bolt", cost: "2 Mana", type: "Spell Shoot", description: "Ranged attack, STR 5, Range 18\"" },
+          { name: "Healing Wave", cost: "2 Mana", type: "Instant", description: "Restore 2 WND to a friendly model within 8\"" },
+        ],
+        specs: [
+          {
+            name: "Elemental",
+            abilities: [
+              { name: "Chain Lightning", cost: "3 Mana", type: "Spell Shoot", description: "STR 5, Range 18\". Bounces to 1 enemy within 4\" at STR 4" },
+              { name: "Earth Shock", cost: "2 Mana", type: "Instant", description: "Target within 8\" cannot use abilities on its next activation" },
+            ],
+            ultimate: { name: "Earthquake", cost: "Once per battle — 3 Mana", type: "Blast", description: "Large Blast 5\", STR 4, Range 18\". Hit targets cannot move and suffer -1 ATK next round" },
+          },
+          {
+            name: "Restoration",
+            abilities: [
+              { name: "Riptide", cost: "2 Mana", type: "Instant", description: "Heal 1 WND + grant Regeneration [1] until end of round" },
+              { name: "Spirit Link", cost: "2 Mana", type: "Buff", description: "2 friendly models within 6\" share damage equally (round up) until end of round" },
+            ],
+            ultimate: { name: "Ancestral Spirit", cost: "Once per battle — 3 Mana", type: "Instant", description: "All friendly models within 6\" heal 3 WND" },
+          },
+        ],
+      },
+    },
+    {
+      name: "Brave",
+      subfaction: "Tauren",
+      tier: "Baseline",
+      archetype: "Core Infantry",
+      keywords: ["Cleave"],
+      description: "Even Tauren Baseline troops are enormous — higher TGH and WND than most factions' Elites. Cleave lets massive weapons sweep through multiple enemies. Slow and predictable, but incredibly hard to bring down.",
+      equipment: ["War Totem", "Greataxe", "Mace", "Shield", "Chain/Hide"],
+      stats: { MOV: 5, ATK: 2, SKL: 4, STR: 5, TGH: 5, DEF: 5, INI: 2, WND: 4, PTS: 55 },
+    },
+    {
+      name: "Tauren Warrior",
+      subfaction: "Tauren",
+      tier: "Elite",
+      archetype: "Heavy Infantry",
+      keywords: ["Cleave"],
+      description: "Massive, tough, devastating. Higher TGH and WND than anything else in the Horde roster. Cleave sweeps through enemies. Slow but hits like a truck. The anvil around which battles are won.",
+      equipment: ["War Totem", "Greataxe", "Mace", "Shield", "Chain/Hide", "Heavy Mail"],
+      stats: { MOV: 5, ATK: 3, SKL: 4, STR: 5, TGH: 6, DEF: 4, INI: 2, WND: 4, PTS: 85 },
+    },
+    {
+      name: "Sunwalker",
+      subfaction: "Tauren",
+      tier: "Elite",
+      archetype: "Tank / Support",
+      keywords: ["Taunt", "Magical"],
+      description: "Tauren paladins — followers of An'she, the sun. Combine Tauren toughness with holy healing and Taunt. The living shield of Thunder Bluff. Even harder to kill than a standard Tauren Warrior thanks to self-healing.",
+      equipment: ["Mace", "Shield", "Heavy Mail", "Chain/Hide"],
+      stats: { MOV: 5, ATK: 2, SKL: 4, STR: 5, TGH: 5, DEF: 4, INI: 2, WND: 4, PTS: 75 },
+    },
+  ],
+  composition: [
+    { size: "Skirmish (500 pts)", baseline: "2-4", mounted: "0", elite: "0-2", hero: "1" },
+    { size: "Standard (750 pts)", baseline: "3-5", mounted: "0", elite: "1-3", hero: "1-2" },
+    { size: "Large (1000+ pts)", baseline: "4-7", mounted: "0", elite: "2-4", hero: "2-3" },
+  ],
+};

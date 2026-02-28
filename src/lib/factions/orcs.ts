@@ -1,0 +1,158 @@
+import type { Faction } from "./types";
+
+export const ORCS: Faction = {
+  id: "orcs",
+  name: "Orcs of Orgrimmar",
+  allegiance: "Horde",
+  crest: "/images/Orc_Crest.webp",
+  svgIcon: "/icons/factions/orcs.svg",
+  colorKey: "orcs",
+  icon: "/images/Orc_Crest.webp",
+  theme: "Savage, honorable, shamanic. Brute force meets elemental magic.",
+  playstyle: "Fast and brutal. Highest base MOV of any infantry faction (MOV 6 on Warriors) and high STR/ATK across the board. Berserker and Momentum on many units. Close the gap, crash in, overwhelm with raw aggression.",
+  mechanic: {
+    name: "Blood Fury",
+    description: "Once per game, during the Mana Phase, all Orc models gain +1 ATK die and +1 MOV this round.",
+  },
+  strengths: "Highest raw ATK/STR, fastest infantry, Momentum on core units, Berserker everywhere, devastating charge game, good elemental magic",
+  weaknesses: "Medium armor at best, below-average DEF, short-range shooting, easy to hit (low INI)",
+  ratings: { offense: 5, defense: 2, magic: 3, speed: 4 },
+  units: [
+    {
+      name: "Far Seer",
+      subfaction: "Orc",
+      tier: "Hero",
+      archetype: "Caster / Shaman",
+      keywords: ["Magical"],
+      description: "The Horde's premier shaman. Three paths: Elemental rains destruction, Enhancement charges into melee with lightning weapons, Restoration keeps the warband fighting. Racial: Blood Rage (+1 ATK die permanently when below 50% WND).",
+      equipment: ["Staff", "Storm Hammer", "Lightning Axes", "Leather"],
+      stats: { MOV: 5, ATK: 2, SKL: 3, STR: 3, TGH: 3, DEF: 6, INI: 4, WND: 3, PTS: 115 },
+      heroData: {
+        className: "Shaman",
+        classAbility: { name: "Reincarnation", cost: "Once per game", type: "Instant", description: "When destroyed, return at start of next Morale Phase with half WND (rounded up) at same position" },
+        globals: [
+          { name: "Lightning Bolt", cost: "2 Mana", type: "Spell Shoot", description: "Ranged attack, STR 5, Range 18\"" },
+          { name: "Far Sight", cost: "1 Mana", type: "Instant", description: "Target point within 24\". All Stealth models within 6\" are revealed until end of round" },
+        ],
+        specs: [
+          {
+            name: "Elemental",
+            abilities: [
+              { name: "Chain Lightning", cost: "3 Mana", type: "Spell Shoot", description: "STR 5, Range 18\". Bounces to 1 enemy within 4\" at STR 4" },
+              { name: "Earth Shock", cost: "2 Mana", type: "Instant", description: "Target within 8\" cannot use abilities on its next activation" },
+            ],
+            ultimate: { name: "Earthquake", cost: "Once per battle — 3 Mana", type: "Blast", description: "Large Blast 5\", STR 4, Range 18\". Hit targets cannot move and suffer -1 ATK next round" },
+          },
+          {
+            name: "Enhancement",
+            abilities: [
+              { name: "Stormstrike", cost: "2 Mana", type: "Instant", description: "Next melee attack gains +2 ATK dice and +1 STR" },
+              { name: "Windfury Weapon", cost: "2 Mana", type: "Buff", description: "On natural 6s to hit in melee, that hit deals +1 DMG. Lasts until end of round" },
+            ],
+            ultimate: { name: "Lava Lash", cost: "Once per battle — 2 Mana", type: "Instant", description: "Next melee attack gains +2 STR and deals elemental damage" },
+          },
+          {
+            name: "Restoration",
+            abilities: [
+              { name: "Healing Wave", cost: "2 Mana", type: "Instant", description: "Restore 3 WND to a friendly model within 6\"" },
+              { name: "Spirit Link", cost: "2 Mana", type: "Buff", description: "2 friendly models within 6\" share damage equally (round up) until end of round" },
+            ],
+            ultimate: { name: "Ancestral Guidance", cost: "Once per battle", type: "Instant", description: "All friendly models within 6\" heal 3 WND and gain +1 to hit until end of round" },
+          },
+        ],
+      },
+    },
+    {
+      name: "Warchief",
+      subfaction: "Orc",
+      tier: "Hero",
+      archetype: "Melee Leader",
+      keywords: ["Berserker"],
+      description: "Frontline command Hero who leads from the front. Warchief spec buffs the army and commands the charge. Blademaster spec turns him into a personal killing machine. Racial: Blood Rage (+1 ATK die permanently when below 50% WND).",
+      equipment: ["Bloodforged Greataxe", "Spirit Blade", "Plate Armor"],
+      stats: { MOV: 5, ATK: 4, SKL: 3, STR: 6, TGH: 5, DEF: 4, INI: 3, WND: 5, PTS: 140 },
+      heroData: {
+        className: "Warchief",
+        classAbility: { name: "Blood Fury", cost: "Once per game", type: "Buff", description: "All Horde models gain +1 ATK die this round" },
+        globals: [
+          { name: "Battle Shout", cost: "2 Mana", type: "Buff", description: "Friendly models within 6\" without Momentum gain Momentum [1] until end of round" },
+          { name: "Commanding Presence", cost: "Passive", type: "Buff", description: "Friendly models within 6\" may reroll failed Morale tests" },
+        ],
+        specs: [
+          {
+            name: "Warchief",
+            abilities: [
+              { name: "War Cry", cost: "2 Mana", type: "Buff", description: "All friendly within 8\" gain +1 ATK die and +1 Morale until end of round" },
+              { name: "Shockwave", cost: "2 Mana", type: "Instant", description: "All enemies in 2\"-wide, 6\"-long line take STR 5 hit and cannot move next activation" },
+            ],
+            ultimate: { name: "For the Horde!", cost: "Once per battle", type: "Buff", description: "All friendly Horde models gain Morale immunity and may Rush + Charge in same activation until end of round" },
+          },
+          {
+            name: "Blademaster",
+            abilities: [
+              { name: "Heroic Strike", cost: "1 Mana", type: "Instant", description: "Next melee attack this activation deals +2 bonus damage" },
+              { name: "Wind Walk", cost: "2 Mana", type: "Buff", description: "Gain Stealth and +2 MOV until this Hero attacks. Next melee attack from Stealth auto-hits" },
+            ],
+            ultimate: { name: "Bladestorm", cost: "Once per battle", type: "Instant", description: "Attack ALL enemy models within 2\" with full ATK dice against each" },
+          },
+        ],
+      },
+    },
+    {
+      name: "Orc Warrior",
+      subfaction: "Orc",
+      tier: "Baseline",
+      archetype: "Core Infantry",
+      keywords: ["Berserker", "Momentum [1]"],
+      description: "The Horde backbone — fast, aggressive, dangerous. MOV 6 makes them the fastest baseline infantry in the game. Momentum [1] on the charge, Berserker when wounded. Three loadouts: Axe+Shield (DEF 4+), Dual Axes (4 ATK), Greataxe (DMG 2).",
+      equipment: ["Axe+Shield / Dual Axes / Greataxe", "Chain/Hide"],
+      stats: { MOV: 6, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 5, INI: 3, WND: 3, PTS: 45 },
+    },
+    {
+      name: "Wolf Rider",
+      subfaction: "Orc",
+      tier: "Mounted",
+      archetype: "Fast Cavalry",
+      keywords: ["Momentum [1]", "Berserker"],
+      description: "Among the fastest cavalry in the game. Berserker on a wolf — screaming Orc that gets angrier as it bleeds. The premier flanker.",
+      equipment: ["Axe+Shield / Throwing Spear", "Leather", "Shield"],
+      stats: { MOV: 10, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 6, INI: 4, WND: 3, PTS: 60 },
+    },
+    {
+      name: "Orc Shaman",
+      subfaction: "Orc",
+      tier: "Elite",
+      archetype: "Caster / Support",
+      keywords: ["Magical"],
+      description: "Battlefield caster. Lightning Bolt (STR 5, 18\") and Earth Shield (+1 DEF, absorb 2 wounds). Provides Magical keyword for Mana generation and Dispel access. Can take Shield for DEF 4+.",
+      equipment: ["Staff", "Shield", "Chain/Hide"],
+      stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 4, DEF: 5, INI: 3, WND: 3, PTS: 65 },
+    },
+    {
+      name: "Kor'kron Elite",
+      subfaction: "Orc",
+      tier: "Elite",
+      archetype: "Heavy Infantry",
+      keywords: ["Cleave"],
+      description: "The Warchief's personal guard. SKL 3+ means they rarely miss. TGH 5 and DEF 4+ makes them the toughest Orc infantry. Masterwork weapons (AP 2) cut through armor. Two loadouts: War Axes (dual, AP 2) or Masterwork Greataxe (AP 2, DMG 2).",
+      equipment: ["War Axes / Masterwork Greataxe", "Plate Armor"],
+      stats: { MOV: 5, ATK: 4, SKL: 3, STR: 5, TGH: 5, DEF: 4, INI: 3, WND: 4, PTS: 85 },
+    },
+    {
+      name: "Wind Rider",
+      subfaction: "Orc",
+      tier: "Elite",
+      archetype: "Flying Shock",
+      keywords: ["Fly", "Momentum [1]"],
+      description: "Orc on a wyvern. Flying charge plus envenomed spear ranged (8\"). Wyvern Sting: ranged wound applies -1 ATK until end of round. Counts against both Mounted and Elite limits.",
+      equipment: ["Axe", "Envenomed Spear", "Chain/Hide"],
+      stats: { MOV: 10, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 5, INI: 3, WND: 3, PTS: 70 },
+      dualSlot: "Mounted + Elite",
+    },
+  ],
+  composition: [
+    { size: "Skirmish (500 pts)", baseline: "3-5", mounted: "0-2", elite: "0-2", hero: "1" },
+    { size: "Standard (750 pts)", baseline: "4-7", mounted: "0-3", elite: "1-3", hero: "1-2" },
+    { size: "Large (1000+ pts)", baseline: "5-9", mounted: "1-4", elite: "2-5", hero: "2-3" },
+  ],
+};
