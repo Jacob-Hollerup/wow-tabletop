@@ -103,6 +103,11 @@ export const FORSAKEN: Faction = {
       keywords: ["Undead"],
       description: "Rank-and-file soldiers of Undercity. Undead: never break, never heal. 3 loadouts: Sword+Shield (DEF 4+), Dual Blades (4 ATK), Greatsword (AP 1, DMG 2, INI -1). Any loadout can upgrade to Poisoned Blades (+5 pts).",
       equipment: ["Sword+Shield / Dual Blades / Greatsword", "Mail"],
+      loadouts: [
+        { name: "Sword + Shield", equipment: ["Sword", "Shield", "Mail"], statOverrides: { DEF: 4 } },
+        { name: "Dual Blades", equipment: ["Dual Blades", "Mail"], statOverrides: { ATK: 4 } },
+        { name: "Greatsword", equipment: ["Greatsword", "Mail"], statOverrides: { INI: 2 } },
+      ],
       stats: { MOV: 5, ATK: 3, SKL: 4, STR: 3, TGH: 3, DEF: 5, INI: 3, WND: 2, PTS: 35 },
     },
     {

@@ -1,5 +1,5 @@
 // Re-export all types
-export type { UnitStats, HeroAbility, HeroSpec, HeroClassData, Unit, Faction } from "./types";
+export type { UnitStats, HeroAbility, HeroSpec, HeroClassData, Unit, Faction, Loadout } from "./types";
 
 // Import factions
 import { HUMANS } from "./humans";

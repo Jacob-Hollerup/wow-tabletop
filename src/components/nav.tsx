@@ -9,6 +9,7 @@ import type { User } from "@supabase/supabase-js";
 const links = [
   { href: "/rules", label: "Rules" },
   { href: "/armies", label: "Armies" },
+  { href: "/builder", label: "Builder" },
   { href: "/scenarios", label: "Maps" },
   { href: "/reference", label: "Quick Ref" },
 ];

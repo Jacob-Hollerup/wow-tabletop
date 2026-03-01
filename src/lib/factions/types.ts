@@ -30,6 +30,12 @@ export interface HeroClassData {
   specs: HeroSpec[];           // spec options (typically 2-3)
 }
 
+export interface Loadout {
+  name: string;
+  equipment: string[];
+  statOverrides: Partial<UnitStats>;
+}
+
 export interface Unit {
   name: string;
   subfaction: string;
@@ -38,6 +44,7 @@ export interface Unit {
   keywords: string[];
   description: string;
   equipment: string[];
+  loadouts?: Loadout[];
   dualSlot?: string;
   stats: UnitStats;
   heroData?: HeroClassData;

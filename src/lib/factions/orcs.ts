@@ -106,6 +106,11 @@ export const ORCS: Faction = {
       keywords: ["Berserker", "Momentum [1]"],
       description: "The Horde backbone — fast, aggressive, dangerous. MOV 6 makes them the fastest baseline infantry in the game. Momentum [1] on the charge, Berserker when wounded. Three loadouts: Axe+Shield (DEF 4+), Dual Axes (4 ATK), Greataxe (DMG 2).",
       equipment: ["Axe+Shield / Dual Axes / Greataxe", "Chain/Hide"],
+      loadouts: [
+        { name: "Axe + Shield", equipment: ["Axe", "Shield", "Chain/Hide"], statOverrides: { DEF: 4 } },
+        { name: "Dual Axes", equipment: ["Dual Axes", "Chain/Hide"], statOverrides: { ATK: 4 } },
+        { name: "Greataxe", equipment: ["Greataxe", "Chain/Hide"], statOverrides: { INI: 2 } },
+      ],
       stats: { MOV: 6, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 5, INI: 3, WND: 3, PTS: 45 },
     },
     {
@@ -116,6 +121,10 @@ export const ORCS: Faction = {
       keywords: ["Momentum [1]", "Berserker"],
       description: "Among the fastest cavalry in the game. Berserker on a wolf — screaming Orc that gets angrier as it bleeds. The premier flanker.",
       equipment: ["Axe+Shield / Throwing Spear", "Leather", "Shield"],
+      loadouts: [
+        { name: "Axe + Shield", equipment: ["Axe", "Shield", "Leather"], statOverrides: { DEF: 5 } },
+        { name: "Throwing Spear", equipment: ["Axe", "Throwing Spear", "Leather"], statOverrides: {} },
+      ],
       stats: { MOV: 10, ATK: 3, SKL: 4, STR: 4, TGH: 4, DEF: 6, INI: 4, WND: 3, PTS: 60 },
     },
     {
@@ -136,6 +145,10 @@ export const ORCS: Faction = {
       keywords: ["Cleave"],
       description: "The Warchief's personal guard. SKL 3+ means they rarely miss. TGH 5 and DEF 4+ makes them the toughest Orc infantry. Masterwork weapons (AP 2) cut through armor. Two loadouts: War Axes (dual, AP 2) or Masterwork Greataxe (AP 2, DMG 2).",
       equipment: ["War Axes / Masterwork Greataxe", "Plate Armor"],
+      loadouts: [
+        { name: "War Axes", equipment: ["War Axes", "Plate Armor"], statOverrides: {} },
+        { name: "Masterwork Greataxe", equipment: ["Masterwork Greataxe", "Plate Armor"], statOverrides: { INI: 2 } },
+      ],
       stats: { MOV: 5, ATK: 4, SKL: 3, STR: 5, TGH: 5, DEF: 4, INI: 3, WND: 4, PTS: 85 },
     },
     {

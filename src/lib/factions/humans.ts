@@ -107,6 +107,10 @@ export const HUMANS: Faction = {
       keywords: ["Shield Wall"],
       description: "The Alliance backbone. Plate armor and discipline make them the toughest baseline unit. Shield Wall: when 2+ Footmen within 2\", Shield Footmen reroll one failed DEF save of 1.",
       equipment: ["Sword+Shield / Halberd", "Plate Armor"],
+      loadouts: [
+        { name: "Sword + Shield", equipment: ["Sword", "Shield", "Plate Armor"], statOverrides: { DEF: 3 } },
+        { name: "Halberd", equipment: ["Halberd", "Plate Armor"], statOverrides: { INI: 2 } },
+      ],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 4, TGH: 5, DEF: 4, INI: 3, WND: 2, PTS: 35 },
     },
     {
@@ -127,6 +131,10 @@ export const HUMANS: Faction = {
       keywords: ["Momentum [1]"],
       description: "Classic armored charge. High DEF, solid damage on impact. The hammer to the Footman's anvil.",
       equipment: ["Sword+Shield / Halberd", "Plate Armor"],
+      loadouts: [
+        { name: "Sword + Shield", equipment: ["Sword", "Shield", "Plate Armor"], statOverrides: { DEF: 3 } },
+        { name: "Halberd", equipment: ["Halberd", "Plate Armor"], statOverrides: { INI: 2 } },
+      ],
       stats: { MOV: 8, ATK: 4, SKL: 4, STR: 4, TGH: 5, DEF: 4, INI: 3, WND: 2, PTS: 60 },
     },
     {
