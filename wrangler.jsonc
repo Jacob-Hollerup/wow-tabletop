@@ -1,5 +1,5 @@
 {
-  "name": "wow-tabletop-site",
+  "name": "wow-tabletop",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-09-23",
   "compatibility_flags": ["nodejs_compat"],
