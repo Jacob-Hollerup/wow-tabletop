@@ -36,8 +36,9 @@ export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === "/login";
   const isLandingPage = request.nextUrl.pathname === "/";
   const isAuthCallback = request.nextUrl.pathname.startsWith("/auth/callback");
+  const isResetPassword = request.nextUrl.pathname.startsWith("/reset-password");
 
-  if (isAuthCallback || isLandingPage) {
+  if (isAuthCallback || isLandingPage || isResetPassword) {
     return supabaseResponse;
   }
 

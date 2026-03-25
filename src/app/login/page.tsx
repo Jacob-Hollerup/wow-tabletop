@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -126,7 +127,18 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-muted">
+          {!isSignUp && (
+            <p className="mt-4 text-center text-sm">
+              <Link
+                href="/reset-password"
+                className="text-muted transition-colors hover:text-gold hover:underline"
+              >
+                Forgot your password?
+              </Link>
+            </p>
+          )}
+
+          <p className="mt-4 text-center text-sm text-muted">
             {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               onClick={() => {
