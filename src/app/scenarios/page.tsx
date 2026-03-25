@@ -1,54 +1,53 @@
 /* eslint-disable @next/next/no-img-element */
+import { getTranslations } from "next-intl/server";
 
-const scenarios = [
-  {
-    name: "Annihilation",
-    description:
-      "Total war. Destroy the enemy army. The player who eliminates the most points of enemy models wins.",
-    size: "Any battle size",
-    objective: "Destroy the most enemy points",
-    maps: [
-      { file: "annihilation-1.svg", label: "Variant 1", note: "Opposing corners" },
-      { file: "annihilation-2.svg", label: "Variant 2", note: "Long edges" },
-      { file: "annihilation-3.svg", label: "Variant 3", note: "Diagonal split" },
-    ],
-  },
-  {
-    name: "Assassination",
-    description:
-      "Targeted strikes. Each player secretly selects an enemy Hero as their assassination target. Kill the target to win.",
-    size: "Requires Heroes",
-    objective: "Eliminate the marked Hero",
-    maps: [
-      { file: "assassination-1.svg", label: "Variant 1", note: "Central corridor" },
-      { file: "assassination-2.svg", label: "Variant 2", note: "Flanking zones" },
-      { file: "assassination-3.svg", label: "Variant 3", note: "Wedge deployment" },
-    ],
-  },
-  {
-    name: "Hold the Line",
-    description:
-      "Territorial control. Capture and hold objective markers placed across the battlefield. Points scored each round for controlled objectives.",
-    size: "Best at 1000+ pts",
-    objective: "Control objectives each round",
-    maps: [
-      { file: "hold-the-line-1.svg", label: "Variant 1", note: "3 objectives" },
-      { file: "hold-the-line-2.svg", label: "Variant 2", note: "5 objectives" },
-      { file: "hold-the-line-3.svg", label: "Variant 3", note: "Offset objectives" },
-    ],
-  },
-];
+export default async function ScenariosPage() {
+  const t = await getTranslations("scenarios");
 
-export default function ScenariosPage() {
+  const scenarios = [
+    {
+      name: t("annihilation"),
+      description: t("annihilationDesc"),
+      size: t("anyBattleSize"),
+      objective: t("destroyMostPoints"),
+      maps: [
+        { file: "annihilation-1.svg", label: t("variant1"), note: t("opposingCorners") },
+        { file: "annihilation-2.svg", label: t("variant2"), note: t("longEdges") },
+        { file: "annihilation-3.svg", label: t("variant3"), note: t("diagonalSplit") },
+      ],
+    },
+    {
+      name: t("assassination"),
+      description: t("assassinationDesc"),
+      size: t("requiresHeroes"),
+      objective: t("eliminateHero"),
+      maps: [
+        { file: "assassination-1.svg", label: t("variant1"), note: t("centralCorridor") },
+        { file: "assassination-2.svg", label: t("variant2"), note: t("flankingZones") },
+        { file: "assassination-3.svg", label: t("variant3"), note: t("wedgeDeployment") },
+      ],
+    },
+    {
+      name: t("holdTheLine"),
+      description: t("holdTheLineDesc"),
+      size: t("bestAt1000"),
+      objective: t("controlObjectives"),
+      maps: [
+        { file: "hold-the-line-1.svg", label: t("variant1"), note: t("threeObjectives") },
+        { file: "hold-the-line-2.svg", label: t("variant2"), note: t("fiveObjectives") },
+        { file: "hold-the-line-3.svg", label: t("variant3"), note: t("offsetObjectives") },
+      ],
+    },
+  ];
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-8 animate-fade-in-up">
         <h1 className="font-display mb-2 text-3xl font-bold text-gold sm:text-4xl">
-          Battle Scenarios
+          {t("title")}
         </h1>
         <p className="text-muted">
-          9 deployment maps across 3 scenario types. Roll or choose before each
-          battle.
+          {t("description")}
         </p>
       </div>
 

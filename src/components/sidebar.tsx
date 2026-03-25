@@ -3,57 +3,56 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
-interface SidebarSection {
-  category: string;
-  items: { slug: string; title: string }[];
+function useSections() {
+  const t = useTranslations("sidebar");
+
+  return [
+    {
+      category: t("coreRules"),
+      items: [
+        { slug: "core-rules", title: t("coreRules") },
+        { slug: "refinement-notes", title: t("refinementNotes") },
+      ],
+    },
+    {
+      category: t("factionsCat"),
+      items: [{ slug: "faction-overview", title: t("factionOverview") }],
+    },
+    {
+      category: t("armyBooksAlliance"),
+      items: [
+        { slug: "army-book-humans", title: t("humans") },
+        { slug: "army-book-dwarves", title: t("dwarves") },
+        { slug: "army-book-night-elves", title: t("nightElves") },
+      ],
+    },
+    {
+      category: t("armyBooksHorde"),
+      items: [
+        { slug: "army-book-orcs", title: t("orcs") },
+        { slug: "army-book-forsaken", title: t("forsaken") },
+        { slug: "army-book-darkspear", title: t("darkspearTrolls") },
+      ],
+    },
+    {
+      category: t("armyBooksScourge"),
+      items: [{ slug: "army-book-scourge", title: t("scourge") }],
+    },
+    {
+      category: t("systems"),
+      items: [
+        { slug: "unit-customization", title: t("unitCustomization") },
+        { slug: "fly-keyword", title: t("flyKeyword") },
+      ],
+    },
+  ];
 }
-
-const sections: SidebarSection[] = [
-  {
-    category: "Core Rules",
-    items: [
-      { slug: "core-rules", title: "Core Rules" },
-      { slug: "refinement-notes", title: "Refinement Notes" },
-    ],
-  },
-  {
-    category: "Factions",
-    items: [{ slug: "faction-overview", title: "Faction Overview" }],
-  },
-  {
-    category: "Army Books — Alliance",
-    items: [
-      { slug: "army-book-humans", title: "Humans" },
-      { slug: "army-book-dwarves", title: "Dwarves" },
-      { slug: "army-book-night-elves", title: "Night Elves" },
-    ],
-  },
-  {
-    category: "Army Books — Horde",
-    items: [
-      { slug: "army-book-orcs", title: "Orcs" },
-      { slug: "army-book-forsaken", title: "Forsaken" },
-      { slug: "army-book-darkspear", title: "Darkspear Trolls" },
-    ],
-  },
-  {
-    category: "Army Books — Scourge",
-    items: [
-      { slug: "army-book-scourge", title: "Scourge" },
-    ],
-  },
-  {
-    category: "Systems",
-    items: [
-      { slug: "unit-customization", title: "Unit Customization" },
-      { slug: "fly-keyword", title: "Fly Keyword" },
-    ],
-  },
-];
 
 function SidebarNav() {
   const pathname = usePathname();
+  const sections = useSections();
 
   return (
     <nav className="space-y-5">
@@ -100,6 +99,8 @@ function SidebarNav() {
 function MobileSidebarDropdown() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const sections = useSections();
+  const t = useTranslations("sidebar");
 
   // Find current page title
   const currentTitle = sections
@@ -107,7 +108,7 @@ function MobileSidebarDropdown() {
     .find((item) => {
       const href = item.slug === "core-rules" ? "/rules" : `/rules/${item.slug}`;
       return pathname === href || (item.slug === "core-rules" && pathname === "/rules");
-    })?.title ?? "Navigate";
+    })?.title ?? t("navigate");
 
   return (
     <div className="mb-4 md:hidden">

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Cinzel } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 import Nav from "@/components/nav";
 import ChatModal from "@/components/chat-modal";
@@ -26,19 +28,24 @@ export const metadata: Metadata = {
   description: "A World of Warcraft tabletop miniatures wargame",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className="dark">
+    <html lang={locale} className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} antialiased`}
       >
-        <Nav />
-        {children}
-        <ChatModal />
+        <NextIntlClientProvider messages={messages}>
+          <Nav />
+          {children}
+          <ChatModal />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

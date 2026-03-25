@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { GRAND_FACTIONS } from "@/lib/factions";
+import { getTranslations } from "next-intl/server";
 
-export default function FactionsPage() {
+export default async function FactionsPage() {
+  const t = await getTranslations("factions");
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-12 animate-fade-in-up text-center">
         <h1 className="font-display mb-3 text-3xl font-bold text-gold sm:text-4xl">
-          Choose Your Side
+          {t("chooseYourSide")}
         </h1>
         <p className="mx-auto max-w-xl text-muted">
-          5 grand factions wage war across Azeroth. Pick your allegiance, then
-          select a subfaction to specialize your army.
+          {t("description")}
         </p>
       </div>
 
@@ -47,7 +49,7 @@ export default function FactionsPage() {
                       color,
                     }}
                   >
-                    Coming Soon
+                    {t("comingSoon")}
                   </span>
                 </div>
               </div>
@@ -97,11 +99,11 @@ export default function FactionsPage() {
                   >
                     {gf.subfactionIds.length}{" "}
                     {gf.subfactionIds.length === 1
-                      ? "subfaction"
-                      : "subfactions"}
+                      ? t("subfaction")
+                      : t("subfactions")}
                   </span>
                   <span className="text-xs text-muted opacity-0 transition-opacity group-hover:opacity-100">
-                    Explore &rarr;
+                    {t("explore")}
                   </span>
                 </div>
               </div>

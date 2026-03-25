@@ -4,16 +4,18 @@ import { useBuilder } from "./army-builder-provider";
 import { resolveUnit } from "@/lib/builder";
 import RosterUnitCard from "./roster-unit-card";
 import RosterHeroCard from "./roster-hero-card";
+import { useTranslations } from "next-intl";
 
 export default function RosterPanel() {
   const { state, faction } = useBuilder();
+  const t = useTranslations("builder");
 
   if (state.units.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-border bg-surface/50 p-12 text-center">
-        <p className="mb-1 text-foreground/60">Your roster is empty</p>
+        <p className="mb-1 text-foreground/60">{t("rosterEmpty")}</p>
         <p className="text-sm text-muted">
-          Add units from the catalog to start building your army.
+          {t("rosterEmptyDesc")}
         </p>
       </div>
     );

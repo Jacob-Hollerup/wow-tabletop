@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GRAND_FACTIONS, getSubfactions, type Faction } from "@/lib/factions";
 import { createArmyList } from "@/lib/builder/actions";
+import { useTranslations } from "next-intl";
 
 export default function NewArmyPage() {
   const router = useRouter();
   const [creating, setCreating] = useState<string | null>(null);
   const [selectedGF, setSelectedGF] = useState<string | null>(null);
+  const t = useTranslations("builder");
 
   const activeGF = GRAND_FACTIONS.find((gf) => gf.id === selectedGF);
   const subfactions = selectedGF ? getSubfactions(selectedGF) : [];
@@ -29,12 +31,12 @@ export default function NewArmyPage() {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-10 animate-fade-in-up">
         <h1 className="font-display mb-2 text-3xl font-bold text-gold sm:text-4xl">
-          Choose Your Faction
+          {t("chooseFaction")}
         </h1>
         <p className="text-muted">
           {selectedGF
-            ? "Now pick a subfaction to specialize your army."
-            : "First, choose your grand faction."}
+            ? t("pickSubfaction")
+            : t("chooseGrandFaction")}
         </p>
       </div>
 
@@ -74,14 +76,14 @@ export default function NewArmyPage() {
             onClick={() => setSelectedGF(null)}
             className="mb-6 text-sm text-muted transition-colors hover:text-foreground"
           >
-            &larr; Back to factions
+            {t("backToFactions")}
           </button>
 
           <h2
             className="font-display mb-4 text-lg font-bold"
             style={{ color: `var(${activeGF.colorVar})` }}
           >
-            {activeGF.name} Subfactions
+            {t("subfactions", { name: activeGF.name })}
           </h2>
 
           <div
@@ -129,7 +131,7 @@ export default function NewArmyPage() {
                   </div>
                   {isCreating && (
                     <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-surface/80">
-                      <span className="text-sm text-gold">Creating...</span>
+                      <span className="text-sm text-gold">{t("creating")}</span>
                     </div>
                   )}
                 </button>

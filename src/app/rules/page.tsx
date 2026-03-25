@@ -1,10 +1,13 @@
 import { getDocBySlug } from "@/lib/content";
 import MarkdownRenderer from "@/components/markdown-renderer";
 import TableOfContents from "@/components/table-of-contents";
+import { getTranslations } from "next-intl/server";
 
-export default function RulesPage() {
+export default async function RulesPage() {
   const doc = getDocBySlug("core-rules");
-  if (!doc) return <p>Document not found.</p>;
+  const t = await getTranslations("rules");
+
+  if (!doc) return <p>{t("documentNotFound")}</p>;
 
   return (
     <div className="flex gap-8">

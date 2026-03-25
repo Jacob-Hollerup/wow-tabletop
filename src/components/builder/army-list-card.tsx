@@ -1,9 +1,13 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+
 import Link from "next/link";
 import type { ArmyListRow } from "@/lib/builder";
 import type { Faction } from "@/lib/factions";
 import { BATTLE_SIZE_CONFIG } from "@/lib/builder";
 import type { BattleSize } from "@/lib/builder";
+import { useTranslations } from "next-intl";
 
 export default function ArmyListCard({
   army,
@@ -20,6 +24,8 @@ export default function ArmyListCard({
     month: "short",
     day: "numeric",
   });
+  const t = useTranslations("common");
+  const tb = useTranslations("builder");
 
   return (
     <Link
@@ -72,14 +78,14 @@ export default function ArmyListCard({
             {sizeConfig?.label ?? army.battle_size}
           </span>
           <span className="rounded-lg bg-gold/10 px-2 py-0.5 text-xs font-medium text-gold">
-            {sizeConfig?.points ?? "?"} pts
+            {t("pts", { points: sizeConfig?.points ?? "?" })}
           </span>
         </div>
 
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-xs text-muted">Updated {updated}</p>
+          <p className="text-xs text-muted">{t("updated", { date: updated })}</p>
           <span className="text-xs text-muted opacity-0 transition-opacity group-hover:opacity-100">
-            Edit &rarr;
+            {t("edit")}
           </span>
         </div>
       </div>

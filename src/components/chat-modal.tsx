@@ -6,13 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
-const suggestedQuestions = [
-  "How does Armor Piercing work against Shields?",
-  "Can a model charge after Combat Withdrawal?",
-  "How does the Scourge Raise Dead mechanic work?",
-  "Explain the Initiative evasion system",
-];
+import { useTranslations } from "next-intl";
 
 function getMessageText(m: { parts?: { type: string; text?: string }[] }): string {
   return (
@@ -31,6 +25,14 @@ export default function ChatModal() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const isLoading = status === "streaming" || status === "submitted";
+  const t = useTranslations("chat");
+
+  const suggestedQuestions = [
+    t("suggestedQ1"),
+    t("suggestedQ2"),
+    t("suggestedQ3"),
+    t("suggestedQ4"),
+  ];
 
   useEffect(() => {
     const supabase = createClient();
@@ -87,7 +89,7 @@ export default function ChatModal() {
       <button
         onClick={() => setOpen(!open)}
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-black shadow-lg shadow-gold/20 transition-all hover:bg-gold-dim hover:scale-105 active:scale-95"
-        aria-label={open ? "Close chat" : "Ask AI"}
+        aria-label={open ? t("closeChat") : t("askAI")}
       >
         {open ? (
           <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -114,7 +116,7 @@ export default function ChatModal() {
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-green-500" />
                 <h3 className="font-display text-sm font-semibold text-gold">
-                  Rules Assistant
+                  {t("rulesAssistant")}
                 </h3>
               </div>
               <button
@@ -133,10 +135,10 @@ export default function ChatModal() {
                 {messages.length === 0 && (
                   <div className="py-8 text-center">
                     <p className="mb-1 text-sm font-semibold text-gold">
-                      Ask about rules & units
+                      {t("askAboutRules")}
                     </p>
                     <p className="mb-4 text-xs text-muted">
-                      I know all the Azeroth at War rules.
+                      {t("iKnowAllRules")}
                     </p>
                     <div className="grid gap-1.5">
                       {suggestedQuestions.map((q) => (
@@ -200,7 +202,7 @@ export default function ChatModal() {
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about rules, units, combat..."
+                  placeholder={t("inputPlaceholder")}
                   className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20"
                 />
                 <button
@@ -208,7 +210,7 @@ export default function ChatModal() {
                   disabled={isLoading || !input.trim()}
                   className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-gold-dim disabled:opacity-50"
                 >
-                  Send
+                  {t("send")}
                 </button>
               </form>
             </div>

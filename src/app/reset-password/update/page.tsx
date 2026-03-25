@@ -3,17 +3,19 @@
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function UpdatePasswordPage() {
   const router = useRouter();
   const supabase = createClient();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("auth");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!supabase) {
-      setError("Authentication is not configured");
+      setError(t("authNotConfigured"));
       return;
     }
     setLoading(true);
@@ -24,13 +26,13 @@ export default function UpdatePasswordPage() {
     const confirm = formData.get("confirm") as string;
 
     if (password !== confirm) {
-      setError("Passwords do not match");
+      setError(t("passwordsDoNotMatch"));
       setLoading(false);
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError(t("passwordTooShort"));
       setLoading(false);
       return;
     }
@@ -56,17 +58,17 @@ export default function UpdatePasswordPage() {
         <div className="mb-6 flex items-center justify-center gap-3">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold/40" />
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold/50">
-            New Password
+            {t("newPassword")}
           </span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold/40" />
         </div>
 
         <div className="rounded-xl border border-border bg-surface/80 p-8 shadow-2xl shadow-black/50 backdrop-blur-sm">
           <h1 className="font-display text-glow mb-1 text-center text-3xl font-bold text-gold">
-            Set New Password
+            {t("setNewPassword")}
           </h1>
           <p className="mb-8 text-center text-sm text-muted">
-            Enter your new password below
+            {t("enterNewPassword")}
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -74,7 +76,7 @@ export default function UpdatePasswordPage() {
               <input
                 name="password"
                 type="password"
-                placeholder="New password"
+                placeholder={t("newPasswordPlaceholder")}
                 required
                 className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20 transition-colors"
               />
@@ -83,7 +85,7 @@ export default function UpdatePasswordPage() {
               <input
                 name="confirm"
                 type="password"
-                placeholder="Confirm new password"
+                placeholder={t("confirmPassword")}
                 required
                 className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20 transition-colors"
               />
@@ -98,7 +100,7 @@ export default function UpdatePasswordPage() {
               disabled={loading}
               className="rounded-lg bg-gold px-4 py-2.5 font-semibold text-black transition-all hover:bg-gold-dim hover:shadow-lg hover:shadow-gold/20 disabled:opacity-50"
             >
-              {loading ? "Updating..." : "Update Password"}
+              {loading ? t("updating") : t("updatePassword")}
             </button>
           </form>
         </div>

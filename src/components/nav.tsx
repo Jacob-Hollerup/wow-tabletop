@@ -5,14 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
-
-const links = [
-  { href: "/rules", label: "Rules" },
-  { href: "/factions", label: "Factions" },
-  { href: "/builder", label: "Builder" },
-  { href: "/scenarios", label: "Maps" },
-  { href: "/reference", label: "Quick Ref" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -20,6 +13,15 @@ export default function Nav() {
   const supabase = createClient();
   const [user, setUser] = useState<User | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = useTranslations("nav");
+
+  const links = [
+    { href: "/rules", label: t("rules") },
+    { href: "/factions", label: t("factions") },
+    { href: "/builder", label: t("builder") },
+    { href: "/scenarios", label: t("maps") },
+    { href: "/reference", label: t("quickRef") },
+  ];
 
   useEffect(() => {
     if (!supabase) return;
@@ -94,7 +96,7 @@ export default function Nav() {
             onClick={handleSignOut}
             className="ml-3 rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground"
           >
-            Sign Out
+            {t("signOut")}
           </button>
         </div>
 
@@ -136,7 +138,7 @@ export default function Nav() {
             onClick={handleSignOut}
             className="block py-2.5 text-sm text-muted"
           >
-            Sign Out
+            {t("signOut")}
           </button>
         </div>
       )}

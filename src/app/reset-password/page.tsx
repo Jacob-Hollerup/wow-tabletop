@@ -3,17 +3,19 @@
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ResetPasswordPage() {
   const supabase = createClient();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const t = useTranslations("auth");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!supabase) {
-      setError("Authentication is not configured");
+      setError(t("authNotConfigured"));
       return;
     }
     setLoading(true);
@@ -44,19 +46,17 @@ export default function ResetPasswordPage() {
         <div className="mb-6 flex items-center justify-center gap-3">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold/40" />
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold/50">
-            Password Reset
+            {t("passwordReset")}
           </span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold/40" />
         </div>
 
         <div className="rounded-xl border border-border bg-surface/80 p-8 shadow-2xl shadow-black/50 backdrop-blur-sm">
           <h1 className="font-display text-glow mb-1 text-center text-3xl font-bold text-gold">
-            Reset Password
+            {t("resetPassword")}
           </h1>
           <p className="mb-8 text-center text-sm text-muted">
-            {sent
-              ? "Check your email for a reset link"
-              : "Enter your email to receive a reset link"}
+            {sent ? t("resetEmailSent") : t("resetEmailPrompt")}
           </p>
 
           {!sent ? (
@@ -65,7 +65,7 @@ export default function ResetPasswordPage() {
                 <input
                   name="email"
                   type="email"
-                  placeholder="Email"
+                  placeholder={t("email")}
                   required
                   className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20 transition-colors"
                 />
@@ -80,13 +80,12 @@ export default function ResetPasswordPage() {
                 disabled={loading}
                 className="rounded-lg bg-gold px-4 py-2.5 font-semibold text-black transition-all hover:bg-gold-dim hover:shadow-lg hover:shadow-gold/20 disabled:opacity-50"
               >
-                {loading ? "Sending..." : "Send Reset Link"}
+                {loading ? t("sending") : t("sendResetLink")}
               </button>
             </form>
           ) : (
             <div className="rounded-lg bg-gold/10 px-4 py-3 text-center text-sm text-gold">
-              A password reset link has been sent to your email. It may take a
-              minute to arrive.
+              {t("resetConfirmation")}
             </div>
           )}
 
@@ -95,7 +94,7 @@ export default function ResetPasswordPage() {
               href="/login"
               className="text-gold transition-colors hover:text-gold-dim hover:underline"
             >
-              Back to Sign In
+              {t("backToSignIn")}
             </Link>
           </p>
         </div>

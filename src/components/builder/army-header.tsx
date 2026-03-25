@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useBuilder } from "./army-builder-provider";
 import { BATTLE_SIZE_CONFIG, type BattleSize } from "@/lib/builder";
+import { useTranslations } from "next-intl";
 
 const BATTLE_SIZES: BattleSize[] = ["skirmish", "standard", "large"];
 
@@ -13,6 +14,8 @@ export default function ArmyHeader() {
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const primary = `var(--faction-${faction.colorKey})`;
+  const t = useTranslations("builder");
+  const tc = useTranslations("common");
 
   useEffect(() => {
     if (editing && inputRef.current) {
@@ -34,7 +37,7 @@ export default function ArmyHeader() {
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
           <path d="M10 4L6 8l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        All Armies
+        {t("allArmies")}
       </Link>
 
       <div className="rounded-xl border border-border bg-surface p-5">
@@ -83,9 +86,9 @@ export default function ArmyHeader() {
           {/* Save indicator */}
           <div className="text-xs text-muted">
             {state.isSaving ? (
-              <span className="text-gold">Saving...</span>
+              <span className="text-gold">{t("saving")}</span>
             ) : state.lastSavedAt ? (
-              <span>Saved</span>
+              <span>{t("saved")}</span>
             ) : null}
           </div>
         </div>
@@ -136,8 +139,8 @@ export default function ArmyHeader() {
 
           {/* Unit count + mana */}
           <div className="flex items-center gap-3 text-xs text-muted">
-            <span>{state.units.length} units</span>
-            <span className="text-blue-400">{useBuilder().manaGeneration} mana/turn</span>
+            <span>{tc("units", { count: state.units.length })}</span>
+            <span className="text-blue-400">{tc("manaPerTurn", { mana: useBuilder().manaGeneration })}</span>
           </div>
         </div>
       </div>

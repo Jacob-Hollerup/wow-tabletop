@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface TocItem {
   id: string;
@@ -26,6 +27,7 @@ function extractHeadings(markdown: string): TocItem[] {
 export default function TableOfContents({ content }: { content: string }) {
   const headings = extractHeadings(content);
   const [activeId, setActiveId] = useState<string>("");
+  const t = useTranslations("toc");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,7 +54,7 @@ export default function TableOfContents({ content }: { content: string }) {
   return (
     <nav className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
       <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
-        On this page
+        {t("onThisPage")}
       </h4>
       <ul className="space-y-0.5 border-l border-border">
         {headings.map((h) => (

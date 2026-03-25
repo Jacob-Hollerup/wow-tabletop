@@ -1,9 +1,12 @@
 import { getDocBySlug } from "@/lib/content";
 import MarkdownRenderer from "@/components/markdown-renderer";
+import { getTranslations } from "next-intl/server";
 
-export default function ReferencePage() {
+export default async function ReferencePage() {
   const doc = getDocBySlug("core-rules");
-  if (!doc) return <p>Not found.</p>;
+  const t = await getTranslations("reference");
+
+  if (!doc) return <p>{t("sectionNotFound")}</p>;
 
   // Extract quick reference section — try multiple heading patterns
   const patterns = [
@@ -25,7 +28,7 @@ export default function ReferencePage() {
   if (!qrContent) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <p className="text-muted">Quick reference section not found in the core rules document.</p>
+        <p className="text-muted">{t("sectionNotFound")}</p>
       </div>
     );
   }
@@ -34,10 +37,10 @@ export default function ReferencePage() {
     <div className="mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8 animate-fade-in-up">
         <h1 className="font-display mb-2 text-3xl font-bold text-gold sm:text-4xl">
-          Quick Reference
+          {t("title")}
         </h1>
         <p className="text-sm text-muted">
-          Key tables and summaries from the core rules, all in one place.
+          {t("description")}
         </p>
       </div>
 

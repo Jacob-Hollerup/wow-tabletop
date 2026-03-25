@@ -2,9 +2,11 @@
 
 import { useBuilder } from "./army-builder-provider";
 import { BATTLE_SIZE_CONFIG } from "@/lib/builder";
+import { useTranslations } from "next-intl";
 
 export default function ValidationPanel() {
   const { errors, state, tierCounts } = useBuilder();
+  const t = useTranslations("builder");
 
   if (state.units.length === 0) return null;
 
@@ -17,7 +19,7 @@ export default function ValidationPanel() {
       {/* Tier summary */}
       <div className="rounded-xl border border-border bg-surface p-4">
         <p className="mb-2 text-[10px] uppercase tracking-wider text-muted">
-          Composition — {sizeConfig.label}
+          {t("compositionLabel", { label: sizeConfig.label })}
         </p>
         <div className="grid grid-cols-4 gap-3 text-center">
           {(["Hero", "Baseline", "Mounted", "Elite"] as const).map((tier) => {
@@ -35,7 +37,7 @@ export default function ValidationPanel() {
       {/* Errors */}
       {errorItems.length > 0 && (
         <div className="rounded-xl border border-horde/20 bg-horde/5 p-4">
-          <p className="mb-2 text-xs font-semibold text-horde">Errors</p>
+          <p className="mb-2 text-xs font-semibold text-horde">{t("errors")}</p>
           <ul className="space-y-1">
             {errorItems.map((err, i) => (
               <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
@@ -50,7 +52,7 @@ export default function ValidationPanel() {
       {/* Warnings */}
       {warningItems.length > 0 && (
         <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
-          <p className="mb-2 text-xs font-semibold text-amber-400">Warnings</p>
+          <p className="mb-2 text-xs font-semibold text-amber-400">{t("warnings")}</p>
           <ul className="space-y-1">
             {warningItems.map((warn, i) => (
               <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
@@ -66,7 +68,7 @@ export default function ValidationPanel() {
         <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
           <p className="flex items-center gap-2 text-xs font-medium text-emerald-400">
             <span>&#10003;</span>
-            Army composition is valid
+            {t("compositionValid")}
           </p>
         </div>
       )}

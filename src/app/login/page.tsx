@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,11 +13,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const t = useTranslations("auth");
+  const tc = useTranslations("common");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!supabase) {
-      setError("Authentication is not configured");
+      setError(t("authNotConfigured"));
       return;
     }
     setLoading(true);
@@ -73,19 +76,17 @@ export default function LoginPage() {
         <div className="mb-6 flex items-center justify-center gap-3">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold/40" />
           <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold/50">
-            Tabletop Wargame
+            {t("tabletopWargame")}
           </span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold/40" />
         </div>
 
         <div className="rounded-xl border border-border bg-surface/80 p-8 shadow-2xl shadow-black/50 backdrop-blur-sm">
           <h1 className="font-display text-glow mb-1 text-center text-3xl font-bold text-gold">
-            Azeroth at War
+            {tc("appName")}
           </h1>
           <p className="mb-8 text-center text-sm text-muted">
-            {isSignUp
-              ? "Create an account to join the fight"
-              : "Sign in to access the rulebook"}
+            {isSignUp ? t("signUpSubtitle") : t("signInSubtitle")}
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -93,7 +94,7 @@ export default function LoginPage() {
               <input
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={t("email")}
                 required
                 className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20 transition-colors"
               />
@@ -102,7 +103,7 @@ export default function LoginPage() {
               <input
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t("password")}
                 required
                 className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-gold/60 focus:outline-none focus:ring-1 focus:ring-gold/20 transition-colors"
               />
@@ -119,11 +120,11 @@ export default function LoginPage() {
             >
               {loading
                 ? isSignUp
-                  ? "Creating account..."
-                  : "Signing in..."
+                  ? t("creatingAccount")
+                  : t("signingIn")
                 : isSignUp
-                  ? "Sign Up"
-                  : "Sign In"}
+                  ? t("signUp")
+                  : t("signIn")}
             </button>
           </form>
 
@@ -133,13 +134,13 @@ export default function LoginPage() {
                 href="/reset-password"
                 className="text-muted transition-colors hover:text-gold hover:underline"
               >
-                Forgot your password?
+                {t("forgotPassword")}
               </Link>
             </p>
           )}
 
           <p className="mt-4 text-center text-sm text-muted">
-            {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+            {isSignUp ? t("alreadyHaveAccount") : t("dontHaveAccount")}{" "}
             <button
               onClick={() => {
                 setIsSignUp(!isSignUp);
@@ -147,13 +148,13 @@ export default function LoginPage() {
               }}
               className="text-gold transition-colors hover:text-gold-dim hover:underline"
             >
-              {isSignUp ? "Sign In" : "Sign Up"}
+              {isSignUp ? t("signIn") : t("signUp")}
             </button>
           </p>
         </div>
 
         <p className="mt-6 text-center text-xs text-muted/40">
-          3 allegiances. 8 factions. One battlefield.
+          {tc("tagline")}
         </p>
       </div>
     </div>

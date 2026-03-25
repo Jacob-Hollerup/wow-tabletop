@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useBuilder } from "./army-builder-provider";
 import { getUnitsByTier, type Unit } from "@/lib/factions";
+import { useTranslations } from "next-intl";
 
 const tierOrder = ["Hero", "Baseline", "Mounted", "Elite"];
 
@@ -24,6 +25,7 @@ export default function UnitCatalog() {
   const { faction, dispatch, state } = useBuilder();
   const [activeTier, setActiveTier] = useState("Hero");
   const unitsByTier = getUnitsByTier(faction.units);
+  const t = useTranslations("builder");
 
   const currentUnits = unitsByTier[activeTier] ?? [];
 
@@ -96,9 +98,9 @@ export default function UnitCatalog() {
                       ? "cursor-not-allowed border-border text-muted/40"
                       : "border-gold/30 text-gold hover:bg-gold/10"
                   }`}
-                  title={taken ? "Hero already in roster" : `Add ${unit.name}`}
+                  title={taken ? t("heroAlreadyInRoster") : t("addUnit", { name: unit.name })}
                 >
-                  {taken ? "Added" : "+"}
+                  {taken ? t("added") : "+"}
                 </button>
               </div>
             </div>
