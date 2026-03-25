@@ -171,11 +171,7 @@ export default async function GrandFactionPage({
         {/* Subfaction cards */}
         <div
           className={`grid gap-5 ${
-            subfactions.length === 1
-              ? "md:max-w-lg"
-              : subfactions.length <= 3
-                ? "md:grid-cols-2 lg:grid-cols-3"
-                : "md:grid-cols-2 xl:grid-cols-4"
+            subfactions.length === 1 ? "md:max-w-lg" : "md:grid-cols-2"
           }`}
         >
           {subfactions.map((sf, i) => {
