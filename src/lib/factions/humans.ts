@@ -107,6 +107,7 @@ export const HUMANS: Faction = {
       tier: "Baseline",
       archetype: "Core Infantry",
       keywords: ["Shield Wall"],
+      isBaseUnit: true,
       description: "The Alliance backbone. Plate armor and discipline make them the toughest baseline unit. Shield Wall: when 2+ Footmen within 2\", Shield Footmen reroll one failed DEF save of 1.",
       equipment: ["Sword+Shield / Halberd", "Plate Armor"],
       loadouts: [
@@ -121,6 +122,7 @@ export const HUMANS: Faction = {
       tier: "Baseline",
       archetype: "Core Ranged",
       keywords: [],
+      isBaseUnit: true,
       description: "Stormwind's ranged infantry. Reliable and disciplined. Standard 24\" range crossbows provide solid fire support. Not flashy, but cheap and effective in numbers.",
       equipment: ["Crossbow", "Sword", "Mail"],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 4, TGH: 3, DEF: 5, INI: 3, WND: 2, PTS: 25 },
@@ -165,6 +167,7 @@ export const HUMANS: Faction = {
       tier: "Elite",
       archetype: "Melee Leader",
       keywords: [],
+      isBaseUnit: true,
       description: "Veteran sub-commander. Masterwork Greatsword (AP 2) cuts through heavy armor. For Lordaeron! gives charging friendlies within 6\" +1 ATK. Inspiring Presence grants +1 Morale.",
       equipment: ["Masterwork Greatsword", "Plate Armor"],
       stats: { MOV: 5, ATK: 3, SKL: 3, STR: 5, TGH: 5, DEF: 4, INI: 2, WND: 3, PTS: 70 },

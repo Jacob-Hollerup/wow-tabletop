@@ -70,6 +70,7 @@ export const ORCS: Faction = {
       tier: "Hero",
       archetype: "Melee Leader",
       keywords: ["Berserker"],
+      isBaseUnit: true,
       description: "Frontline command Hero who leads from the front. Warchief spec buffs the army and commands the charge. Blademaster spec turns him into a personal killing machine. Racial: Blood Rage (+1 ATK die permanently when below 50% WND).",
       equipment: ["Bloodforged Greataxe", "Spirit Blade", "Plate Armor"],
       stats: { MOV: 5, ATK: 4, SKL: 3, STR: 6, TGH: 5, DEF: 4, INI: 3, WND: 5, PTS: 140 },
@@ -106,6 +107,7 @@ export const ORCS: Faction = {
       tier: "Baseline",
       archetype: "Core Infantry",
       keywords: ["Berserker", "Momentum [1]"],
+      isBaseUnit: true,
       description: "The Horde backbone — fast, aggressive, dangerous. MOV 6 makes them the fastest baseline infantry in the game. Momentum [1] on the charge, Berserker when wounded. Three loadouts: Axe+Shield (DEF 4+), Dual Axes (4 ATK), Greataxe (DMG 2).",
       equipment: ["Axe+Shield / Dual Axes / Greataxe", "Chain/Hide"],
       loadouts: [
