@@ -169,6 +169,18 @@ export default async function SubfactionPage({
 
       {/* Page content */}
       <div className="mx-auto max-w-5xl px-4 py-8">
+        {/* Upcoming banner */}
+        {faction.upcoming && (
+          <div className="mb-6 flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-5 py-3 animate-fade-in-up">
+            <span className="shrink-0 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-500">
+              Upcoming
+            </span>
+            <p className="text-sm text-amber-500/80">
+              {faction.upcomingHint || "This army book is still in progress. Unit profiles and abilities may change."}
+            </p>
+          </div>
+        )}
+
         {/* Theme & Playstyle */}
         <div className="mb-6 grid gap-4 md:grid-cols-2 animate-fade-in-up animate-delay-100">
           <div>

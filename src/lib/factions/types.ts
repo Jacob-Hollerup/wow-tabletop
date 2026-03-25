@@ -48,6 +48,7 @@ export interface Unit {
   dualSlot?: string;
   stats: UnitStats;
   heroData?: HeroClassData;
+  isBaseUnit?: boolean;  // shared across all subfactions in the grand faction
 }
 
 export type GrandFactionId = "alliance" | "horde" | "scourge" | "burning-legion" | "void";
@@ -85,4 +86,6 @@ export interface Faction {
   composition: { size: string; baseline: string; mounted: string; elite: string; hero: string }[];
   specialRules?: string[];
   isBase?: boolean;  // true if this subfaction IS the grand faction base (e.g. humans for alliance)
+  upcoming?: boolean;        // army book still in progress — show "Upcoming" badge
+  upcomingHint?: string;     // short explanation shown on the card
 }

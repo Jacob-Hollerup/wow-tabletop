@@ -6,8 +6,10 @@ import {
   getGrandFaction,
   getSubfactions,
   getBaseFaction,
+  getBaseUnits,
 } from "@/lib/factions";
 import StarRating from "@/components/star-rating";
+import UnitCard from "@/components/unit-card";
 
 export function generateStaticParams() {
   return GRAND_FACTIONS.filter((gf) => !gf.comingSoon).map((gf) => ({
@@ -26,6 +28,7 @@ export default async function GrandFactionPage({
 
   const subfactions = getSubfactions(gf.id);
   const baseFaction = getBaseFaction(gf.id);
+  const baseUnits = getBaseUnits(gf.id);
 
   const color = `var(${gf.colorVar})`;
   const accent = `var(${gf.accentVar})`;
@@ -124,6 +127,35 @@ export default async function GrandFactionPage({
           </div>
         )}
 
+        {/* Base units */}
+        {baseUnits.length > 0 && baseFaction && (
+          <div className="mb-10 animate-fade-in-up animate-delay-100">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="faction-divider h-px flex-1" />
+              <h2 className="font-display text-xl font-bold text-foreground">
+                Shared Base Units
+              </h2>
+              <div
+                className="h-px w-12"
+                style={{ background: `color-mix(in srgb, ${color} 40%, transparent)` }}
+              />
+            </div>
+            <p className="mb-4 text-sm text-muted">
+              Available to all {gf.name} subfactions.
+            </p>
+            <div className="grid gap-3 md:grid-cols-2">
+              {baseUnits.map((unit) => (
+                <UnitCard
+                  key={unit.name}
+                  unit={unit}
+                  allegiance={baseFaction.allegiance}
+                  factionId={baseFaction.id}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Subfaction header */}
         <div className="mb-6 flex items-center gap-3 animate-fade-in-up animate-delay-100">
           <div className="faction-divider h-px flex-1" />
@@ -208,6 +240,17 @@ export default async function GrandFactionPage({
                       <h3 className="font-display flex-1 truncate text-lg font-bold text-foreground">
                         {sf.name}
                       </h3>
+                      {sf.upcoming && (
+                        <span
+                          className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
+                          style={{
+                            backgroundColor: "color-mix(in srgb, #f59e0b 15%, transparent)",
+                            color: "#f59e0b",
+                          }}
+                        >
+                          Upcoming
+                        </span>
+                      )}
                       {sf.isBase && (
                         <span
                           className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
@@ -265,6 +308,11 @@ export default async function GrandFactionPage({
                         color={sfAccent}
                       />
                     </div>
+                    {sf.upcoming && sf.upcomingHint && (
+                      <p className="mb-2 text-[11px] italic text-amber-500/70">
+                        {sf.upcomingHint}
+                      </p>
+                    )}
                     <div className="flex items-center justify-between">
                       <p className="text-xs text-muted">
                         {sf.units.length} units

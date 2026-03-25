@@ -18,6 +18,8 @@ export const DWARVES: Faction = {
   strengths: "Hardest-hitting ranged weapons, longest range, highest Morale, tough infantry, gryphon air support",
   weaknesses: "Slowest faction, limited magic, few Magical units for Mana/Dispel",
   ratings: { offense: 3, defense: 4, magic: 2, speed: 2 },
+  upcoming: true,
+  upcomingHint: "Army book in progress — unit profiles may change",
   units: [
     {
       name: "Mountain King",

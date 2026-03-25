@@ -17,6 +17,8 @@ export const TAUREN: Faction = {
   strengths: "Toughest models in the game, Cleave everywhere, War Stomp disruption, excellent tanks, totem buffs",
   weaknesses: "Very low model count (expensive), slow, no flying, limited ranged options, vulnerable to being outnumbered",
   ratings: { offense: 4, defense: 5, magic: 3, speed: 2 },
+  upcoming: true,
+  upcomingHint: "Army book in progress — unit profiles may change",
   units: [
     {
       name: "Elder Shaman",
