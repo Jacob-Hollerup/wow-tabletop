@@ -5,10 +5,9 @@ export const DARKSPEAR: Faction = {
   name: "Darkspear Trolls",
   grandFaction: "horde",
   allegiance: "Horde",
-  crest: "/images/Troll_Crest.webp",
-  svgIcon: "/icons/factions/darkspear-trolls.svg",
+  crest: "/assets/horde/darkspear/crest.webp",
   colorKey: "darkspear",
-  icon: "/images/Troll_Crest.webp",
+  icon: "/assets/horde/darkspear/crest.webp",
   theme: "Voodoo, regeneration, berserker fury, primal savagery.",
   playstyle: "Regeneration and Berserker everywhere. Trolls get tougher to kill as the fight goes on — they heal, get angry, hit harder. Powerful voodoo magic provides hexes, wards, and healing. The longer the battle lasts, the more they dominate.",
   mechanic: {

@@ -6,10 +6,9 @@ export const ORCS: Faction = {
   grandFaction: "horde",
   allegiance: "Horde",
   isBase: true,
-  crest: "/images/Orc_Crest.webp",
-  svgIcon: "/icons/factions/orcs.svg",
+  crest: "/assets/horde/orcs/crest.webp",
   colorKey: "orcs",
-  icon: "/images/Orc_Crest.webp",
+  icon: "/assets/horde/orcs/crest.webp",
   theme: "Savage, honorable, shamanic. Brute force meets elemental magic.",
   playstyle: "Fast and brutal. Highest base MOV of any infantry faction (MOV 6 on Warriors) and high STR/ATK across the board. Berserker and Momentum on many units. Close the gap, crash in, overwhelm with raw aggression.",
   mechanic: {

@@ -31,7 +31,7 @@ export default async function FactionsPage() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, color-mix(in srgb, ${color} 10%, #0f0f0f), #0f0f0f)`,
+                    background: `linear-gradient(135deg, color-mix(in srgb, ${color} 10%, var(--background)), var(--background))`,
                   }}
                 />
                 <div className="relative">
@@ -72,9 +72,9 @@ export default async function FactionsPage() {
                 className="absolute inset-0 transition-all duration-500"
                 style={{
                   background: `linear-gradient(135deg,
-                    color-mix(in srgb, ${color} 20%, #0f0f0f) 0%,
-                    #141414 55%,
-                    color-mix(in srgb, ${accent} 8%, #0f0f0f) 100%
+                    color-mix(in srgb, ${color} 10%, var(--surface)) 0%,
+                    var(--surface) 55%,
+                    color-mix(in srgb, ${accent} 6%, var(--surface)) 100%
                   )`,
                 }}
               />

@@ -81,8 +81,7 @@ export interface Faction {
   grandFaction: GrandFactionId;
   allegiance: "Alliance" | "Horde" | "Scourge";  // kept for backwards compat
   icon: string;
-  crest?: string;
-  svgIcon: string;
+  crest: string;
   colorKey: string;
   theme: string;
   playstyle: string;

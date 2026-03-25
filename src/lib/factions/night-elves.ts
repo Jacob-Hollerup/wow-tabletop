@@ -5,10 +5,9 @@ export const NIGHT_ELVES: Faction = {
   name: "Night Elves",
   grandFaction: "alliance",
   allegiance: "Alliance",
-  crest: "/images/night_elves_crest.webp",
-  svgIcon: "/icons/factions/night-elves.svg",
+  crest: "/assets/alliance/night-elves/crest.webp",
   colorKey: "night-elves",
-  icon: "/images/night_elves.webp",
+  icon: "/assets/alliance/night-elves/crest.webp",
   theme: "Ancient, stealthy, nature-bound. Guerrilla warfare and druidic shapeshifting.",
   playstyle: "Hit-and-run. High INI across the board, Stealth on many units, strong archery. Druids shapeshift for different roles. They control engagement — picking fights on their terms and using forests as home territory.",
   mechanic: {

@@ -78,27 +78,19 @@ export default async function SubfactionPage({
           className="absolute inset-0 texture-noise"
           style={{
             background: `linear-gradient(160deg,
-              color-mix(in srgb, ${primary} 30%, #0a0a0a) 0%,
-              #0f0f0f 50%,
-              color-mix(in srgb, ${accent} 8%, #0f0f0f) 100%
+              color-mix(in srgb, ${primary} 15%, var(--background)) 0%,
+              var(--background) 50%,
+              color-mix(in srgb, ${accent} 6%, var(--background)) 100%
             )`,
           }}
         />
 
         {/* Crest watermark */}
-        {faction.crest ? (
-          <img
-            src={faction.crest}
-            alt=""
-            className="pointer-events-none absolute right-4 top-1/2 h-56 w-56 -translate-y-1/2 object-contain opacity-[0.08] md:right-12 md:h-64 md:w-64"
-          />
-        ) : (
-          <img
-            src={faction.svgIcon}
-            alt=""
-            className="pointer-events-none absolute right-8 top-1/2 h-44 w-44 -translate-y-1/2 object-contain opacity-[0.10] md:right-16"
-          />
-        )}
+        <img
+          src={faction.crest}
+          alt=""
+          className="pointer-events-none absolute right-4 top-1/2 h-56 w-56 -translate-y-1/2 object-contain opacity-[0.08] md:right-12 md:h-64 md:w-64"
+        />
 
         {/* Banner content */}
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-8">
@@ -143,7 +135,7 @@ export default async function SubfactionPage({
           {/* Faction identity */}
           <div className="flex items-end gap-5 animate-fade-in-up">
             <img
-              src={faction.crest ?? faction.svgIcon}
+              src={faction.crest}
               alt={faction.name}
               width={64}
               height={64}

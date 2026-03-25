@@ -114,7 +114,7 @@ export default function NewArmyPage() {
                   )}
                   <div className="relative flex items-center gap-3">
                     <img
-                      src={faction.svgIcon}
+                      src={faction.crest}
                       alt={faction.name}
                       width={32}
                       height={32}

@@ -58,7 +58,7 @@ export default function ArmyListCard({
           </div>
           {faction && (
             <img
-              src={faction.svgIcon}
+              src={faction.crest}
               alt=""
               width={24}
               height={24}

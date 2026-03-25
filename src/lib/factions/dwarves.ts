@@ -5,10 +5,9 @@ export const DWARVES: Faction = {
   name: "Dwarves of Ironforge",
   grandFaction: "alliance",
   allegiance: "Alliance",
-  crest: "/images/Dwarf_Crest.webp",
-  svgIcon: "/icons/factions/dwarves.svg",
+  crest: "/assets/alliance/dwarves/crest.webp",
   colorKey: "dwarves",
-  icon: "/images/Dwarf_Crest.webp",
+  icon: "/assets/alliance/dwarves/crest.webp",
   theme: "Stubborn, heavily armed, ranged firepower and aerial prowess.",
   playstyle: "Ranged-dominant with the best guns in the game. Extremely tough and stubborn (high Morale bonuses). Slow-moving but devastating at range. Close combat is functional but not their strength — they want to shoot you to pieces before you reach them.",
   mechanic: {

@@ -201,9 +201,9 @@ export default async function GrandFactionPage({
                   className="absolute inset-0 transition-all duration-500"
                   style={{
                     background: `linear-gradient(135deg,
-                      color-mix(in srgb, ${sfColor} 20%, #0f0f0f) 0%,
-                      #141414 55%,
-                      color-mix(in srgb, ${sfAccent} 8%, #0f0f0f) 100%
+                      color-mix(in srgb, ${sfColor} 10%, var(--surface)) 0%,
+                      var(--surface) 55%,
+                      color-mix(in srgb, ${sfAccent} 6%, var(--surface)) 100%
                     )`,
                   }}
                 />
@@ -222,7 +222,7 @@ export default async function GrandFactionPage({
                   className="absolute inset-0 rounded-xl"
                   style={{
                     background:
-                      "radial-gradient(ellipse 50% 80% at 85% 50%, transparent 30%, #0f0f0f 100%)",
+                      "radial-gradient(ellipse 50% 80% at 85% 50%, transparent 30%, var(--surface) 100%)",
                   }}
                 />
 
@@ -231,7 +231,7 @@ export default async function GrandFactionPage({
                   <div>
                     <div className="mb-3 flex items-center gap-3">
                       <img
-                        src={sf.svgIcon}
+                        src={sf.crest}
                         alt={sf.name}
                         width={28}
                         height={28}

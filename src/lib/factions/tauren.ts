@@ -7,7 +7,6 @@ export const TAUREN: Faction = {
   allegiance: "Horde",
   icon: "/assets/horde/tauren/crest.webp",
   crest: "/assets/horde/tauren/crest.webp",
-  svgIcon: "/icons/factions/tauren.svg",
   colorKey: "tauren",
   theme: "Mighty, spiritual, nature-guardians. Walking walls of muscle.",
   playstyle: "Elite-heavy, low model count. Every Tauren is big, tough, and hits hard. Highest base TGH and WND in the game. Cleave keyword sweeps through clusters. They don't have many models, but each one is a serious threat.",
