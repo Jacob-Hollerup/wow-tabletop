@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 export default function NewArmyPage() {
   const router = useRouter();
   const [creating, setCreating] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [selectedGF, setSelectedGF] = useState<string | null>(null);
   const t = useTranslations("builder");
 
@@ -19,10 +20,13 @@ export default function NewArmyPage() {
   async function handleSelect(factionId: string) {
     if (creating) return;
     setCreating(factionId);
+    setError(null);
     try {
       const id = await createArmyList(factionId);
       router.push(`/builder/${id}`);
-    } catch {
+    } catch (err) {
+      console.error("Failed to create army list:", err);
+      setError(err instanceof Error ? err.message : "Failed to create army list");
       setCreating(null);
     }
   }
@@ -39,6 +43,12 @@ export default function NewArmyPage() {
             : t("chooseGrandFaction")}
         </p>
       </div>
+
+      {error && (
+        <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          {error}
+        </div>
+      )}
 
       {/* Grand faction selector */}
       {!selectedGF && (

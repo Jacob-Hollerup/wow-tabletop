@@ -6,12 +6,11 @@ import type { BattleSize, RosterUnit, ArmyListRow, ArmyListWithUnits } from "./t
 
 export async function createArmyList(factionId: string): Promise<string> {
   const supabase = await createClient();
-  if (!supabase) throw new Error("Not authenticated");
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("Not authenticated");
+  if (!user) throw new Error("You must be signed in to create an army list");
 
   const factionNames: Record<string, string> = {
     humans: "Humans", dwarves: "Dwarves", "night-elves": "Night Elves",
@@ -30,7 +29,10 @@ export async function createArmyList(factionId: string): Promise<string> {
     .select("id")
     .single();
 
-  if (error) throw error;
+  if (error) {
+    console.error("Supabase insert error:", error);
+    throw new Error(error.message);
+  }
   return data.id;
 }
 
