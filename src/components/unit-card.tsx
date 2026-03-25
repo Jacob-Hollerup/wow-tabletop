@@ -281,6 +281,30 @@ export default function UnitCard({
         </div>
       )}
 
+      {/* Retinue */}
+      {unit.retinue && (
+        <div
+          className="mb-3 rounded-lg border px-3 py-2"
+          style={{
+            borderColor: `color-mix(in srgb, ${factionAccent || "var(--gold)"} 25%, transparent)`,
+            backgroundColor: `color-mix(in srgb, ${factionAccent || "var(--gold)"} 5%, transparent)`,
+          }}
+        >
+          <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: factionAccent || "var(--gold)" }}>
+            Retinue
+          </p>
+          <p className="text-xs text-foreground/80">
+            {unit.retinue.min === unit.retinue.max
+              ? `${unit.retinue.max} ${unit.retinue.unitName}`
+              : `${unit.retinue.min}–${unit.retinue.max} ${unit.retinue.unitName}`}
+            {unit.retinue.max > 1 ? "s" : ""}
+          </p>
+          {unit.retinue.specialRule && (
+            <p className="mt-1 text-[11px] italic text-foreground/60">{unit.retinue.specialRule}</p>
+          )}
+        </div>
+      )}
+
       {/* Description */}
       <p className="text-sm leading-relaxed text-foreground/80">
         {unit.description}

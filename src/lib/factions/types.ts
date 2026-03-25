@@ -36,6 +36,13 @@ export interface Loadout {
   statOverrides: Partial<UnitStats>;
 }
 
+export interface RetinueData {
+  unitName: string;       // name of the retinue unit (e.g. "Footman", "Kor'kron Elite")
+  min: number;            // minimum retinue count
+  max: number;            // maximum retinue count
+  specialRule?: string;   // faction-specific retinue rule (e.g. "Shatter Soul")
+}
+
 export interface Unit {
   name: string;
   subfaction: string;
@@ -49,6 +56,7 @@ export interface Unit {
   stats: UnitStats;
   heroData?: HeroClassData;
   isBaseUnit?: boolean;  // shared across all subfactions in the grand faction
+  retinue?: RetinueData; // optional bodyguard/retinue attachment
 }
 
 export type GrandFactionId = "alliance" | "horde" | "scourge" | "burning-legion" | "void";

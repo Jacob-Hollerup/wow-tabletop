@@ -545,7 +545,19 @@ Some models have the **Spell Block** keyword. A model with Spell Block can attem
 - Heroes have a **Command Aura** of 6" — friendly models within 6" may reroll one failed Morale test per turn. **A Hero's Command Aura does not apply to itself** — a Hero cannot reroll its own Morale tests using its own aura (though it can benefit from a *different* Hero's Command Aura).
 - If your last Hero is slain, your army immediately suffers -1 to all Morale tests for the rest of the game.
 
-### 9.2 Unit Profiles
+### 9.2 Retinues
+
+Some Heroes and powerful Elites may deploy with a **Retinue** — a small group of bodyguard models that fight alongside them. Retinues are defined on the leader's unit card.
+
+**Retinue Rules:**
+- Retinue models deploy within 2" of their leader and must remain within **4"** (coherency). If a retinue model ends an activation more than 4" from its leader, it must move toward the leader on its next activation.
+- The leader's MOV is limited to the retinue model's MOV while any retinue models are alive.
+- Retinue models **do not count** against army composition limits but cost their normal points.
+- Retinue models activate independently (they are separate activations, not part of the leader's activation).
+- If the leader is destroyed, retinue models become independent — they no longer have coherency requirements and activate as normal units for the rest of the game.
+- Each leader's Army Book entry specifies how many retinue models it may take, which unit type, and any special rules (e.g., Shatter Soul, bonus auras, extra War Stomp).
+
+### 9.3 Unit Profiles
 
 Unit profiles (including Heroes, Infantry, Cavalry, and Monsters) will be provided in separate **Army Book** supplements for each faction. Each unit card will list the model's stats, base size, equipment tags, keywords, and abilities.
 

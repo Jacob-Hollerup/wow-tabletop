@@ -30,6 +30,7 @@ export const DWARVES: Faction = {
       description: "Ancient warrior-lord of the deep halls. Racial: Stoneform (once per game, remove all debuffs and +1 DEF until end of round). Storm Bolt stuns priority targets, Thunder Clap disrupts formations, Avatar transforms him into stone.",
       equipment: ["Dwarven Hammer", "Greatsword", "Halberd", "Shield", "Plate Armor", "Mail"],
       stats: { MOV: 5, ATK: 4, SKL: 3, STR: 5, TGH: 5, DEF: 3, INI: 3, WND: 5, PTS: 145 },
+      retinue: { unitName: "Ironforge Guard", min: 1, max: 2, specialRule: "King's Guard: Retinue Ironforge Guard may use Shatter Soul — destroy 1 guard to negate all damage from a single non-Blast hit on the Mountain King." },
       heroData: {
         className: "Mountain King",
         classAbility: { name: "Battle Cry", cost: "Once per game", type: "Buff", description: "All friendly models within 6\" gain +1 ATK die until end of round" },

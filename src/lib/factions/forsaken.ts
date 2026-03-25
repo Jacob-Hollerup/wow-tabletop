@@ -66,6 +66,7 @@ export const FORSAKEN: Faction = {
       tier: "Hero",
       archetype: "Plague Caster / Debuff",
       keywords: ["Magical", "Plague"],
+      retinue: { unitName: "Apothecary", min: 1, max: 1, specialRule: "Lab Assistant: The retinue Apothecary generates +1 Mana while within 4\" of the Grand Apothecary." },
       description: "Supreme alchemist. Master of chemical warfare — Plague Bombs, mass debuffs, Blight detonation. New Plague permanently applies both Plagued AND Poisoned. Living — tests Morale, can be healed.",
       equipment: ["Plague Staff", "Robes/None"],
       stats: { MOV: 5, ATK: 2, SKL: 4, STR: 3, TGH: 3, DEF: 5, INI: 3, WND: 3, PTS: 115 },

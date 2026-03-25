@@ -71,6 +71,7 @@ export const ORCS: Faction = {
       archetype: "Melee Leader",
       keywords: ["Berserker"],
       isBaseUnit: true,
+      retinue: { unitName: "Kor'kron Elite", min: 1, max: 2, specialRule: "Kor'kron Honor Guard: Retinue Kor'kron gain +1 ATK die while within 4\" of the Warchief." },
       description: "Frontline command Hero who leads from the front. Warchief spec buffs the army and commands the charge. Blademaster spec turns him into a personal killing machine. Racial: Blood Rage (+1 ATK die permanently when below 50% WND).",
       equipment: ["Bloodforged Greataxe", "Spirit Blade", "Plate Armor"],
       stats: { MOV: 5, ATK: 4, SKL: 3, STR: 6, TGH: 5, DEF: 4, INI: 3, WND: 5, PTS: 140 },

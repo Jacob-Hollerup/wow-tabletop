@@ -29,6 +29,7 @@ export const HUMANS: Faction = {
       description: "The quintessential Alliance Hero — faith, plate, and a blessed blade. Racial: Versatility (may use 2 abilities per activation, second costs +1 Mana). Protection Paladins are unkillable walls. Retribution Paladins channel the Light into devastating melee strikes.",
       equipment: ["Runesword", "Plate Armor", "Shield (Protection only)"],
       stats: { MOV: 5, ATK: 4, SKL: 3, STR: 5, TGH: 5, DEF: 4, INI: 3, WND: 5, PTS: 140 },
+      retinue: { unitName: "Footman", min: 1, max: 2, specialRule: "Honor Guard: Retinue Footmen gain +1 Morale while within 4\" of the Paladin." },
       heroData: {
         className: "Paladin",
         classAbility: { name: "Lay on Hands", cost: "Once per game", type: "Instant", description: "Fully heal one friendly model within 2\"" },

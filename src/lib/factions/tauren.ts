@@ -26,6 +26,7 @@ export const TAUREN: Faction = {
       tier: "Hero",
       archetype: "Caster / Tank",
       keywords: ["Magical", "Summon [3]"],
+      retinue: { unitName: "Brave", min: 1, max: 2, specialRule: "Thunder Guard: Retinue Braves may also declare War Stomp (in addition to the normal once-per-round Tauren limit)." },
       description: "Earth magic incarnate. The toughest caster in the game — Tauren stats mean this Hero can take hits while channeling. Racial: War Stomp (once per round, all enemies within 2\" suffer -1 to hit, free).",
       equipment: ["Staff", "Mace", "Shield", "Chain/Hide"],
       stats: { MOV: 5, ATK: 2, SKL: 3, STR: 4, TGH: 5, DEF: 5, INI: 2, WND: 5, PTS: 130 },
