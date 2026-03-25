@@ -1,15 +1,22 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ─── Light theme (default) ─────────────────────────────── */
 :root {
-  --background: #0f0f0f;
-  --foreground: #e5e5e5;
-  --gold: #d4a843;
-  --gold-dim: #a67c2e;
-  --surface: #1a1a1a;
-  --surface-hover: #252525;
-  --border: #2a2a2a;
-  --muted: #888;
+  --background: #f8f8f8;
+  --foreground: #1a1a1a;
+  --gold: #b8922a;
+  --gold-dim: #96750f;
+  --surface: #ffffff;
+  --surface-hover: #f0f0f0;
+  --border: #e0e0e0;
+  --muted: #666;
+  --shadow-strength: 0.1;
+  --prose-even-row: #f5f5f5;
+  --prose-th-bg: #f0f0f0;
+  --prose-blockquote: #555;
+  --scrollbar-thumb: #ccc;
+
   /* Grand faction colors */
   --alliance: #3b82f6;
   --alliance-dark: #1e3a5f;
@@ -44,6 +51,25 @@
   --faction-darkspear-accent: #f97316;
   --faction-scourge: #60a5fa;
   --faction-scourge-accent: #93c5fd;
+}
+
+/* ─── Dark theme ────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    --foreground: #e5e5e5;
+    --gold: #d4a843;
+    --gold-dim: #a67c2e;
+    --surface: #1a1a1a;
+    --surface-hover: #252525;
+    --border: #2a2a2a;
+    --muted: #888;
+    --shadow-strength: 0.4;
+    --prose-even-row: #141414;
+    --prose-th-bg: #1a1a1a;
+    --prose-blockquote: #aaa;
+    --scrollbar-thumb: #333;
+  }
 }
 
 @theme inline {
@@ -101,18 +127,18 @@ body {
   font-family: var(--font-cinzel), serif;
 }
 
-/* ─── Prose overrides for dark theme ─────────────────────── */
+/* ─── Prose overrides ───────────────────────────────────── */
 .prose {
-  --tw-prose-body: #d4d4d4;
-  --tw-prose-headings: #e5e5e5;
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
   --tw-prose-links: var(--gold);
-  --tw-prose-bold: #e5e5e5;
+  --tw-prose-bold: var(--foreground);
   --tw-prose-code: var(--gold);
-  --tw-prose-counters: #888;
-  --tw-prose-bullets: #888;
-  --tw-prose-hr: #2a2a2a;
-  --tw-prose-th-borders: #2a2a2a;
-  --tw-prose-td-borders: #1f1f1f;
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
 }
 
 .prose table {
@@ -120,7 +146,7 @@ body {
 }
 
 .prose th {
-  background: #1a1a1a;
+  background: var(--prose-th-bg);
   color: var(--gold);
   font-weight: 600;
 }
@@ -128,24 +154,24 @@ body {
 .prose td,
 .prose th {
   padding: 0.5rem 0.75rem;
-  border-color: #2a2a2a;
+  border-color: var(--border);
 }
 
 .prose tr:nth-child(even) {
-  background: #141414;
+  background: var(--prose-even-row);
 }
 
 .prose blockquote {
   border-left-color: var(--gold);
-  color: #aaa;
+  color: var(--prose-blockquote);
 }
 
 .prose strong {
-  color: #e5e5e5;
+  color: var(--foreground);
 }
 
 .prose h2 {
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.5rem;
   font-family: var(--font-cinzel), serif;
 }
@@ -282,7 +308,7 @@ body {
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, var(--shadow-strength));
 }
 
 /* ─── Hero section helpers ───────────────────────────────── */
@@ -307,19 +333,19 @@ body {
   background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
 /* ─── Faction-themed glow effects ───────────────────────── */
 .faction-glow {
   box-shadow: 0 0 40px -10px var(--faction-primary, transparent),
-              0 8px 25px rgba(0, 0, 0, 0.4);
+              0 8px 25px rgba(0, 0, 0, var(--shadow-strength));
 }
 
 .faction-glow:hover {
   box-shadow: 0 0 60px -8px var(--faction-primary, transparent),
-              0 12px 35px rgba(0, 0, 0, 0.5);
+              0 12px 35px rgba(0, 0, 0, calc(var(--shadow-strength) + 0.1));
 }
 
 /* ─── Subtle noise texture (CSS-only, no image assets) ─── */
@@ -343,9 +369,9 @@ body {
 .faction-banner {
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--gf-color, transparent) 30%, #0a0a0a) 0%,
-    #0f0f0f 50%,
-    color-mix(in srgb, var(--gf-accent, transparent) 10%, #0f0f0f) 100%
+    color-mix(in srgb, var(--gf-color, transparent) 20%, var(--background)) 0%,
+    var(--background) 50%,
+    color-mix(in srgb, var(--gf-accent, transparent) 8%, var(--background)) 100%
   );
 }
 
@@ -365,7 +391,7 @@ body {
 .subfaction-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 0 50px -12px var(--sf-color, transparent),
-              0 12px 35px rgba(0, 0, 0, 0.5);
+              0 12px 35px rgba(0, 0, 0, var(--shadow-strength));
   border-color: color-mix(in srgb, var(--sf-color, transparent) 50%, transparent);
 }
 
