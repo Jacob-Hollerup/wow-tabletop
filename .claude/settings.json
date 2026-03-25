@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l src/lib/*.ts)",
+      "Bash(git status -u)",
+      "Bash(git checkout -b claude/armies-visual-rework)",
+      "Bash(where gh)",
+      "Bash(git checkout master)",
+      "Bash(git merge:*)",
+      "Bash(git checkout -b claude/split-factions)",
+      "Bash(for f in src/lib/factions/night-elves.ts src/lib/factions/forsaken.ts)",
+      "Bash(do sed -i '/^\\\\/\\\\* ─/d' \"$f\")",
+      "Bash(done)",
+      "Bash(git checkout -b claude/army-builder)"
+    ],
+    "additionalDirectories": [
+      "c:\\wow-tabletop\\wow-tabletop-site\\src\\app\\builder"
+    ]
+  }
+}

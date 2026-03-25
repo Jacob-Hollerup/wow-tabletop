@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npx opennextjs-cloudflare build",
+    "build:cf": "npx opennextjs-cloudflare build",
     "preview": "node scripts/bundle-content.mjs && opennextjs-cloudflare build && wrangler dev",
     "deploy": "node scripts/bundle-content.mjs && opennextjs-cloudflare build && wrangler deploy",
     "start": "next start",
