@@ -98,6 +98,12 @@ export function getBaseFaction(grandFactionId: string): Faction | undefined {
   return getFaction(gf.baseFactionId);
 }
 
+export function getBaseUnits(grandFactionId: string): Unit[] {
+  const base = getBaseFaction(grandFactionId);
+  if (!base) return [];
+  return base.units.filter((u) => u.isBaseUnit);
+}
+
 export function getUnitsByTier(units: Unit[]): Record<string, Unit[]> {
   const tiers: Record<string, Unit[]> = {};
   const order = ["Hero", "Baseline", "Mounted", "Elite"];
