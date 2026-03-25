@@ -3,7 +3,9 @@ import type { Faction } from "./types";
 export const SCOURGE: Faction = {
   id: "scourge",
   name: "Scourge",
+  grandFaction: "scourge",
   allegiance: "Scourge",
+  isBase: true,
   icon: "/images/scourge.webp",
   crest: "/images/scourge_crest.webp",
   svgIcon: "/icons/factions/scourge.svg",

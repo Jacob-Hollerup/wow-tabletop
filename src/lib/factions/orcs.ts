@@ -3,7 +3,9 @@ import type { Faction } from "./types";
 export const ORCS: Faction = {
   id: "orcs",
   name: "Orcs of Orgrimmar",
+  grandFaction: "horde",
   allegiance: "Horde",
+  isBase: true,
   crest: "/images/Orc_Crest.webp",
   svgIcon: "/icons/factions/orcs.svg",
   colorKey: "orcs",

@@ -3,6 +3,7 @@ import type { Faction } from "./types";
 export const NIGHT_ELVES: Faction = {
   id: "night-elves",
   name: "Night Elves",
+  grandFaction: "alliance",
   allegiance: "Alliance",
   crest: "/images/night_elves_crest.webp",
   svgIcon: "/icons/factions/night-elves.svg",

@@ -3,7 +3,9 @@ import type { Faction } from "./types";
 export const HUMANS: Faction = {
   id: "humans",
   name: "Humans of Stormwind",
+  grandFaction: "alliance",
   allegiance: "Alliance",
+  isBase: true,
   icon: "/images/Human_Crest.webp",
   crest: "/images/Human_Crest.webp",
   svgIcon: "/icons/factions/humans.svg",

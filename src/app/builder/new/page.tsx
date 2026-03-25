@@ -3,24 +3,16 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ALL_FACTIONS, type Faction } from "@/lib/factions";
+import { GRAND_FACTIONS, getSubfactions, type Faction } from "@/lib/factions";
 import { createArmyList } from "@/lib/builder/actions";
-
-const allegianceText: Record<string, string> = {
-  Alliance: "text-alliance",
-  Horde: "text-horde",
-  Scourge: "text-scourge",
-};
 
 export default function NewArmyPage() {
   const router = useRouter();
   const [creating, setCreating] = useState<string | null>(null);
+  const [selectedGF, setSelectedGF] = useState<string | null>(null);
 
-  const groups: Record<string, Faction[]> = {
-    Alliance: ALL_FACTIONS.filter((f) => f.allegiance === "Alliance"),
-    Horde: ALL_FACTIONS.filter((f) => f.allegiance === "Horde"),
-    Scourge: ALL_FACTIONS.filter((f) => f.allegiance === "Scourge"),
-  };
+  const activeGF = GRAND_FACTIONS.find((gf) => gf.id === selectedGF);
+  const subfactions = selectedGF ? getSubfactions(selectedGF) : [];
 
   async function handleSelect(factionId: string) {
     if (creating) return;
@@ -40,24 +32,66 @@ export default function NewArmyPage() {
           Choose Your Faction
         </h1>
         <p className="text-muted">
-          Select a faction to start building your army.
+          {selectedGF
+            ? "Now pick a subfaction to specialize your army."
+            : "First, choose your grand faction."}
         </p>
       </div>
 
-      {Object.entries(groups).map(([allegiance, factions], gi) => (
-        <div
-          key={allegiance}
-          className="mb-10 animate-fade-in-up"
-          style={{ animationDelay: `${gi * 0.1}s` }}
-        >
-          <h2 className={`font-display mb-4 text-lg font-bold ${allegianceText[allegiance]}`}>
-            {allegiance}
+      {/* Grand faction selector */}
+      {!selectedGF && (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {GRAND_FACTIONS.filter((gf) => !gf.comingSoon).map((gf) => {
+            const color = `var(${gf.colorVar})`;
+            return (
+              <button
+                key={gf.id}
+                onClick={() => setSelectedGF(gf.id)}
+                className="card-hover group relative block overflow-hidden rounded-xl border border-border bg-surface p-5 text-left transition-all"
+                style={{ borderLeftColor: color, borderLeftWidth: 3 }}
+              >
+                <div className="relative">
+                  <h3
+                    className="font-display mb-1 text-lg font-semibold"
+                    style={{ color }}
+                  >
+                    {gf.name}
+                  </h3>
+                  <p className="text-xs text-muted line-clamp-2">
+                    {gf.description}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Subfaction selector */}
+      {selectedGF && activeGF && (
+        <div>
+          <button
+            onClick={() => setSelectedGF(null)}
+            className="mb-6 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            &larr; Back to factions
+          </button>
+
+          <h2
+            className="font-display mb-4 text-lg font-bold"
+            style={{ color: `var(${activeGF.colorVar})` }}
+          >
+            {activeGF.name} Subfactions
           </h2>
 
-          <div className={`grid gap-4 ${
-            factions.length === 1 ? "md:grid-cols-1 md:max-w-sm" : "sm:grid-cols-2 lg:grid-cols-3"
-          }`}>
-            {factions.map((faction) => {
+          <div
+            className={`grid gap-4 ${
+              subfactions.length === 1
+                ? "md:max-w-sm"
+                : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {subfactions.map((faction: Faction) => {
               const primary = `var(--faction-${faction.colorKey})`;
               const isCreating = creating === faction.id;
 
@@ -88,7 +122,9 @@ export default function NewArmyPage() {
                       <h3 className="font-display truncate font-semibold text-foreground">
                         {faction.name}
                       </h3>
-                      <p className="truncate text-xs text-muted">{faction.theme}</p>
+                      <p className="truncate text-xs text-muted">
+                        {faction.theme}
+                      </p>
                     </div>
                   </div>
                   {isCreating && (
@@ -101,7 +137,7 @@ export default function NewArmyPage() {
             })}
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }

@@ -50,21 +50,39 @@ export interface Unit {
   heroData?: HeroClassData;
 }
 
+export type GrandFactionId = "alliance" | "horde" | "scourge" | "burning-legion" | "void";
+
+export interface GrandFaction {
+  id: GrandFactionId;
+  name: string;
+  colorVar: string;        // CSS variable name, e.g. "--alliance"
+  accentVar: string;       // e.g. "--alliance-accent"
+  darkVar: string;         // e.g. "--alliance-dark"
+  description: string;
+  baseFactionId: string;   // subfaction that provides base battleline, e.g. "humans"
+  mechanic?: { name: string; description: string };  // grand faction mechanic (inherited by all subfactions)
+  crest?: string;          // path to grand faction crest image
+  subfactionIds: string[];
+  comingSoon?: boolean;
+}
+
 export interface Faction {
   id: string;
   name: string;
-  allegiance: "Alliance" | "Horde" | "Scourge";
+  grandFaction: GrandFactionId;
+  allegiance: "Alliance" | "Horde" | "Scourge";  // kept for backwards compat
   icon: string;
-  crest?: string;      // webp crest for large displays (undefined = fall back to svgIcon)
-  svgIcon: string;     // SVG icon for small inline use (always present)
-  colorKey: string;    // CSS variable fragment, e.g. "humans" → var(--faction-humans)
+  crest?: string;
+  svgIcon: string;
+  colorKey: string;
   theme: string;
   playstyle: string;
-  mechanic: { name: string; description: string };
+  mechanic: { name: string; description: string };  // subfaction-specific mechanic
   strengths: string;
   weaknesses: string;
   ratings: { offense: number; defense: number; magic: number; speed: number };
   units: Unit[];
   composition: { size: string; baseline: string; mounted: string; elite: string; hero: string }[];
   specialRules?: string[];
+  isBase?: boolean;  // true if this subfaction IS the grand faction base (e.g. humans for alliance)
 }

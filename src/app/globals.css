@@ -10,11 +10,24 @@
   --surface-hover: #252525;
   --border: #2a2a2a;
   --muted: #888;
+  /* Grand faction colors */
   --alliance: #3b82f6;
+  --alliance-dark: #1e3a5f;
+  --alliance-accent: #93bbfd;
   --horde: #ef4444;
+  --horde-dark: #5f1e1e;
+  --horde-accent: #fca5a5;
   --scourge: #7dd3fc;
+  --scourge-dark: #1a3a4a;
+  --scourge-accent: #bae6fd;
+  --burning-legion: #22c55e;
+  --burning-legion-dark: #14532d;
+  --burning-legion-accent: #86efac;
+  --void: #a855f7;
+  --void-dark: #3b1564;
+  --void-accent: #d8b4fe;
 
-  /* Faction color themes */
+  /* Subfaction color themes */
   --faction-humans: #3b82f6;
   --faction-humans-accent: #d4a843;
   --faction-dwarves: #9ca3af;
@@ -43,8 +56,20 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
   --color-alliance: var(--alliance);
+  --color-alliance-dark: var(--alliance-dark);
+  --color-alliance-accent: var(--alliance-accent);
   --color-horde: var(--horde);
+  --color-horde-dark: var(--horde-dark);
+  --color-horde-accent: var(--horde-accent);
   --color-scourge: var(--scourge);
+  --color-scourge-dark: var(--scourge-dark);
+  --color-scourge-accent: var(--scourge-accent);
+  --color-burning-legion: var(--burning-legion);
+  --color-burning-legion-dark: var(--burning-legion-dark);
+  --color-burning-legion-accent: var(--burning-legion-accent);
+  --color-void: var(--void);
+  --color-void-dark: var(--void-dark);
+  --color-void-accent: var(--void-accent);
   --color-faction-humans: var(--faction-humans);
   --color-faction-humans-accent: var(--faction-humans-accent);
   --color-faction-dwarves: var(--faction-dwarves);
@@ -305,3 +330,51 @@ body {
 
 .animate-delay-700 { animation-delay: 0.7s; }
 .animate-delay-800 { animation-delay: 0.8s; }
+
+/* ─── Grand faction page theming ───────────────────────── */
+.faction-page-bg {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    color-mix(in srgb, var(--gf-color, transparent) 8%, transparent) 0%,
+    transparent 60%
+  );
+}
+
+.faction-banner {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--gf-color, transparent) 30%, #0a0a0a) 0%,
+    #0f0f0f 50%,
+    color-mix(in srgb, var(--gf-accent, transparent) 10%, #0f0f0f) 100%
+  );
+}
+
+.faction-divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--gf-color, transparent) 40%, transparent),
+    transparent
+  );
+}
+
+.subfaction-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.subfaction-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px -12px var(--sf-color, transparent),
+              0 12px 35px rgba(0, 0, 0, 0.5);
+  border-color: color-mix(in srgb, var(--sf-color, transparent) 50%, transparent);
+}
+
+.coming-soon-card {
+  opacity: 0.4;
+  filter: grayscale(0.5);
+  cursor: default;
+}
+
+.coming-soon-card:hover {
+  opacity: 0.5;
+}

@@ -3,6 +3,7 @@ import type { Faction } from "./types";
 export const DWARVES: Faction = {
   id: "dwarves",
   name: "Dwarves of Ironforge",
+  grandFaction: "alliance",
   allegiance: "Alliance",
   crest: "/images/Dwarf_Crest.webp",
   svgIcon: "/icons/factions/dwarves.svg",

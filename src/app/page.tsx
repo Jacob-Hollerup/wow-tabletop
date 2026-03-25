@@ -34,7 +34,7 @@ const features = [
   {
     title: "8 Factions",
     description: "From Stormwind's paladins to the Lich King's undead legions. Each with unique mechanics, units, and playstyles.",
-    href: "/armies",
+    href: "/factions",
     icon: (
       <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -126,10 +126,10 @@ export default async function Home() {
                 Enter Rulebook
               </Link>
               <Link
-                href="/armies"
+                href="/factions"
                 className="rounded-lg border border-border px-8 py-3 text-sm font-semibold text-foreground transition-all hover:border-gold/40 hover:text-gold"
               >
-                Browse Armies
+                Browse Factions
               </Link>
             </>
           ) : (
@@ -193,7 +193,7 @@ export default async function Home() {
                     {factions.map((f) => (
                       <Link
                         key={f.id}
-                        href={isLoggedIn ? `/armies/${f.id}` : "/login"}
+                        href={isLoggedIn ? `/factions/${f.grandFaction}/${f.id}` : "/login"}
                         className="flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-background/50"
                       >
                         <img

@@ -3,6 +3,7 @@ import type { Faction } from "./types";
 export const TAUREN: Faction = {
   id: "tauren",
   name: "Tauren of Thunder Bluff",
+  grandFaction: "horde",
   allegiance: "Horde",
   icon: "/icons/factions/tauren.svg",
   svgIcon: "/icons/factions/tauren.svg",
