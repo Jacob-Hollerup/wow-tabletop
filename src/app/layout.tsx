@@ -26,6 +26,9 @@ const cinzel = Cinzel({
 export const metadata: Metadata = {
   title: "Azeroth at War",
   description: "A World of Warcraft tabletop miniatures wargame",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default async function RootLayout({
