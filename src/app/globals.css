@@ -114,7 +114,7 @@
   --color-faction-scourge-accent: var(--faction-scourge-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-cinzel);
+  --font-display: var(--font-display);
 }
 
 body {
@@ -124,7 +124,7 @@ body {
 
 /* Display font for headings */
 .font-display {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-display), serif;
 }
 
 /* ─── Prose overrides ───────────────────────────────────── */
@@ -173,11 +173,11 @@ body {
 .prose h2 {
   border-bottom: 1px solid var(--border);
   padding-bottom: 0.5rem;
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-display), serif;
 }
 
 .prose h3 {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-display), serif;
 }
 
 /* ─── Callout boxes in markdown ──────────────────────────── */
