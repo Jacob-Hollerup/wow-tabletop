@@ -5,6 +5,19 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://wrhzgfbagr
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndyaHpnZmJhZ3Jrem93ZGFtZGVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0NDgzMjAsImV4cCI6MjA4NzAyNDMyMH0.nB6q0cawZOZrCOGPCbQNSo_-LE9P96Eq27jj4uEbsYg";
 
 export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Static content pages: skip Supabase entirely, no auth needed
+  const isPublicContent =
+    pathname.startsWith("/rules") ||
+    pathname.startsWith("/factions") ||
+    pathname.startsWith("/scenarios") ||
+    pathname.startsWith("/reference");
+
+  if (isPublicContent) {
+    return NextResponse.next({ request });
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -29,14 +42,7 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isLoginPage = request.nextUrl.pathname === "/login";
-  const isLandingPage = request.nextUrl.pathname === "/";
-  const isAuthCallback = request.nextUrl.pathname.startsWith("/auth/callback");
-  const isResetPassword = request.nextUrl.pathname.startsWith("/reset-password");
-
-  if (isAuthCallback || isLandingPage || isResetPassword) {
-    return supabaseResponse;
-  }
+  const isLoginPage = pathname === "/login";
 
   if (!user && !isLoginPage) {
     const url = request.nextUrl.clone();
@@ -54,5 +60,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/login",
+    "/armies/:path*",
+    "/builder/:path*",
+    "/api/:path*",
+    "/rules/:path*",
+    "/factions/:path*",
+    "/scenarios/:path*",
+    "/reference/:path*",
+  ],
 };
