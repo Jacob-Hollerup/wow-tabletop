@@ -50,21 +50,14 @@ export default function Nav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-gold transition-transform group-hover:scale-110"
-          >
-            <path
-              d="M14.5 3L12 7l-2.5-4M12 7v10M8 13l4 4 4-4M7 21h10"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.svg"
+            alt=""
+            width={24}
+            height={24}
+            className="transition-transform group-hover:scale-110"
+          />
           <span className="font-display text-lg font-bold text-gold">
             Azeroth at War
           </span>
