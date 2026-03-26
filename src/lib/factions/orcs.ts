@@ -7,6 +7,7 @@ export const ORCS: Faction = {
   allegiance: "Horde",
   isBase: true,
   crest: "/assets/horde/orcs/crest.webp",
+  banner: "/assets/horde/orcs/banner.png",
   colorKey: "orcs",
   icon: "/assets/horde/orcs/crest.webp",
   theme: "Savage, honorable, shamanic. Brute force meets elemental magic.",

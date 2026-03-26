@@ -8,6 +8,7 @@ export const HUMANS: Faction = {
   isBase: true,
   icon: "/assets/alliance/humans/crest.webp",
   crest: "/assets/alliance/humans/crest.webp",
+  banner: "/assets/alliance/humans/banner.png",
   colorKey: "humans",
   theme: "Disciplined, versatile, faith-powered. The backbone of the Alliance.",
   playstyle: "Balanced and adaptable. Strong defensive line with heavy armor infantry, supported by paladins (Taunt/healing) and priests (buffs). Solid ranged with crossbowmen. Good cavalry for flanking. No glaring weakness but no extreme specialty — they win through discipline and flexibility.",

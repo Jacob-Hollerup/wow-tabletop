@@ -87,6 +87,15 @@ export default async function SubfactionPage({
           }}
         />
 
+        {/* Banner image (subfaction only, no fallback) */}
+        {faction.banner && (
+          <img
+            src={faction.banner}
+            alt=""
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20"
+          />
+        )}
+
         {/* Crest watermark */}
         <img
           src={faction.crest}

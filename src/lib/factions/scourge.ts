@@ -8,6 +8,7 @@ export const SCOURGE: Faction = {
   isBase: true,
   icon: "/assets/scourge/scourge/crest.webp",
   crest: "/assets/scourge/scourge/crest.webp",
+  banner: "/assets/scourge/scourge/banner.png",
   colorKey: "scourge",
   theme: "Undeath incarnate. The Lich King's army of skeletons, ghouls, and necromancers. Relentless, inevitable, endless.",
   playstyle: "Swarm and attrition. Flood the board with cheap Undead that never test Morale. Necromancers raise fallen models as new Skeletons — the army grows as models die. The Scourge doesn't outfight you — it outlasts you.",

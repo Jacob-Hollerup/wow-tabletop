@@ -48,6 +48,13 @@ export default async function GrandFactionPage({
 
       {/* Banner */}
       <div className="faction-banner texture-noise relative overflow-hidden">
+        {gf.banner && (
+          <img
+            src={gf.banner}
+            alt=""
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20"
+          />
+        )}
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-8">
           {/* Breadcrumb */}
           <nav className="mb-8 flex items-center gap-1.5 text-sm animate-fade-in">

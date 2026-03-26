@@ -71,6 +71,7 @@ export interface GrandFaction {
   baseFactionId: string;   // subfaction that provides base battleline, e.g. "humans"
   mechanic?: { name: string; description: string };  // grand faction mechanic (inherited by all subfactions)
   crest?: string;          // path to grand faction crest image
+  banner?: string;         // path to grand faction banner image
   subfactionIds: string[];
   comingSoon?: boolean;
 }
@@ -82,6 +83,7 @@ export interface Faction {
   allegiance: "Alliance" | "Horde" | "Scourge";  // kept for backwards compat
   icon: string;
   crest: string;
+  banner?: string;         // path to subfaction banner image
   colorKey: string;
   theme: string;
   playstyle: string;
