@@ -1,7 +1,4 @@
--- Enable pgvector extension
-create extension if not exists vector with schema extensions;
-
--- Rule chunks table for vector search
+-- Rule chunks table with full-text search
 create table if not exists rule_chunks (
   id bigserial primary key,
   doc_slug text not null,
@@ -9,22 +6,23 @@ create table if not exists rule_chunks (
   section_heading text,
   content text not null,
   token_count int not null default 0,
-  embedding vector(1024),
+  search_vector tsvector generated always as (
+    setweight(to_tsvector('english', coalesce(doc_title, '')), 'A') ||
+    setweight(to_tsvector('english', coalesce(section_heading, '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(content, '')), 'C')
+  ) stored,
   created_at timestamptz default now()
 );
 
--- Index for fast similarity search
-create index if not exists rule_chunks_embedding_idx
-  on rule_chunks using ivfflat (embedding vector_cosine_ops)
-  with (lists = 20);
+-- GIN index for fast full-text search
+create index if not exists rule_chunks_search_idx on rule_chunks using gin (search_vector);
 
 -- Index for doc_slug lookups
 create index if not exists rule_chunks_doc_slug_idx on rule_chunks (doc_slug);
 
--- Similarity search function
-create or replace function match_rule_chunks(
-  query_embedding vector(1024),
-  match_threshold float default 0.3,
+-- Full-text search function
+create or replace function search_rule_chunks(
+  query text,
   match_count int default 8
 )
 returns table (
@@ -33,7 +31,7 @@ returns table (
   doc_title text,
   section_heading text,
   content text,
-  similarity float
+  rank real
 )
 language sql stable
 as $$
@@ -43,9 +41,9 @@ as $$
     rule_chunks.doc_title,
     rule_chunks.section_heading,
     rule_chunks.content,
-    1 - (rule_chunks.embedding <=> query_embedding) as similarity
+    ts_rank_cd(rule_chunks.search_vector, plainto_tsquery('english', query)) as rank
   from rule_chunks
-  where 1 - (rule_chunks.embedding <=> query_embedding) > match_threshold
-  order by rule_chunks.embedding <=> query_embedding
+  where rule_chunks.search_vector @@ plainto_tsquery('english', query)
+  order by rank desc
   limit match_count;
 $$;

@@ -1,8 +1,8 @@
 /**
- * One-time script: chunks markdown docs by section, embeds via Voyage,
- * and inserts into Supabase rule_chunks table.
+ * One-time script: chunks markdown docs by section and inserts into
+ * Supabase rule_chunks table for full-text search.
  *
- * Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... VOYAGE_API_KEY=... node scripts/embed-content.mjs
+ * Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... node scripts/embed-content.mjs
  *
  * Requires service role key (not anon) to bypass RLS.
  */
@@ -16,14 +16,9 @@ const contentDir = path.join(__dirname, "..", "content");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
-const VOYAGE_API_KEY = process.env.VOYAGE_API_KEY;
 
 if (!SUPABASE_URL || !SUPABASE_KEY) {
   console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_KEY");
-  process.exit(1);
-}
-if (!VOYAGE_API_KEY) {
-  console.error("Missing VOYAGE_API_KEY");
   process.exit(1);
 }
 
@@ -46,7 +41,7 @@ const DOC_MAP = [
 ];
 
 /**
- * Split markdown by ## headings into chunks.
+ * Split markdown by headings into chunks.
  * Merges small sections into the previous chunk to avoid tiny fragments.
  */
 function chunkMarkdown(content, minChars = 200) {
@@ -60,7 +55,6 @@ function chunkMarkdown(content, minChars = 200) {
     const text = currentLines.join("\n").trim();
     if (!text) return;
 
-    // Merge small chunks into previous
     if (text.length < minChars && chunks.length > 0) {
       chunks[chunks.length - 1].content += "\n\n" + text;
     } else {
@@ -70,7 +64,6 @@ function chunkMarkdown(content, minChars = 200) {
   }
 
   for (const line of lines) {
-    // Split on ## headings (but not # which is the doc title)
     if (/^#{1,3}\s/.test(line)) {
       flush();
       currentHeading = line.replace(/^#+\s*/, "").trim();
@@ -85,30 +78,6 @@ function chunkMarkdown(content, minChars = 200) {
 /** Rough token estimate (~4 chars per token) */
 function estimateTokens(text) {
   return Math.ceil(text.length / 4);
-}
-
-/** Embed texts via Voyage API in batches */
-async function embedBatch(texts) {
-  const res = await fetch("https://api.voyageai.com/v1/embeddings", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${VOYAGE_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "voyage-3-lite",
-      input: texts,
-      input_type: "document",
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Voyage API error ${res.status}: ${err}`);
-  }
-
-  const data = await res.json();
-  return data.data.map((d) => d.embedding);
 }
 
 async function main() {
@@ -144,29 +113,19 @@ async function main() {
 
   console.log(`Chunked ${DOC_MAP.length} docs into ${allChunks.length} chunks`);
 
-  // Embed in batches of 20
-  const BATCH_SIZE = 20;
+  // Insert in batches of 50
+  const BATCH_SIZE = 50;
   for (let i = 0; i < allChunks.length; i += BATCH_SIZE) {
     const batch = allChunks.slice(i, i + BATCH_SIZE);
-    const texts = batch.map((c) => c.content);
-
-    console.log(`Embedding batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(allChunks.length / BATCH_SIZE)}...`);
-    const embeddings = await embedBatch(texts);
-
-    // Insert with embeddings
-    const rows = batch.map((chunk, j) => ({
-      ...chunk,
-      embedding: JSON.stringify(embeddings[j]),
-    }));
-
-    const { error } = await supabase.from("rule_chunks").insert(rows);
+    const { error } = await supabase.from("rule_chunks").insert(batch);
     if (error) {
       console.error("Insert error:", error);
       process.exit(1);
     }
+    console.log(`Inserted batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(allChunks.length / BATCH_SIZE)}`);
   }
 
-  console.log(`Done! Inserted ${allChunks.length} chunks with embeddings.`);
+  console.log(`Done! Inserted ${allChunks.length} chunks.`);
 }
 
 main().catch((e) => {

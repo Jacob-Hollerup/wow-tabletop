@@ -1,42 +1,15 @@
 import { createClient } from "@/lib/supabase/server";
 
-const VOYAGE_API_KEY = process.env.VOYAGE_API_KEY;
-
-/** Embed a query string via Voyage API */
-async function embedQuery(text: string): Promise<number[]> {
-  if (!VOYAGE_API_KEY) throw new Error("Missing VOYAGE_API_KEY");
-
-  const res = await fetch("https://api.voyageai.com/v1/embeddings", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${VOYAGE_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "voyage-3-lite",
-      input: [text],
-      input_type: "query",
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error(`Voyage API error ${res.status}`);
-  }
-
-  const data = await res.json();
-  return data.data[0].embedding;
-}
-
-export interface RuleChunk {
+interface RuleChunk {
   doc_slug: string;
   doc_title: string;
   section_heading: string | null;
   content: string;
-  similarity: number;
+  rank: number;
 }
 
 /**
- * Find the most relevant rule chunks for a user query via vector similarity.
+ * Find the most relevant rule chunks for a user query via PostgreSQL full-text search.
  * Returns formatted context string ready for the AI system prompt.
  */
 export async function getRelevantRules(
@@ -47,16 +20,8 @@ export async function getRelevantRules(
   const supabase = await createClient();
   if (!supabase) return "";
 
-  let embedding: number[];
-  try {
-    embedding = await embedQuery(query);
-  } catch {
-    return "";
-  }
-
-  const { data: chunks, error } = await supabase.rpc("match_rule_chunks", {
-    query_embedding: JSON.stringify(embedding),
-    match_threshold: 0.3,
+  const { data: chunks, error } = await supabase.rpc("search_rule_chunks", {
+    query,
     match_count: matchCount,
   });
 
