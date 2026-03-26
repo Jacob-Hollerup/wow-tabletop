@@ -9,6 +9,7 @@ import {
   getBaseUnits,
 } from "@/lib/factions";
 import UnitCard from "@/components/unit-card";
+import FactionCard from "@/components/faction-card";
 
 export function generateStaticParams() {
   return GRAND_FACTIONS.filter((gf) => !gf.comingSoon).map((gf) => ({
@@ -173,28 +174,17 @@ export default async function GrandFactionPage({
             const sfColor = `var(--faction-${sf.colorKey})`;
 
             return (
-              <Link
+              <FactionCard
                 key={sf.id}
                 href={`/factions/${gf.id}/${sf.id}`}
-                className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 transition-colors hover:bg-surface-hover"
-                style={{
-                  borderLeftColor: sfColor,
-                  borderLeftWidth: "3px",
-                  animationDelay: `${i * 0.06}s`,
-                }}
-              >
-                <img
-                  src={sf.crest}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="mt-0.5 shrink-0 rounded object-contain"
-                />
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-display text-lg font-bold text-foreground">
-                      {sf.name}
-                    </h3>
+                name={sf.name}
+                crest={sf.crest}
+                color={sfColor}
+                subtitle={sf.theme}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${i * 0.06}s` }}
+                badge={
+                  <>
                     {sf.isBase && (
                       <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">
                         Base
@@ -205,22 +195,18 @@ export default async function GrandFactionPage({
                         Upcoming
                       </span>
                     )}
-                  </div>
-                  <p className="mt-1 text-sm text-muted">
-                    {sf.theme}
-                  </p>
-                  <div className="mt-2 flex items-center gap-3 text-xs text-muted">
+                  </>
+                }
+                meta={
+                  <>
                     <span className="font-medium uppercase tracking-wider">
                       {sf.mechanic.name}
                     </span>
                     <span>&middot;</span>
                     <span>{sf.units.length} units</span>
-                  </div>
-                </div>
-                <span className="mt-1 shrink-0 text-xs text-muted opacity-0 transition-opacity group-hover:opacity-100">
-                  &rarr;
-                </span>
-              </Link>
+                  </>
+                }
+              />
             );
           })}
         </div>

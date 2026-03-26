@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ALL_FACTIONS } from "@/lib/factions";
+import FactionCard from "@/components/faction-card";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
@@ -195,27 +196,18 @@ export default async function Home() {
 
                   <div className="space-y-2">
                     {factions.map((f) => (
-                      <Link
+                      <FactionCard
                         key={f.id}
                         href={isLoggedIn ? `/factions/${f.grandFaction}/${f.id}` : "/login"}
-                        className="flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-background/50"
-                      >
-                        <img
-                          src={f.icon}
-                          alt={f.name}
-                          width={28}
-                          height={28}
-                          className="shrink-0 opacity-70 transition-opacity group-hover:opacity-100"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-semibold text-foreground">
-                            {f.name}
-                          </p>
-                          <p className="truncate text-xs text-muted">
+                        name={f.name}
+                        crest={f.icon}
+                        color={`var(--faction-${f.colorKey})`}
+                        meta={
+                          <span className="font-medium uppercase tracking-wider">
                             {f.mechanic.name}
-                          </p>
-                        </div>
-                      </Link>
+                          </span>
+                        }
+                      />
                     ))}
                   </div>
                 </div>
