@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const NIGHT_ELVES: Faction = {
   id: "night-elves",
-  name: "Night Elves",
+  name: "Kaldorei",
   grandFaction: "alliance",
   allegiance: "Alliance",
   crest: "/assets/alliance/night-elves/crest.webp",

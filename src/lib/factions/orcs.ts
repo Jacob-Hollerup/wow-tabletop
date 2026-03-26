@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const ORCS: Faction = {
   id: "orcs",
-  name: "Orcs of Orgrimmar",
+  name: "Warsong Clan",
   grandFaction: "horde",
   allegiance: "Horde",
   isBase: true,

@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const HUMANS: Faction = {
   id: "humans",
-  name: "Humans of Stormwind",
+  name: "Kingdom of Stormwind",
   grandFaction: "alliance",
   allegiance: "Alliance",
   isBase: true,

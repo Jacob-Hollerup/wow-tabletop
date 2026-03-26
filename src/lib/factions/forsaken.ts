@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const FORSAKEN: Faction = {
   id: "forsaken",
-  name: "Forsaken of Undercity",
+  name: "The Forsaken",
   grandFaction: "horde",
   allegiance: "Horde",
   icon: "/assets/horde/forsaken/crest.webp",

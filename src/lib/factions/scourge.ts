@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const SCOURGE: Faction = {
   id: "scourge",
-  name: "Scourge",
+  name: "The Scourge",
   grandFaction: "scourge",
   allegiance: "Scourge",
   isBase: true,

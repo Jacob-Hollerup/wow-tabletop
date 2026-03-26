@@ -2,7 +2,7 @@ import type { Faction } from "./types";
 
 export const DARKSPEAR: Faction = {
   id: "darkspear",
-  name: "Darkspear Trolls",
+  name: "Darkspear Tribe",
   grandFaction: "horde",
   allegiance: "Horde",
   crest: "/assets/horde/darkspear/crest.webp",
