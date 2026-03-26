@@ -125,25 +125,36 @@ export default function UnitCard({
   unit,
   allegiance,
   factionId,
+  collapsible = false,
+  defaultOpen = false,
 }: {
   unit: Unit;
   allegiance: "Alliance" | "Horde" | "Scourge";
   factionId?: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
 }) {
   const [specIdx, setSpecIdx] = useState(0);
+  const [open, setOpen] = useState(defaultOpen);
   const iniRange = computeEffectiveINI(unit);
   const hero = unit.heroData;
 
   const factionPrimary = factionId ? `var(--faction-${factionId})` : undefined;
   const factionAccent = factionId ? `var(--faction-${factionId}-accent)` : undefined;
+  const isOpen = !collapsible || open;
 
   return (
     <div
-      className="card-hover rounded-xl border border-border border-l-[3px] bg-surface p-4"
+      className="card-hover rounded-xl border border-border border-l-[3px] bg-surface"
       style={factionPrimary ? { borderLeftColor: factionPrimary } : undefined}
     >
       {/* Header */}
-      <div className="mb-3 flex items-start justify-between gap-2">
+      <div
+        className={`flex items-start justify-between gap-2 p-4 ${collapsible ? "cursor-pointer select-none" : ""} ${isOpen ? "" : "pb-4"}`}
+        onClick={collapsible ? () => setOpen(!open) : undefined}
+        role={collapsible ? "button" : undefined}
+        aria-expanded={collapsible ? open : undefined}
+      >
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <h3 className="font-display truncate font-semibold text-foreground">{unit.name}</h3>
@@ -183,8 +194,27 @@ export default function UnitCard({
           <span className="rounded-lg bg-gold/10 px-2 py-0.5 text-xs font-bold text-gold">
             {unit.stats.PTS} pts
           </span>
+          {collapsible && (
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className={`text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+            >
+              <path d="M4 6l4 4 4-4" />
+            </svg>
+          )}
         </div>
       </div>
+
+      {/* Collapsible body */}
+      <div
+        className={`grid transition-[grid-template-rows] duration-200 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-4 pb-4">
 
       {/* Stats Bar — responsive: 2 rows on mobile, 1 row on sm+ */}
       <div className="mb-3 overflow-hidden rounded-lg border border-border bg-border">
@@ -361,6 +391,9 @@ export default function UnitCard({
           </div>
         </div>
       )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

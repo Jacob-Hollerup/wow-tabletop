@@ -6,6 +6,7 @@ import {
   getGrandFaction,
   getFaction,
   getBaseFaction,
+  getBaseUnits,
   getUnitsByTier,
 } from "@/lib/factions";
 import UnitCard from "@/components/unit-card";
@@ -45,6 +46,7 @@ export default async function SubfactionPage({
   const baseFaction = getBaseFaction(gf.id);
   const isBase = faction.isBase;
   const unitsByTier = getUnitsByTier(faction.units);
+  const baseUnits = !isBase ? getBaseUnits(gf.id) : [];
 
   const gfColor = `var(${gf.colorVar})`;
   const primary = `var(--faction-${faction.colorKey})`;
@@ -298,6 +300,35 @@ export default async function SubfactionPage({
           </div>
         )}
 
+        {/* Base Units (for non-base subfactions) */}
+        {baseUnits.length > 0 && baseFaction && (
+          <div className="mb-8">
+            <div className="mb-4 flex items-center gap-3">
+              <div
+                className="h-px flex-1"
+                style={{
+                  background: `linear-gradient(to right, ${gfColor}, transparent)`,
+                }}
+              />
+              <h2 className="font-display text-xl font-bold text-foreground">
+                {gf.name} Base Units
+              </h2>
+              <div className="h-px w-8" style={{ background: gfColor }} />
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {baseUnits.map((unit) => (
+                <UnitCard
+                  key={unit.name}
+                  unit={unit}
+                  allegiance={faction.allegiance}
+                  factionId={baseFaction.id}
+                  collapsible
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Unit Roster by Tier */}
         {Object.entries(unitsByTier).map(([tier, units]) => (
           <div key={tier} className="mb-8">
@@ -320,6 +351,7 @@ export default async function SubfactionPage({
                   unit={unit}
                   allegiance={faction.allegiance}
                   factionId={faction.id}
+                  collapsible
                 />
               ))}
             </div>
