@@ -42,7 +42,7 @@ export default async function BuilderEditorPage({
     units,
     isDirty: false,
     isSaving: false,
-    lastSavedAt: new Date(army.updated_at),
+    lastSavedAt: army.updated_at,
   };
 
   return (

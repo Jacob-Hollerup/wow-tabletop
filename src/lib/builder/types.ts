@@ -30,7 +30,7 @@ export interface BuilderState {
   units: RosterUnit[];
   isDirty: boolean;
   isSaving: boolean;
-  lastSavedAt: Date | null;
+  lastSavedAt: string | Date | null;
 }
 
 // --- Actions ---
