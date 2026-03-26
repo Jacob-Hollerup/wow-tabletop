@@ -8,7 +8,6 @@ import {
   getBaseFaction,
   getBaseUnits,
 } from "@/lib/factions";
-import StarRating from "@/components/star-rating";
 import UnitCard from "@/components/unit-card";
 
 export function generateStaticParams() {
@@ -169,156 +168,58 @@ export default async function GrandFactionPage({
         </div>
 
         {/* Subfaction cards */}
-        <div
-          className={`grid gap-5 ${
-            subfactions.length === 1 ? "md:max-w-lg" : "md:grid-cols-2"
-          }`}
-        >
+        <div className="flex flex-col gap-3">
           {subfactions.map((sf, i) => {
             const sfColor = `var(--faction-${sf.colorKey})`;
-            const sfAccent = `var(--faction-${sf.colorKey}-accent)`;
 
             return (
               <Link
                 key={sf.id}
                 href={`/factions/${gf.id}/${sf.id}`}
-                className="subfaction-card faction-glow group relative block min-h-64 overflow-hidden rounded-xl border"
-                style={
-                  {
-                    "--faction-primary": sfColor,
-                    "--sf-color": sfColor,
-                    borderColor: `color-mix(in srgb, ${sfColor} 25%, transparent)`,
-                    animationDelay: `${i * 0.08}s`,
-                  } as React.CSSProperties
-                }
+                className="group flex items-start gap-4 rounded-xl border border-border bg-surface p-5 transition-colors hover:bg-surface-hover"
+                style={{
+                  borderLeftColor: sfColor,
+                  borderLeftWidth: "3px",
+                  animationDelay: `${i * 0.06}s`,
+                }}
               >
-                {/* Background gradient */}
-                <div
-                  className="absolute inset-0 transition-all duration-500"
-                  style={{
-                    background: `linear-gradient(135deg,
-                      color-mix(in srgb, ${sfColor} 10%, var(--surface)) 0%,
-                      var(--surface) 55%,
-                      color-mix(in srgb, ${sfAccent} 6%, var(--surface)) 100%
-                    )`,
-                  }}
+                <img
+                  src={sf.crest}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="mt-0.5 shrink-0 rounded object-contain"
                 />
-
-                {/* Crest watermark */}
-                {sf.crest && (
-                  <img
-                    src={sf.crest}
-                    alt=""
-                    className="pointer-events-none absolute -right-6 -top-6 h-52 w-52 object-contain opacity-[0.10] transition-opacity duration-500 group-hover:opacity-[0.20]"
-                  />
-                )}
-
-                {/* Vignette */}
-                <div
-                  className="absolute inset-0 rounded-xl"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse 50% 80% at 85% 50%, transparent 30%, var(--surface) 100%)",
-                  }}
-                />
-
-                {/* Content */}
-                <div className="relative flex h-full min-h-64 flex-col justify-between p-5">
-                  <div>
-                    <div className="mb-3 flex items-center gap-3">
-                      <img
-                        src={sf.crest}
-                        alt={sf.name}
-                        width={28}
-                        height={28}
-                        className="shrink-0 opacity-90 transition-opacity group-hover:opacity-100"
-                      />
-                      <h3 className="font-display flex-1 truncate text-lg font-bold text-foreground">
-                        {sf.name}
-                      </h3>
-                      {sf.upcoming && (
-                        <span
-                          className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
-                          style={{
-                            backgroundColor: "color-mix(in srgb, #f59e0b 15%, transparent)",
-                            color: "#f59e0b",
-                          }}
-                        >
-                          Upcoming
-                        </span>
-                      )}
-                      {sf.isBase && (
-                        <span
-                          className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider"
-                          style={{
-                            backgroundColor: `color-mix(in srgb, ${sfColor} 15%, transparent)`,
-                            color: sfColor,
-                          }}
-                        >
-                          Base
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="mb-3 text-sm leading-relaxed text-muted line-clamp-2">
-                      {sf.theme}
-                    </p>
-
-                    {/* Mechanic pill */}
-                    <div
-                      className="mb-3 inline-block rounded-lg border px-2.5 py-1"
-                      style={{
-                        borderColor: `color-mix(in srgb, ${sfAccent} 25%, transparent)`,
-                        backgroundColor: `color-mix(in srgb, ${sfAccent} 6%, transparent)`,
-                      }}
-                    >
-                      <p
-                        className="text-[10px] font-semibold uppercase tracking-wider"
-                        style={{ color: sfAccent }}
-                      >
-                        {sf.mechanic.name}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="mb-2 space-y-1">
-                      <StarRating
-                        label="Offense"
-                        value={sf.ratings.offense}
-                        color={sfAccent}
-                      />
-                      <StarRating
-                        label="Defense"
-                        value={sf.ratings.defense}
-                        color={sfAccent}
-                      />
-                      <StarRating
-                        label="Magic"
-                        value={sf.ratings.magic}
-                        color={sfAccent}
-                      />
-                      <StarRating
-                        label="Speed"
-                        value={sf.ratings.speed}
-                        color={sfAccent}
-                      />
-                    </div>
-                    {sf.upcoming && sf.upcomingHint && (
-                      <p className="mb-2 text-[11px] italic text-amber-500/70">
-                        {sf.upcomingHint}
-                      </p>
-                    )}
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs text-muted">
-                        {sf.units.length} units
-                      </p>
-                      <span className="text-xs text-muted opacity-0 transition-opacity group-hover:opacity-100">
-                        View Subfaction &rarr;
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-display text-lg font-bold text-foreground">
+                      {sf.name}
+                    </h3>
+                    {sf.isBase && (
+                      <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">
+                        Base
                       </span>
-                    </div>
+                    )}
+                    {sf.upcoming && (
+                      <span className="rounded-full border border-amber-500/30 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-500">
+                        Upcoming
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 text-sm text-muted">
+                    {sf.theme}
+                  </p>
+                  <div className="mt-2 flex items-center gap-3 text-xs text-muted">
+                    <span className="font-medium uppercase tracking-wider">
+                      {sf.mechanic.name}
+                    </span>
+                    <span>&middot;</span>
+                    <span>{sf.units.length} units</span>
                   </div>
                 </div>
+                <span className="mt-1 shrink-0 text-xs text-muted opacity-0 transition-opacity group-hover:opacity-100">
+                  &rarr;
+                </span>
               </Link>
             );
           })}

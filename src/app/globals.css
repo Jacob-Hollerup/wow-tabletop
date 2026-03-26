@@ -322,7 +322,7 @@ body {
 }
 
 .text-glow {
-  text-shadow: 0 0 40px rgba(212, 168, 67, 0.3), 0 0 80px rgba(212, 168, 67, 0.1);
+  /* kept as no-op for backwards compat — intentionally empty */
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────── */
@@ -337,16 +337,8 @@ body {
   border-radius: 3px;
 }
 
-/* ─── Faction-themed glow effects ───────────────────────── */
-.faction-glow {
-  box-shadow: 0 0 40px -10px var(--faction-primary, transparent),
-              0 8px 25px rgba(0, 0, 0, var(--shadow-strength));
-}
-
-.faction-glow:hover {
-  box-shadow: 0 0 60px -8px var(--faction-primary, transparent),
-              0 12px 35px rgba(0, 0, 0, calc(var(--shadow-strength) + 0.1));
-}
+/* faction-glow removed — kept class name as no-op for backwards compat */
+.faction-glow {}
 
 /* ─── Subtle noise texture (CSS-only, no image assets) ─── */
 .texture-noise {
