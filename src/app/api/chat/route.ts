@@ -35,10 +35,10 @@ export async function POST(req: Request) {
 
   const { messages } = await req.json();
 
-  // Use the latest user message to pick relevant rule docs
+  // Use the latest user message to find relevant rule chunks via vector search
   const lastUserMsg = [...messages].reverse().find((m: { role: string }) => m.role === "user");
   const query = lastUserMsg?.content ?? "";
-  const rules = getRelevantRules(typeof query === "string" ? query : JSON.stringify(query));
+  const rules = await getRelevantRules(typeof query === "string" ? query : JSON.stringify(query));
 
   const result = streamText({
     model: anthropic("claude-sonnet-4-6"),

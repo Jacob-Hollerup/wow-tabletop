@@ -1,175 +1,93 @@
-import fs from "node:fs";
-import path from "node:path";
+import { createClient } from "@/lib/supabase/server";
 
-interface RulesDoc {
-  slug: string;
-  title: string;
-  content: string;
-  keywords: string[];
-}
+const VOYAGE_API_KEY = process.env.VOYAGE_API_KEY;
 
-const CONTENT_DIR = path.join(process.cwd(), "content");
+/** Embed a query string via Voyage API */
+async function embedQuery(text: string): Promise<number[]> {
+  if (!VOYAGE_API_KEY) throw new Error("Missing VOYAGE_API_KEY");
 
-const SLUG_META: Record<string, { title: string; keywords: string[] }> = {
-  "azeroth-at-war-v1.1": {
-    title: "Core Rules v1.1",
-    keywords: [
-      "rules", "combat", "movement", "phase", "turn", "morale", "mana",
-      "hero", "wound", "damage", "save", "charge", "shoot", "shooting",
-      "melee", "terrain", "deployment", "army", "building", "points",
-      "keyword", "ability", "stat", "initiative", "armor", "piercing",
-      "shield", "blast", "template", "scatter", "retreat", "withdrawal",
-      "flanking", "objective", "victory", "dice", "roll", "hit",
-    ],
-  },
-  "faction-overview": {
-    title: "Faction Overview",
-    keywords: [
-      "faction", "alliance", "horde", "scourge", "playstyle", "theme",
-      "allegiance", "subfaction",
-    ],
-  },
-  "unit-customization-system": {
-    title: "Unit Customization / Hero Building",
-    keywords: [
-      "hero", "customization", "race", "class", "spec", "equipment",
-      "ability", "build", "talent", "loadout", "weapon", "armor",
-    ],
-  },
-  "fly-keyword-draft": {
-    title: "Fly Keyword",
-    keywords: ["fly", "flying", "airborne", "gryphon", "wyvern", "bat"],
-  },
-  "azeroth-at-war-refinement-notes": {
-    title: "Design / Refinement Notes",
-    keywords: ["design", "refinement", "balance", "change", "note", "errata"],
-  },
-  "army-book-humans": {
-    title: "Army Book: Humans",
-    keywords: [
-      "human", "stormwind", "alliance", "footman", "knight", "paladin",
-      "priest", "mage", "gryphon",
-    ],
-  },
-  "army-book-dwarves": {
-    title: "Army Book: Dwarves",
-    keywords: [
-      "dwarf", "dwarves", "ironforge", "wildhammer", "rifleman", "gryphon",
-      "thunderhammer", "mountaineer",
-    ],
-  },
-  "army-book-night-elves": {
-    title: "Army Book: Night Elves",
-    keywords: [
-      "night elf", "night elves", "kaldorei", "sentinel", "druid",
-      "huntress", "archer", "moonwell", "shadowmeld",
-    ],
-  },
-  "army-book-orcs": {
-    title: "Army Book: Orcs",
-    keywords: [
-      "orc", "orcs", "orgrimmar", "horde", "grunt", "warchief", "shaman",
-      "axe", "wyvern", "blademaster",
-    ],
-  },
-  "army-book-darkspear": {
-    title: "Army Book: Darkspear Trolls",
-    keywords: [
-      "troll", "darkspear", "horde", "voodoo", "headhunter", "witch doctor",
-      "raptor", "berserker", "regenerat",
-    ],
-  },
-  "army-book-tauren": {
-    title: "Army Book: Tauren",
-    keywords: [
-      "tauren", "thunder bluff", "horde", "totem", "chieftain",
-      "spirit walker", "kodo", "warchief",
-    ],
-  },
-  "army-book-forsaken": {
-    title: "Army Book: Forsaken",
-    keywords: [
-      "forsaken", "undercity", "horde", "apothecary", "blight", "plague",
-      "deathstalker", "abomination", "banshee", "dark ranger",
-    ],
-  },
-  "army-book-scourge": {
-    title: "Army Book: Scourge",
-    keywords: [
-      "scourge", "lich king", "undead", "skeleton", "ghoul", "necromancer",
-      "death knight", "raise dead", "lich", "acolyte",
-    ],
-  },
-};
-
-const CORE_SLUG = "azeroth-at-war-v1.1";
-
-let cachedDocs: RulesDoc[] | null = null;
-
-function loadDocs(): RulesDoc[] {
-  if (cachedDocs) return cachedDocs;
-
-  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
-  cachedDocs = files.map((file) => {
-    const slug = file.replace(/\.md$/, "");
-    const content = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
-    const meta = SLUG_META[slug] ?? { title: slug, keywords: [] };
-    return { slug, title: meta.title, content, keywords: meta.keywords };
+  const res = await fetch("https://api.voyageai.com/v1/embeddings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${VOYAGE_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "voyage-3-lite",
+      input: [text],
+      input_type: "query",
+    }),
   });
-  return cachedDocs;
+
+  if (!res.ok) {
+    throw new Error(`Voyage API error ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data.data[0].embedding;
 }
 
-function scoreDoc(doc: RulesDoc, query: string): number {
-  const q = query.toLowerCase();
-  let score = 0;
-
-  for (const kw of doc.keywords) {
-    if (q.includes(kw.toLowerCase())) {
-      score += kw.length > 4 ? 3 : 1; // longer keyword matches score higher
-    }
-  }
-
-  // Boost if the doc title words appear in the query
-  for (const word of doc.title.toLowerCase().split(/\W+/)) {
-    if (word.length > 2 && q.includes(word)) score += 2;
-  }
-
-  return score;
+export interface RuleChunk {
+  doc_slug: string;
+  doc_title: string;
+  section_heading: string | null;
+  content: string;
+  similarity: number;
 }
 
 /**
- * Returns the core rules + up to `maxExtra` most-relevant docs for the query.
- * Caps total characters to stay well within context limits.
+ * Find the most relevant rule chunks for a user query via vector similarity.
+ * Returns formatted context string ready for the AI system prompt.
  */
-export function getRelevantRules(
+export async function getRelevantRules(
   query: string,
-  maxExtra = 3,
-  maxChars = 80_000,
-): string {
-  const docs = loadDocs();
-  const coreDoc = docs.find((d) => d.slug === CORE_SLUG);
+  matchCount = 8,
+  maxChars = 12_000,
+): Promise<string> {
+  const supabase = await createClient();
+  if (!supabase) return "";
 
-  // Score and sort non-core docs
-  const others = docs
-    .filter((d) => d.slug !== CORE_SLUG)
-    .map((d) => ({ doc: d, score: scoreDoc(d, query) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxExtra)
-    .filter((d) => d.score > 0)
-    .map((d) => d.doc);
+  let embedding: number[];
+  try {
+    embedding = await embedQuery(query);
+  } catch {
+    return "";
+  }
 
+  const { data: chunks, error } = await supabase.rpc("match_rule_chunks", {
+    query_embedding: JSON.stringify(embedding),
+    match_threshold: 0.3,
+    match_count: matchCount,
+  });
+
+  if (error || !chunks || chunks.length === 0) return "";
+
+  // Build context string, respecting char limit
   const sections: string[] = [];
   let totalChars = 0;
 
-  if (coreDoc) {
-    sections.push(`--- ${coreDoc.title} ---\n\n${coreDoc.content}`);
-    totalChars += coreDoc.content.length;
+  // Group by doc for cleaner output
+  const byDoc = new Map<string, RuleChunk[]>();
+  for (const chunk of chunks as RuleChunk[]) {
+    if (!byDoc.has(chunk.doc_title)) byDoc.set(chunk.doc_title, []);
+    byDoc.get(chunk.doc_title)!.push(chunk);
   }
 
-  for (const doc of others) {
-    if (totalChars + doc.content.length > maxChars) continue;
-    sections.push(`--- ${doc.title} ---\n\n${doc.content}`);
-    totalChars += doc.content.length;
+  for (const [title, docChunks] of byDoc) {
+    const header = `--- ${title} ---\n`;
+    for (const chunk of docChunks) {
+      const section = chunk.section_heading
+        ? `### ${chunk.section_heading}\n${chunk.content}`
+        : chunk.content;
+
+      if (totalChars + section.length > maxChars) continue;
+      if (sections.length === 0 || !sections[sections.length - 1].startsWith(`--- ${title}`)) {
+        sections.push(header + section);
+      } else {
+        sections[sections.length - 1] += "\n\n" + section;
+      }
+      totalChars += section.length;
+    }
   }
 
   return sections.join("\n\n");
