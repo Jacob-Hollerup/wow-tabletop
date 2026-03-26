@@ -190,6 +190,8 @@ Both players generate Mana and resolve any start-of-round effects at the same ti
 **Stage 2 — Activation Phase (alternating)**
 Players take turns activating **one model at a time**. The player who deployed second activates first in Round 1; after that, players roll off at the start of each round (highest D6; reroll ties). Players alternate activations until all models on both sides have been activated. If one player runs out of models to activate, the other player activates their remaining models one at a time.
 
+**Tracking Activations:** At the start of each Activation Phase, place a token (coin, bead, or small marker) next to every model on the battlefield. When a model completes its activation, remove the token. This makes it easy to see at a glance which models are still waiting to act — especially important when armies have very different model counts.
+
 **Stage 3 — Morale Phase (simultaneous)**
 Both players test Morale for any models that qualify. Routing models flee during this phase.
 
@@ -624,7 +626,7 @@ Each player secretly nominates one of their Heroes as their **Warlord**. The gam
 
 ### Round Sequence
 1. **Mana Phase** (simultaneous) — Generate Mana (base + Heroes + Magical units + objectives).
-2. **Activation Phase** (alternating) — Players take turns activating 1 model each.
+2. **Activation Phase** (alternating) — Players take turns activating 1 model each. Place a token beside each model; remove it when activated.
 3. **Morale Phase** (simultaneous) — Test models that lost 50%+ Wounds or had allies destroyed nearby. Routing models flee.
 
 ### Activation Options
