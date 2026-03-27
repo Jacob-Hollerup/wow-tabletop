@@ -1,4 +1,5 @@
-import { bundledDocs, type BundledDoc } from "./content-data";
+import fs from "node:fs";
+import path from "node:path";
 
 export interface DocMeta {
   slug: string;
@@ -6,12 +7,30 @@ export interface DocMeta {
   category: string;
 }
 
+interface DocWithContent extends DocMeta {
+  content: string;
+}
+
+const contentDir = path.join(process.cwd(), "public", "content");
+
+function readIndex(): DocMeta[] {
+  return JSON.parse(fs.readFileSync(path.join(contentDir, "index.json"), "utf-8"));
+}
+
+function readDoc(slug: string): DocWithContent | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(contentDir, `${slug}.json`), "utf-8"));
+  } catch {
+    return null;
+  }
+}
+
 export function getAllDocs(): DocMeta[] {
-  return bundledDocs.map(({ slug, title, category }) => ({ slug, title, category }));
+  return readIndex();
 }
 
 export function getDocBySlug(slug: string): { meta: DocMeta; content: string } | null {
-  const doc = bundledDocs.find((d) => d.slug === slug);
+  const doc = readDoc(slug);
   if (!doc) return null;
   return {
     meta: { slug: doc.slug, title: doc.title, category: doc.category },
@@ -21,7 +40,7 @@ export function getDocBySlug(slug: string): { meta: DocMeta; content: string } |
 
 export function getDocsByCategory(): Record<string, DocMeta[]> {
   const grouped: Record<string, DocMeta[]> = {};
-  for (const doc of bundledDocs) {
+  for (const doc of readIndex()) {
     if (!grouped[doc.category]) grouped[doc.category] = [];
     grouped[doc.category].push({ slug: doc.slug, title: doc.title, category: doc.category });
   }

@@ -7,17 +7,6 @@ const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "eyJhbGci
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Static content pages: skip Supabase entirely, no auth needed
-  const isPublicContent =
-    pathname.startsWith("/rules") ||
-    pathname.startsWith("/factions") ||
-    pathname.startsWith("/scenarios") ||
-    pathname.startsWith("/reference");
-
-  if (isPublicContent) {
-    return NextResponse.next({ request });
-  }
-
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -65,9 +54,5 @@ export const config = {
     "/armies/:path*",
     "/builder/:path*",
     "/api/:path*",
-    "/rules/:path*",
-    "/factions/:path*",
-    "/scenarios/:path*",
-    "/reference/:path*",
   ],
 };

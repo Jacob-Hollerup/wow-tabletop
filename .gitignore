@@ -43,7 +43,7 @@ yarn-error.log*
 .dev.vars
 
 # generated content bundle
-src/lib/content-data.ts
+public/content/
 
 # typescript
 *.tsbuildinfo
